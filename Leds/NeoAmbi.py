@@ -21,7 +21,7 @@ LED_FREQ_HZ = 800000
 LED_DMA_NUM = 5
 
 # GPIO connected to the LED signal line. Must support PWM
-LED_GPIO = 18
+LED_GPIO = 13
 
 # Set to 0 for darkest and 255 for brightest
 LED_BRIGHTNESS = 255
