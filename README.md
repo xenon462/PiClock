@@ -1,7 +1,6 @@
 # PiClock
 A Fancy Clock built around a monitor and a Raspberry Pi
-
-![PiClock Picture](https://raw.githubusercontent.com/n0bel/PiClock/master/Pictures/20150307_222711.jpg)
+![PiClock Picture](https://user-images.githubusercontent.com/34947093/219121247-430fbd9b-2d39-4c8f-bb92-ce2538ed5147.png)
 
 This project started out as a way to waste a Saturday afternoon.
 I had a Raspberry Pi and an extra monitor and had just taken down an analog clock from my livingroom wall.
