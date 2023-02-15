@@ -1398,11 +1398,6 @@ def getwx_owm():
     else:
         wxurl += '&units=imperial'
 
-        
-#    wxurl += '&units=' + Config.units.lower()
-    
-
-
     wxurl += '&lang='+ Config.Language.lower()
     wxurl += '&r=' + str(random.random())
 #    print(wxurl)
@@ -1422,7 +1417,13 @@ def getwx_cc():
 #    print("getting current: " + time.ctime())
     wxurl = 'https://api.tomorrow.io/v4/timelines?timesteps=current&apikey=' + ApiKeys.ccapi
     wxurl += "&location=" + str(Config.location.lat) + ',' + str(Config.location.lng)
-    wxurl += "&units=" + Config.units.lower()  #                                          Единицы измерения
+
+    if Config.metric:
+        
+        wxurl += '&units=metric'  #                                          Единицы измерения
+    else:
+        wxurl += '&units=imperial'
+
     wxurl += '&fields=temperature,weatherCode,temperatureApparent,humidity,'
     wxurl += 'windSpeed,windDirection,windGust,pressureSurfaceLevel,precipitationType,'
     wxurl += 'dewPoint,visibility,cloudCover,uvIndex'
@@ -1434,7 +1435,13 @@ def getwx_cc():
 #    print("getting hourly: " + time.ctime())
     wxurl2 = 'https://api.tomorrow.io/v4/timelines?timesteps=1h&apikey=' + ApiKeys.ccapi
     wxurl2 += "&location=" + str(Config.location.lat) + ',' + str(Config.location.lng)
-    wxurl2 += "&units=" + Config.units.lower()  #                                         Единицы измерения
+
+    if Config.metric:
+        
+        wxurl2 += '&units=metric'  #                                          Единицы измерения
+    else:
+        wxurl2 += '&units=imperial'
+
     wxurl2 += '&fields=temperature,precipitationIntensity,precipitationType,'
     wxurl2 += 'precipitationProbability,weatherCode'
 #    print(wxurl2)
@@ -1445,7 +1452,14 @@ def getwx_cc():
 #    print("getting daily: " + time.ctime())
     wxurl3 = 'https://api.tomorrow.io/v4/timelines?timesteps=1d&apikey=' + ApiKeys.ccapi 
     wxurl3 += "&location=" + str(Config.location.lat) + ',' + str(Config.location.lng)
-    wxurl3 += "&units=" + Config.units.lower()  #                                         Единицы измерения
+
+
+    if Config.metric:
+        
+        wxurl3 += '&units=metric'  #                                          Единицы измерения
+    else:
+        wxurl3 += '&units=imperial'
+
     wxurl3 += '&fields=temperature,precipitationIntensity,precipitationType,'
     wxurl3 += 'precipitationProbability,weatherCode,temperatureMax,temperatureMin'
 #    print(wxurl3)
