@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 from PyQt5.QtGui import QColor
-
 from GoogleMercatorProjection import LatLng
 
 # LOCATION(S)
 # Further radar configuration (zoom, marker location) can be
 # completed under the RADAR section
-primary_coordinates = 69.00853822448543, 33.08984071653644  # Change to your Lat/Lon
+primary_coordinates = 69.008538, 33.089840  # Change to your Lat/Lon
 
 location = LatLng(primary_coordinates[0], primary_coordinates[1])
 primary_location = LatLng(primary_coordinates[0], primary_coordinates[1])
-noaastream = 'http://www.urberg.net:8000/tim273/edina'
+#noaastream = 'http://www.urberg.net:8000/tim273/edina'
+noaastream = 'http://www.meteonova.ru/speech/forecast_33990_0.mp3'
+
 background = 'images/dark.png'
 squares1 = 'images/squares1-kevin.png'
 squares2 = 'images/squares2-kevin.png'
