@@ -1,96 +1,49 @@
-#!/usr/bin/python
-# Must be run under sudo
-# Requires: sudo pip install rpi_ws281x
+#!/usr/bin/env python3
+import time
+from rpi_ws281x import PixelStrip, Color
+from time import sleep
 
-import _rpi_ws281x as ws
-from time import sleep, time
-from math import modf
-import colorsys
+# LED strip configuration:
+LED_COUNT = 27        # Number of LED pixels.
+LED_PIN = 13          # GPIO pin connected to the pixels (18 uses PWM!).
+LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
+LED_DMA = 10          # DMA channel to use for generating signal (try 10)
+LED_BRIGHTNESS = 255  # Set to 0 for darkest and 255 for brightest
+LED_INVERT = False    # True to invert the signal (when using NPN transistor level shift)
+LED_CHANNEL = 1       # set to '1' for GPIOs 13, 19, 41, 45 or 53
 
-# LED configuration.
-LED_COUNT = 27         # How many LEDs to light.
+def wheel(pos):
+    """Generate rainbow colors across 0-255 positions."""
+    if pos < 85:
+        return Color(pos * 3, 255 - pos * 3, 0)
+    elif pos < 170:
+        pos -= 85
+        return Color(255 - pos * 3, 0, pos * 3)
+    else:
+        pos -= 170
+        return Color(0, pos * 3, 255 - pos * 3)
 
-# 0..2
-LED_CHANNEL = 0
+def rainbowCycle(strip, wait_ms=20, iterations=5):
+    """Draw rainbow that uniformly distributes itself across all pixels."""
+    for j in range(256 * iterations):
+        for i in range(strip.numPixels()):
+            strip.setPixelColor(i, wheel(
+                (int(i * 256 / strip.numPixels()) + j) & 255))
+        strip.show()
+        time.sleep(wait_ms / 1000.0)
 
-# Frequency of the LED signal. Should be 800khz or 400khz
-LED_FREQ_HZ = 800000
+def colorWipe(strip, color, wait_ms=50):
+    """Wipe color across display a pixel at a time."""
+    for i in range(strip.numPixels()):
+        strip.setPixelColor(i, color)
+        strip.show()
+        time.sleep(wait_ms / 1000.0)
 
+strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+strip.begin()
 
-# DMA channel to use, can be 0-14.
-LED_DMA_NUM = 5
-
-# GPIO connected to the LED signal line. Must support PWM
-LED_GPIO = 13
-
-# Set to 0 for darkest and 255 for brightest
-LED_BRIGHTNESS = 255
-
-# Set to 1 to invert the LED signal, good if using NPN
-# transistor as a 3.3V->5V level converter.  Keep at 0
-# for a normal/non-inverted signal.
-LED_INVERT = 0
-
-
-# from RGB in float 0..1.0 to NeoPixel Color 0..255
-def toNeoPixelColor(r, g, b):
-    if r > 1:
-        r = 1
-    if g > 1:
-        g = 1
-    if b > 1:
-        b = 1
-    if r < 0:
-        r = 0
-    if g < 0:
-        g = 0
-    if b < 0:
-        b = 0
-    c = ((int(r * 255) & 0xff) << 16 |
-         (int(g * 255) & 0xff) << 8 | (int(b * 255) & 0xff))
-    return(c)
-
-
-leds = ws.new_ws2811_t()
-
-channel = ws.ws2811_channel_get(leds, LED_CHANNEL)
-
-ws.ws2811_channel_t_count_set(channel, LED_COUNT)
-ws.ws2811_channel_t_gpionum_set(channel, LED_GPIO)
-ws.ws2811_channel_t_invert_set(channel, LED_INVERT)
-ws.ws2811_channel_t_brightness_set(channel, LED_BRIGHTNESS)
-
-ws.ws2811_t_freq_set(leds, LED_FREQ_HZ)
-ws.ws2811_t_dmanum_set(leds, LED_DMA_NUM)
-
-resp = ws.ws2811_init(leds)
-if resp != 0:
-        raise RuntimeError('ws2811_init failed with code {0}'.format(resp))
-
-try:
-    offset = 0
-    while True:
-        (fractionOfMinute, dummy) = modf(time() / 60.0)
-        for i in range(LED_COUNT):
-                p = i / float(LED_COUNT)    # 0.0..1.0 by position on string
-                q = p + fractionOfMinute
-                while(q > 1):
-                    q = q - 1.0  # normalize for overflow
-                (r, g, b) = colorsys.hsv_to_rgb(q, 1.0, 1.0)
-                ws.ws2811_led_set(channel, i, toNeoPixelColor(r, g, b))
-
-        resp = ws.ws2811_render(leds)
-        if resp != 0:
-            raise RuntimeError('ws2811_render failed with code {0}'.
-                               format(resp))
-
-        sleep(0.2)
-
-finally:
-    for i in range(LED_COUNT):
-        ws.ws2811_led_set(channel, i, 0)
-    resp = ws.ws2811_render(leds)
-    if resp != 0:
-        raise RuntimeError('ws2811_render failed with code {0}'.format(resp))
-    ws.ws2811_fini(leds)
-    ws.delete_ws2811_t(leds)
+while True:
+    rainbowCycle(strip) # rainbow
+    sleep(5)
+    colorWipe(strip, Color(0, 0, 0))  # Off
+    quit()
