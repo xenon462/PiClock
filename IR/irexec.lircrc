@@ -1,0 +1,121 @@
+#
+# Initial test configuration for systemwide irexec service.
+#
+# Note that the system-wide service is useful only in corner-cases.
+# Most scenarios are better off with a session service as described in the
+# Configuration Guide. However, note that both can also be combined.
+#
+# Also note that the system-wide service runs without a terminal. To
+# check the output generated use something like
+# 'journalctl -b0 /usr/bin/irexec'. This service just echoes some keys
+# commonly available.
+#
+begin
+    prog   = irexec
+    button = KEY_1
+    config = sudo python3 /home/pi/PiClock/scripts/meteonova.py
+end
+
+begin
+    prog   = irexec
+    button = KEY_2
+    config = sudo -u pi DISPLAY=:0 PiClock/scripts/osd-text.sh
+end
+
+begin
+    prog   = irexec
+    button = KEY_3
+    config = sudo -u pi DISPLAY=:0 PiClock/scripts/osd-text.sh
+end
+
+begin
+    prog   = irexec
+    button = KEY_4
+    config = sudo -u pi DISPLAY=:0 PiClock/scripts/osd-text.sh
+end
+
+begin
+    prog   = irexec
+    button = KEY_5
+    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+end
+
+begin
+    prog   = irexec
+    button = KEY_6
+    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+end
+
+begin
+    prog   = irexec
+    button = KEY_7
+    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+end
+
+begin
+    prog   = irexec
+    button = KEY_8
+    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+end
+
+begin
+    prog   = irexec
+    button = KEY_9
+    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+end
+
+begin
+    prog   = irexec
+    button = KEY_0
+    config = sudo python /home/pi/PiClock/scripts/meteonova.py
+end
+
+begin
+    prog   = irexec
+    button = KEY_REWIND
+    config = sudo python /home/pi/PiClock/Leds/red.py
+    config = sudo python /home/pi/PiClock/Leds/orange.py
+    config = sudo python /home/pi/PiClock/Leds/yellow.py
+    config = sudo python /home/pi/PiClock/Leds/green.py
+    config = sudo python /home/pi/PiClock/Leds/skyblue.py
+    config = sudo python /home/pi/PiClock/Leds/blue.py
+    config = sudo python /home/pi/PiClock/Leds/purple.py	
+    config = sudo python /home/pi/PiClock/Leds/all_leds_off.py
+    repeat = 1
+end
+
+begin
+    prog   = irexec
+    button = KEY_PREVIOUS
+    config = sudo python /home/pi/PiClock/Leds/all_leds_off.py
+end
+
+begin
+    prog   = irexec
+    button = KEY_UP
+    config = echo "KEY_BLUE"
+end
+
+begin
+    prog   = irexec
+    button = KEY_LEFT
+    config = echo "KEY_BLUE"
+end
+
+begin
+    prog   = irexec
+    button = KEY_OK
+    config = echo "KEY_BLUE"
+end
+
+begin
+    prog   = irexec
+    button = KEY_RIGHT
+    config = echo "KEY_BLUE"
+end
+
+begin
+    prog   = irexec
+    button = KEY_DOWN
+    config = echo "KEY_BLUE"
+end
