@@ -2613,7 +2613,7 @@ bottom.setObjectName("bottom")
 bottom.setStyleSheet("#bottom { font-family:sans-serif; color: " +  
                      Config.textcolorBottom +  #                        Цвет
                      "; background-color: transparent; font-size: " +
-                     str(int(35 * xscale * Config.fontmult)) +  #       Шрифт
+                     str(int(30 * xscale * Config.fontmult)) +  #       Шрифт
                      "px; " +
                      Config.fontattr +
                      "}")
