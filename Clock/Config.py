@@ -23,7 +23,7 @@ textcolor = '#ffe4e1'
 clockface = 'images/myclockface3.png'
 hourhand = 'images/myhour.png'
 minhand = 'images/mymin.png'
-sechand = 'images/mysechand.png'
+sechand = 'images/my_sechand.png'
 
 textcolorTopLine = '#20FFFF'     #Цвет верхняя строка
 textcolorDatex2 = '#20FFFF'  # Цвет строка день недели на второй странице
