@@ -67,7 +67,7 @@ fi
 
 echo "Setting sound to max (assuming Monitor Tv controls volume)...."
 # push sound level to maximum
-amixer cset numid=1 -- 400 >/dev/null 2>&1
+amixer cset numid=1 -- 300 >/dev/null 2>&1
 
 # NeoPixel AmbiLights
 echo "Checking for NeoPixels Ambilight..."
