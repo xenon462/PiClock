@@ -2084,7 +2084,7 @@ class MyMain(QtWidgets.QWidget):
             # print(event.key(), format(event.key(), '08x'))
             if event.key() == Qt.Key_F4:
                 myquit()
-            if event.key() == Qt.Key_F2:
+            if event.key() == Qt.Key_0:
                 if time.time() > lastkeytime:
                     if weatherplayer is None:
                         weatherplayer = Popen(
@@ -2099,6 +2099,54 @@ class MyMain(QtWidgets.QWidget):
                 nextframe(-1)
             if event.key() == Qt.Key_Right:
                 nextframe(1)
+            if event.key() == Qt.Key_R:  # Key '*'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/rainbow.py")
+
+            if event.key() == Qt.Key_P:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
+
+            if event.key() == Qt.Key_1:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/red.py")
+
+            if event.key() == Qt.Key_2:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/orange.py")
+
+            if event.key() == Qt.Key_3:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/yellow.py")
+
+            if event.key() == Qt.Key_4:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/green.py")
+
+            if event.key() == Qt.Key_5:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/skyblue.py")
+
+            if event.key() == Qt.Key_6:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/blue.py")
+
+            if event.key() == Qt.Key_7:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/purple.py")
+
+            if event.key() == Qt.Key_8:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
+
+            if event.key() == Qt.Key_9:  # Key '#'
+                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
+
+
+
+
+
             if event.key() == Qt.Key_F6:  # Previous Image
                 objimage1.prev_next(-1)
             if event.key() == Qt.Key_F7:  # Next Image
@@ -2642,12 +2690,12 @@ ccfields.setObjectName("ccfields")
 ccfields.setStyleSheet("#ccfields { background-color: transparent; color: " +
                     Config.colorCCfields + 
                     "; font-size: " +
-                    str(int(28 * xscale * Config.fontmult)) + 
+                    str(int(29 * xscale * Config.fontmult)) +
                     "px; " +
                     Config.fontattr +
                     "}")
-ccfields.setAlignment(Qt.AlignLeft | Qt.AlignTop) 
-ccfields.setGeometry(int(315 * xscale), int(ypos * yscale), int(1000 * xscale), 100)
+ccfields.setAlignment(Qt.AlignHCenter | Qt.AlignTop)
+ccfields.setGeometry(0, int(height - 150 * yscale), width, int(50 * yscale))
 ccfields.raise_()
 
 #                              Прогноз в столбике
