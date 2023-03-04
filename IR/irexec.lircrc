@@ -13,109 +13,101 @@
 begin
     prog   = irexec
     button = KEY_1
-    config = sudo python3 /home/pi/PiClock/scripts/meteonova.py
+    config = echo "KEY_1"
 end
 
 begin
     prog   = irexec
     button = KEY_2
-    config = sudo -u pi DISPLAY=:0 PiClock/scripts/osd-text.sh
+    config = echo "KEY_2"
 end
 
 begin
     prog   = irexec
     button = KEY_3
-    config = sudo -u pi DISPLAY=:0 PiClock/scripts/osd-text.sh
+    config = echo "KEY_3"
 end
 
 begin
     prog   = irexec
     button = KEY_4
-    config = sudo -u pi DISPLAY=:0 PiClock/scripts/osd-text.sh
+    config = echo "KEY_4"
 end
 
 begin
     prog   = irexec
     button = KEY_5
-    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+    config = echo "KEY_5"
 end
 
 begin
     prog   = irexec
     button = KEY_6
-    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+    config = echo "KEY_6"
 end
 
 begin
     prog   = irexec
     button = KEY_7
-    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+    config = echo "KEY_7"
 end
 
 begin
     prog   = irexec
     button = KEY_8
-    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+    config = echo "KEY_8"
 end
 
 begin
     prog   = irexec
     button = KEY_9
-    config = sudo sh /home/pi/PiClock/scripts/osd-text.sh
+    config = echo "KEY_9"
 end
 
 begin
     prog   = irexec
     button = KEY_0
-    config = sudo python /home/pi/PiClock/scripts/meteonova.py
+    config = echo "KEY_0"
 end
 
 begin
     prog   = irexec
     button = KEY_REWIND
-    config = sudo python /home/pi/PiClock/Leds/red.py
-    config = sudo python /home/pi/PiClock/Leds/orange.py
-    config = sudo python /home/pi/PiClock/Leds/yellow.py
-    config = sudo python /home/pi/PiClock/Leds/green.py
-    config = sudo python /home/pi/PiClock/Leds/skyblue.py
-    config = sudo python /home/pi/PiClock/Leds/blue.py
-    config = sudo python /home/pi/PiClock/Leds/purple.py	
-    config = sudo python /home/pi/PiClock/Leds/all_leds_off.py
-    repeat = 1
+    config = echo "KEY_R"
 end
 
 begin
     prog   = irexec
     button = KEY_PREVIOUS
-    config = sudo python /home/pi/PiClock/Leds/all_leds_off.py
+    config = echo "KEY_P"
 end
 
 begin
     prog   = irexec
     button = KEY_UP
-    config = echo "KEY_BLUE"
+    config = echo "KEY_UP"
 end
 
 begin
     prog   = irexec
     button = KEY_LEFT
-    config = echo "KEY_BLUE"
+    config = echo "KEY_LEFT"
 end
 
 begin
     prog   = irexec
     button = KEY_OK
-    config = echo "KEY_BLUE"
+    config = echo "KEY_OK"
 end
 
 begin
     prog   = irexec
     button = KEY_RIGHT
-    config = echo "KEY_BLUE"
+    config = echo "KEY_RIGHT"
 end
 
 begin
     prog   = irexec
     button = KEY_DOWN
-    config = echo "KEY_BLUE"
+    config = echo "KEY_DOWN"
 end
