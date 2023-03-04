@@ -9,4 +9,7 @@ mbapi = 'YOUR MAPBOX ACCESS TOKEN'
 # also comment/remove ccapi if you're using Openweathermap
 # owmapi = 'YOUR OPENWEATHERMAP APPID'
 # If you want to use Climacell.co, uncomment and add appid
-ccapi = 'YOUR CLIMACELL API KEY'
+ccapi = 'YOUR CLIMACELL API KEY' 
+#owmapi = 'owmap'  #OWM
+ccapi = 'Climacell v4'  #Climacell v4
+tsApiKey = 'thingspeak Read API Key'  # thingspeak Read API Key
