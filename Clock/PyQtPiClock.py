@@ -2114,7 +2114,7 @@ class MyMain(QtWidgets.QWidget):
                 os.popen("DISPLAY=:0 /home/pi/osd.sh 1%-")
 
             if event.key() == Qt.Key_O:  # Key OK
-                os.popen("DISPLAY=:0 /home/pi/osd.sh 100%-")
+                os.popen("killall -9 -q mpg123")
 
 
             if event.key() == Qt.Key_1:  # Key 1
