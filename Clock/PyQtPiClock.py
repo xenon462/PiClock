@@ -2113,7 +2113,7 @@ class MyMain(QtWidgets.QWidget):
             if event.key() == Qt.Key_D:  # Key DOWN
                 os.popen("sudo -u pi DISPLAY=:0 /home/pi/osd.sh 1%-")
 
-            if event.key() == Qt.Key_OK:  # Key OK
+            if event.key() == Qt.Key_O:  # Key OK
                 os.popen("sudo -u pi DISPLAY=:0 /home/pi/osd.sh 100%-")
 
 
