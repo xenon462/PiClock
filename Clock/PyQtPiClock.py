@@ -2137,15 +2137,11 @@ class MyMain(QtWidgets.QWidget):
 
             if event.key() == Qt.Key_8:  # Key '#'
                 os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/dim_light.py")
 
             if event.key() == Qt.Key_9:  # Key '#'
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/light.py")
-
-
-
-
 
             if event.key() == Qt.Key_F6:  # Previous Image
                 objimage1.prev_next(-1)
