@@ -2107,49 +2107,49 @@ class MyMain(QtWidgets.QWidget):
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
 
-            if event.key() == Qt.Key_UP:  # Key '#'
+            if event.key() == Qt.Key_U:  # Key UP
                 os.popen("sudo -u pi DISPLAY=:0 /home/pi/osd.sh 1%+")
 
-            if event.key() == Qt.Key_DOWN:  # Key '#'
+            if event.key() == Qt.Key_D:  # Key DOWN
                 os.popen("sudo -u pi DISPLAY=:0 /home/pi/osd.sh 1%-")
 
-            if event.key() == Qt.Key_OK:  # Key '#'
+            if event.key() == Qt.Key_OK:  # Key OK
                 os.popen("sudo -u pi DISPLAY=:0 /home/pi/osd.sh 100%-")
 
 
-            if event.key() == Qt.Key_1:  # Key '#'
+            if event.key() == Qt.Key_1:  # Key 1
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/red.py")
 
-            if event.key() == Qt.Key_2:  # Key '#'
+            if event.key() == Qt.Key_2:  # Key 2
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/orange.py")
 
-            if event.key() == Qt.Key_3:  # Key '#'
+            if event.key() == Qt.Key_3:  # Key 3
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/yellow.py")
 
-            if event.key() == Qt.Key_4:  # Key '#'
+            if event.key() == Qt.Key_4:  # Key 4
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/green.py")
 
-            if event.key() == Qt.Key_5:  # Key '#'
+            if event.key() == Qt.Key_5:  # Key 5
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/skyblue.py")
 
-            if event.key() == Qt.Key_6:  # Key '#'
+            if event.key() == Qt.Key_6:  # Key 6
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/blue.py")
 
-            if event.key() == Qt.Key_7:  # Key '#'
+            if event.key() == Qt.Key_7:  # Key 7
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/purple.py")
 
-            if event.key() == Qt.Key_8:  # Key '#'
+            if event.key() == Qt.Key_8:  # Key 8
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/dim_light.py")
 
-            if event.key() == Qt.Key_9:  # Key '#'
+            if event.key() == Qt.Key_9:  # Key 9
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/light.py")
 
