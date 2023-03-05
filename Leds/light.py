@@ -4,7 +4,7 @@ from time import sleep
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.OUT)
 GPIO.output(26, True)
-sleep(0.2)
+sleep(0.1)
 GPIO.output(26, False)
 GPIO.cleanup()
 
@@ -26,5 +26,5 @@ def colorWipe(strip, color, wait_ms=50):
 strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 strip.begin()
 while True:
-    colorWipe(strip, Color(255, 255, 255))  # Red wipe
+    colorWipe(strip, Color(255, 255, 255))  # White wipe
     quit()

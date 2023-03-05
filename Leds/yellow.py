@@ -4,7 +4,7 @@ from time import sleep
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(26, GPIO.OUT)
 GPIO.output(26, True)
-sleep(0.2)
+sleep(0.1)
 GPIO.output(26, False)
 GPIO.cleanup()
 
