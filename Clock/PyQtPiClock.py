@@ -2108,13 +2108,13 @@ class MyMain(QtWidgets.QWidget):
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
 
             if event.key() == Qt.Key_UP:  # Key '#'
-                os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo -u pi DISPLAY=:0 /home/pi/osd.sh 1%+")
 
             if event.key() == Qt.Key_DOWN:  # Key '#'
-                os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo -u pi DISPLAY=:0 /home/pi/osd.sh 1%-")
 
+            if event.key() == Qt.Key_OK:  # Key '#'
+                os.popen("sudo -u pi DISPLAY=:0 /home/pi/osd.sh 100%-")
 
 
             if event.key() == Qt.Key_1:  # Key '#'
