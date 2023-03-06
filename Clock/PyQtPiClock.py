@@ -2084,7 +2084,7 @@ class MyMain(QtWidgets.QWidget):
             # print(event.key(), format(event.key(), '08x'))
             if event.key() == Qt.Key_F4:
                 myquit()
-            if event.key() == Qt.Key_0:
+            if event.key() == Qt.Key_F2:
                 if time.time() > lastkeytime:
                     if weatherplayer is None:
                         weatherplayer = Popen(
