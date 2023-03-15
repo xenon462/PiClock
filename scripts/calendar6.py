@@ -8,7 +8,7 @@ class CalendarWidget(QCalendarWidget):
     def __init__(self, *args, **kwargs):
         super(CalendarWidget, self).__init__(*args, **kwargs)
 
-        # Вертикальный заголовок.
+# Вертикальный заголовок.
         self.setVerticalHeaderFormat(self.NoVerticalHeader)
 
         # Изменить цвета субботы и воскресенья
