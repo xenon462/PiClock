@@ -1129,210 +1129,6 @@ def wxfinished_cc3():
         wx.setText(cc_code_map[f["values"]["weatherCode"]] + "\n" + s)
         wx.setAlignment(Qt.AlignHCenter | Qt.AlignTop)  #                 Выравнивание столбец 4-9 строка
 
-
-'''
-metar_cond = [
-    ('CLR', '', '', 'Clear', 'clear-day', 0),
-    ('NSC', '', '', 'Clear', 'clear-day', 0),
-    ('SKC', '', '', 'Clear', 'clear-day', 0),
-    ('FEW', '', '', 'Few Clouds', 'partly-cloudy-day', 1),
-    ('NCD', '', '', 'Clear', 'clear-day', 0),
-    ('SCT', '', '', 'Scattered Clouds', 'partly-cloudy-day', 2),
-    ('BKN', '', '', 'Mostly Cloudy', 'partly-cloudy-day', 3),
-    ('OVC', '', '', 'Cloudy', 'cloudy', 4),
-
-    ('///', '', '', '', 'cloudy', 0),
-    ('UP', '', '', '', 'cloudy', 0),
-    ('VV', '', '', '', 'cloudy', 0),
-    ('//', '', '', '', 'cloudy', 0),
-
-    ('DZ', '', '', 'Drizzle', 'rain', 10),
-
-    ('RA', 'FZ', '+', 'Heavy Freezing Rain', 'sleet', 11),
-    ('RA', 'FZ', '-', 'Light Freezing Rain', 'sleet', 11),
-    ('RA', 'SH', '+', 'Heavy Rain Showers', 'sleet', 11),
-    ('RA', 'SH', '-', 'Light Rain Showers', 'rain', 11),
-    ('RA', 'BL', '+', 'Heavy Blowing Rain', 'rain', 11),
-    ('RA', 'BL', '-', 'Light Blowing Rain', 'rain', 11),
-    ('RA', 'FZ', '', 'Freezing Rain', 'sleet', 11),
-    ('RA', 'SH', '', 'Rain Showers', 'rain', 11),
-    ('RA', 'BL', '', 'Blowing Rain', 'rain', 11),
-    ('RA', '', '+', 'Heavy Rain', 'rain', 11),
-    ('RA', '', '-', 'Light Rain', 'rain', 11),
-    ('RA', '', '', 'Rain', 'rain', 11),
-
-    ('SN', 'FZ', '+', 'Heavy Freezing Snow', 'snow', 12),
-    ('SN', 'FZ', '-', 'Light Freezing Snow', 'snow', 12),
-    ('SN', 'SH', '+', 'Heavy Snow Showers', 'snow', 12),
-    ('SN', 'SH', '-', 'Light Snow Showers', 'snow', 12),
-    ('SN', 'BL', '+', 'Heavy Blowing Snow', 'snow', 12),
-    ('SN', 'BL', '-', 'Light Blowing Snow', 'snow', 12),
-    ('SN', 'FZ', '', 'Freezing Snow', 'snow', 12),
-    ('SN', 'SH', '', 'Snow Showers', 'snow', 12),
-    ('SN', 'BL', '', 'Blowing Snow', 'snow', 12),
-    ('SN', '', '+', 'Heavy Snow', 'snow', 12),
-    ('SN', '', '-', 'Light Snow', 'snow', 12),
-    ('SN', '', '', 'Rain', 'snow', 12),
-
-    ('SG', 'BL', '', 'Blowing Snow', 'snow', 12),
-    ('SG', '', '', 'Snow', 'snow', 12),
-    ('GS', 'BL', '', 'Blowing Snow Pellets', 'snow', 12),
-    ('GS', '', '', 'Snow Pellets', 'snow', 12),
-
-    ('IC', '', '', 'Ice Crystals', 'snow', 13),
-    ('PL', '', '', 'Ice Pellets', 'snow', 13),
-
-    ('GR', '', '+', 'Heavy Hail', 'thuderstorm', 14),
-    ('GR', '', '', 'Hail', 'thuderstorm', 14),
-]
-'''
-
-'''
-def temperatureApparent(f):
-    t = f.temp.value('C')
-    d = f.dewpt.value('C')
-    h = (math.exp((17.625 * d) / (243.04 + d)) /
-         math.exp((17.625 * t) / (243.04 + t)))
-    t = f.temp.value('F')
-    w = f.wind('MPH')
-    if t > 80 and h >= 0.40:
-        hi = (-42.379 + 2.04901523 * t + 10.14333127 * h - .22475541 * t * h -
-              .00683783 * t * t - .05481717 * h * h + .00122874 * t * t * h +
-              .00085282 * t * h * h - .00000199 * t * t * h * h)
-        if h < 0.13:
-            if 80.0 <= t <= 112.0:
-                hi -= ((13 - h) / 4) * math.sqrt((17 - abs(t - 95)) / 17)
-        if h > 0.85:
-            if 80.0 <= t <= 112.0:
-                hi += ((h - 85) / 10) * ((87 - t) / 5)
-        return hi
-#    if t < 50 and w >= 3:
-        wc = 35.74 + 0.6215 * t - 35.75 * \
-             (w ** 0.16) + 0.4275 * t * (w ** 0.16)
-        return wc
-    return t
-
-
-def wxfinished_metar():
-    global metarreply
-    global wxicon, temper, wxdesc, press, humidity
-    global wind, feelslike, wdate, bottom
-    global wxicon2, temper2, wxdesc2
-    global daytime
-
-    wxstr = str(metarreply.readAll(), 'utf-8')
-    for wxline in wxstr.splitlines():
-        if wxline.startswith(Config.METAR):
-            wxstr = wxline
-    print('wxmetar: ' + wxstr)
-    f = Metar.Metar(wxstr)
-    print(f)
-
-    dt = f.time.replace(tzinfo=TimeZoneUTC()).astimezone(tzlocal.get_localzone())
-
-    pri = -1
-    weather = ''
-    icon = ''
-    for s in f.sky:
-        for c in metar_cond:
-            if s[0] == c[0]:
-                if c[5] > pri:
-                    pri = c[5]
-                    weather = c[3]
-                    icon = c[4]
-    for w in f.weather:
-        for c in metar_cond:
-            if w[2] == c[0]:
-                if c[1] > '':
-                    if w[1] == c[1]:
-                        if c[2] > '':
-                            if w[0][0:1] == c[2]:
-                                if c[5] > pri:
-                                    pri = c[5]
-                                    weather = c[3]
-                                    icon = c[4]
-                else:
-                    if c[2] > '':
-                        if w[0][0:1] == c[2]:
-                            if c[5] > pri:
-                                pri = c[5]
-                                weather = c[3]
-                                icon = c[4]
-                    else:
-                        if c[5] > pri:
-                            pri = c[5]
-                            weather = c[3]
-                            icon = c[4]
-
-    if not daytime:
-        icon = icon.replace('-day', '-night')
-
-    wxiconpixmap = QtGui.QPixmap(Config.icons + "/" + icon + ".png")
-    wxicon.setPixmap(wxiconpixmap.scaled(
-        wxicon.width(), wxicon.height(), Qt.IgnoreAspectRatio,
-        Qt.SmoothTransformation))
-    wxicon2.setPixmap(wxiconpixmap.scaled(
-        wxicon.width(),
-        wxicon.height(),
-        Qt.IgnoreAspectRatio,
-        Qt.SmoothTransformation))
-    wxdesc.setText(weather)
-    wxdesc2.setText(weather)
-
-    if Config.metric:
-        temper.setText('%.1d' % (f.temp.value('C')) + u'°C')  #              '%.1d' Целое число
-        temper2.setText('%.1d' % (f.temp.value('C')) + u'°C')
-        press.setText(Config.LPressure + '%.1f' % f.press.value('MB') + 'mb')
-        t = f.temp.value('C')
-        d = f.dewpt.value('C')
-        h = 100.0 * (math.exp((17.625 * d) / (243.04 + d)) /
-                     math.exp((17.625 * t) / (243.04 + t)))
-        humidity.setText(Config.LHumidity + '%.0f%%' % h)
-        wd = f.wind_dir.compass()
-        if Config.wind_degrees:
-            wd = str(f.wind_dir.value) + u'°'
-        ws = (Config.LWind +
-              wd + ' ' +
-              str(f.wind('KMH')) + 'km/h')
-        if f.wind:
-            ws += (Config.Lgusting +
-                   str(f.wind('KMH')) + 'km/h')
-        wind.setText(ws)
-        feelslike.setText(Config.LFeelslike +
-                          ('%.1f' % (tempm(temperatureApparent(f))) + u'°C'))
-        wdate.setText("{0:%H:%M}".format(dt))
-    # Config.LPrecip1hr + f['precip_1hr_metric'] + 'mm ' +
-    # Config.LToday + f['precip_today_metric'] + 'mm')
-    else:
-        temper.setText('%.1d' % (f.temp.value('F')) + u'°F')  #             '%.1d' Целое число
-        temper2.setText('%.1d' % (f.temp.value('F')) + u'°F')
-        press.setText(Config.LPressure + '%.2f' % f.press.value('IN') + 'in')
-        t = f.temp.value('C')
-        d = f.dewpt.value('C')
-        h = 100.0 * (math.exp((17.625 * d) / (243.04 + d)) /
-                     math.exp((17.625 * t) / (243.04 + t)))
-        humidity.setText(Config.LHumidity + '%.0f%%' % h)
-        wd = f.wind_dir.compass()
-        if Config.wind_degrees:
-            wd = str(f.wind_dir.value) + u'°'
-        ws = (Config.LWind +
-              wd + ' ' +
-              str(f.wind('MPH')) + 'mph')
-        print('-ws===', ws)    
-
-        if f.wind:
-            ws += (Config.Lgusting +
-                   str(f.wind('MPH')) + 'mph')
-        wind.setText(ws)
-        feelslike.setText(Config.LFeelslike +
-                          '%.1f' % (temperatureApparent(f)) + u'°F')
-        wdate.setText("{0:%H:%M} {1}".format(dt, Config.METAR))
-
-
-# Config.LPrecip1hr + f['precip_1hr_in'] + 'in ' +
-# Config.LToday + f['precip_today_in'] + 'in')
-'''
-
 def getwx():
     global supress_current
     supress_current = False
@@ -1369,21 +1165,6 @@ def getwx():
     except AttributeError:
         pass
 
-'''
-def getwx_ds():
-    global wxurl
-    global wxreply
-    print("getting current and forecast: " + time.ctime())
-    wxurl = 'https://api.darksky.net/forecast/' + ApiKeys.dsapi + '/'
-    wxurl += str(Config.location.lat) + ',' + str(Config.location.lng)
-    wxurl += '?units=us&lang=' + Config.Language.lower()
-    wxurl += '&r=' + str(random.random())
-    print(wxurl)
-    r = QUrl(wxurl)
-    r = QNetworkRequest(r)
-    wxreply = manager.get(r)
-    wxreply.finished.connect(wxfinished_ds)
-'''
 
 def getwx_owm():
     global wxurl
@@ -1468,17 +1249,6 @@ def getwx_cc():
     wxreply3 = manager.get(r3)
     wxreply3.finished.connect(wxfinished_cc3)
 
-'''
-def getwx_metar():
-    global metarurl
-    global metarreply
-    metarurl = "https://tgftp.nws.noaa.gov/data/observations/metar/stations/" + Config.METAR + ".TXT"
-    print('metar url: ' + metarurl)
-    r = QUrl(metarurl)
-    r = QNetworkRequest(r)
-    metarreply = manager.get(r)
-    metarreply.finished.connect(wxfinished_metar)
-'''
 
 def getallwx():
     getwx()
@@ -2110,13 +1880,11 @@ class MyMain(QtWidgets.QWidget):
             if event.key() == Qt.Key_Up:  # Key_UP, NEOPIXEL, GPIO 25, кнопка на корпусе
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/NeoAmbi.py")
 
-            if event.key() == Qt.Key_VolumeUp:
+            if event.key() == Qt.Key_U:
                 os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%+")  # Кнопка на пульте ВВЕРХ
-                print("НАЖАТА КНОПКА VolumeUP")
 
-            if event.key() == Qt.Key_VolumeDown:
+            if event.key() == Qt.Key_D:
                 os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%-")  # Кнопка на пульте ВНИЗ
-                print("НАЖАТА КНОПКА VolumeDown")
 
             if event.key() == Qt.Key_O:  # Кнопка на пульте 'OK'
                 os.popen("killall -9 -q mpg123")
