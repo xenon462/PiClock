@@ -2107,15 +2107,17 @@ class MyMain(QtWidgets.QWidget):
                 os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
 
-            if event.key() == Qt.Key_Up:  # Key UP
+            if event.key() == Qt.Key_Up:  # Key_UP, NEOPIXEL, GPIO 25, кнопка на корпусе
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/rainbow.py")
+
+            if event.key() == Qt.Key_VolumeUp:  # Кнопка на пульте ВВЕРХ
                 os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%+")
 
-            if event.key() == Qt.Key_Down:  # Key DOWN
+            if event.key() == Qt.Key_VolumeDown:  # Кнопка на пульте ВНИЗ
                 os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%-")
 
-            if event.key() == Qt.Key_O:  # Key OK
+            if event.key() == Qt.Key_O:  # Кнопка на пульте 'OK'
                 os.popen("killall -9 -q mpg123")
-
 
             if event.key() == Qt.Key_1:  # Key 1
                 os.popen("sudo pkill -f 'PiClock/Leds'")
