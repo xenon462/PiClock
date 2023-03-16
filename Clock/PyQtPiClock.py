@@ -2108,13 +2108,15 @@ class MyMain(QtWidgets.QWidget):
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
 
             if event.key() == Qt.Key_Up:  # Key_UP, NEOPIXEL, GPIO 25, кнопка на корпусе
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/rainbow.py")
+                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/NeoAmbi.py")
 
-            if event.key() == Qt.Key_VolumeUp:  # Кнопка на пульте ВВЕРХ
-                os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%+")
+            if event.key() == Qt.Key_VolumeUp:
+                os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%+")  # Кнопка на пульте ВВЕРХ
+                print("НАЖАТА КНОПКА VolumeUP")
 
-            if event.key() == Qt.Key_VolumeDown:  # Кнопка на пульте ВНИЗ
-                os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%-")
+            if event.key() == Qt.Key_VolumeDown:
+                os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%-")  # Кнопка на пульте ВНИЗ
+                print("НАЖАТА КНОПКА VolumeDown")
 
             if event.key() == Qt.Key_O:  # Кнопка на пульте 'OK'
                 os.popen("killall -9 -q mpg123")
