@@ -13,7 +13,16 @@
 begin
     prog   = irexec
     button = KEY_1
-    config = echo "KEY_1"
+    config = sudo python3 /home/pi/PiClock/Leds/red.py
+    config = sudo python3 /home/pi/PiClock/Leds/orange.py
+    config = sudo python3 /home/pi/PiClock/Leds/yellow.py
+    config = sudo python3 /home/pi/PiClock/Leds/green.py
+    config = sudo python3 /home/pi/PiClock/Leds/skyblue.py
+    config = sudo python3 /home/pi/PiClock/Leds/blue.py
+    config = sudo python3 /home/pi/PiClock/Leds/purple.py
+    config = sudo python3 /home/pi/PiClock/Leds/dim_light.py
+    config = sudo python3 /home/pi/PiClock/Leds/light.py
+    config = sudo python3 /home/pi/PiClock/Leds/all_leds_off.py
 end
 
 begin
@@ -67,25 +76,25 @@ end
 begin
     prog   = irexec
     button = KEY_0
-    config = echo "KEY_0"
+    config = sudo python3 /home/pi/PiClock/scripts/meteonova.py
 end
 
 begin
     prog   = irexec
-    button = KEY_REWIND
-    config = echo "KEY_R"
+    button = KEY_R
+    config = sudo python3  /home/pi/PiClock/Leds/rainbow.py
 end
 
 begin
     prog   = irexec
-    button = KEY_PREVIOUS
-    config = echo "KEY_P"
+    button = KEY_P
+    config = sudo python3  /home/pi/PiClock/Leds/all_leds_off.py
 end
 
 begin
     prog   = irexec
-    button = KEY_UP
-    config = echo "KEY_UP"
+    button = KEY_U
+    config = DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%+
 end
 
 begin
@@ -96,8 +105,8 @@ end
 
 begin
     prog   = irexec
-    button = KEY_OK
-    config = echo "KEY_OK"
+    button = KEY_O
+    config = killall -9 -q mpg123
 end
 
 begin
@@ -108,6 +117,6 @@ end
 
 begin
     prog   = irexec
-    button = KEY_DOWN
-    config = echo "KEY_DOWN"
+    button = KEY_D
+    config = DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%-
 end

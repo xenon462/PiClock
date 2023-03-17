@@ -1706,62 +1706,11 @@ class MyMain(QtWidgets.QWidget):
                 nextframe(-1)
             if event.key() == Qt.Key_Right:
                 nextframe(1)
-            if event.key() == Qt.Key_R:  # Key '*'
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/rainbow.py")
-
-            if event.key() == Qt.Key_P:  # Key '#'
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
 
             if event.key() == Qt.Key_Up:  # Key_UP, NEOPIXEL, GPIO 25, кнопка на корпусе
-                os.popen("sudo pkill -f 'PiClock/Leds'")
+                os.popen("sudo python3 /home/pi/PiClock/Leds/all_leds_off.py")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/NeoAmbi.py")
 
-            if event.key() == Qt.Key_U:
-                os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%+")  # Кнопка на пульте ВВЕРХ
-
-            if event.key() == Qt.Key_D:
-                os.popen("DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%-")  # Кнопка на пульте ВНИЗ
-
-            if event.key() == Qt.Key_O:  # Кнопка на пульте 'OK'
-                os.popen("killall -9 -q mpg123")
-
-            if event.key() == Qt.Key_1:  # Key 1
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/red.py")
-
-            if event.key() == Qt.Key_2:  # Key 2
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/orange.py")
-
-            if event.key() == Qt.Key_3:  # Key 3
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/yellow.py")
-
-            if event.key() == Qt.Key_4:  # Key 4
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/green.py")
-
-            if event.key() == Qt.Key_5:  # Key 5
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/skyblue.py")
-
-            if event.key() == Qt.Key_6:  # Key 6
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/blue.py")
-
-            if event.key() == Qt.Key_7:  # Key 7
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/purple.py")
-
-            if event.key() == Qt.Key_8:  # Key 8
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/dim_light.py")
-
-            if event.key() == Qt.Key_9:  # Key 9
-                os.popen("sudo pkill -f 'PiClock/Leds'")
-                os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/light.py")
 
             if event.key() == Qt.Key_F6:  # Previous Image
                 objimage1.prev_next(-1)
