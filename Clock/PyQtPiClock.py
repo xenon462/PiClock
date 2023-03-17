@@ -640,168 +640,7 @@ def wxfinished_owm():
         wx.setStyleSheet("#wx { font-size: " + str(int(19 * xscale * Config.fontmult)) + "px; }")
         wx.setText(f['weather'][0]['description'] + "\n" + s)
 
-'''
-def wxfinished_ds():
-    global wxreply, wxdata, supress_current
-    global wxicon, temper, wxdesc, press, humidity
-    global wind, feelslike, wdate, bottom, forecast
-    global wxicon2, temper2, wxdesc2, attribution
-    global daytime
 
-    attribution.setText("DarkSky.net")
-    attribution2.setText("DarkSky.net")
-
-    wxstr = str(wxreply.readAll(), 'utf-8')
-    wxdata = json.loads(wxstr)
-    f = wxdata['currently']
-    if not supress_current:
-        wxiconpixmap = QtGui.QPixmap(Config.icons + "/" + f['icon'] + ".png")
-        wxicon.setPixmap(wxiconpixmap.scaled(
-            wxicon.width(), wxicon.height(), Qt.IgnoreAspectRatio,
-            Qt.SmoothTransformation))
-        wxicon2.setPixmap(wxiconpixmap.scaled(
-            wxicon.width(),
-            wxicon.height(),
-            Qt.IgnoreAspectRatio,
-            Qt.SmoothTransformation))
-        wxdesc.setText(f['summary'])
-        wxdesc2.setText(f['summary'])
-
-        if Config.metric:
-            temper.setText('%.1d' % (tempm(f['temperature'])) + u'°C')  # '%.1d' Целое число
-            temper2.setText('%.1d' % (tempm(f['temperature'])) + u'°C')
-            press.setText(Config.LPressure + '%.1f' % f['pressure'] + 'mb')
-            humidity.setText(Config.LHumidity + '%.0f%%' % (f['humidity'] * 100.0))
-            wd = bearing(f['windBearing'])
-            if Config.wind_degrees:
-                wd = str(f['windBearing']) + u'°'
-            wind.setText(Config.LWind +
-                         wd + ' ' +
-                         '%.1f' % (speedm(f['windSpeed'])) + u'м/с' +
-                         Config.Lgusting +
-                         '%.1f' % (speedm(f['windGust'])) + u'м/с')
-            feelslike.setText(Config.LFeelslike +
-                              '%.1f' % (tempm(f['apparentTemperature'])) + u'°C')
-            wdate.setText("{0:%H:%M}".format(datetime.datetime.fromtimestamp(
-                int(f['time']))))
-        # Config.LPrecip1hr + f['precip_1hr_metric'] + 'mm ' +
-        # Config.LToday + f['precip_today_metric'] + 'mm')
-        else:
-            temper.setText('%.1d' % (f['temperature']) + u'°F')  # '%.1d' Целое число
-            temper2.setText('%.1d' % (f['temperature']) + u'°F')
-            press.setText(Config.LPressure + '%.2f' % pressi(f['pressure']) + 'in')
-            humidity.setText(Config.LHumidity + '%.0f%%' % (f['humidity'] * 100.0))
-            wd = bearing(f['windBearing'])
-            if Config.wind_degrees:
-                wd = str(f['windBearing']) + u'°'
-            wind.setText(Config.LWind +
-                         wd + ' ' +
-                         '%.1f' % (f['windSpeed']) + 'mph' +
-                         Config.Lgusting +
-                         '%.1f' % (f['windGust']) + 'mph')
-            feelslike.setText(Config.LFeelslike +
-                              '%.1f' % (f['apparentTemperature']) + u'°F')
-            wdate.setText("{0:%H:%M}".format(datetime.datetime.fromtimestamp(
-                int(f['time']))))
-    # Config.LPrecip1hr + f['precip_1hr_in'] + 'in ' +
-    # Config.LToday + f['precip_today_in'] + 'in')
-
-    for i in range(0, 3):
-        f = wxdata['hourly']['data'][i * 3 + 2]
-        fl = forecast[i]
-        icon = fl.findChild(QtWidgets.QLabel, "icon")
-        wxiconpixmap = QtGui.QPixmap(Config.icons + "/" + f['icon'] + ".png")
-        icon.setPixmap(wxiconpixmap.scaled(
-            icon.width(),
-            icon.height(),
-            Qt.IgnoreAspectRatio,
-            Qt.SmoothTransformation))
-        wx = fl.findChild(QtWidgets.QLabel, "wx")
-        day = fl.findChild(QtWidgets.QLabel, "day")
-        day.setText("{0:%A %I:%M%p}".format(datetime.datetime.fromtimestamp(
-            int(f['time']))))
-        s = ''
-        pop = 0
-        ptype = ''
-        paccum = 0
-        if 'precipProbability' in f:
-            pop = float(f['precipProbability']) * 100.0
-        if 'precipAccumulation' in f:
-            paccum = float(f['precipAccumulation'])
-        if 'precipType' in f:
-            ptype = f['precipType']
-
-        if pop > 0.0 or ptype != '':
-            s += '%.0f' % pop + '% '
-        if Config.metric:
-            if ptype == 'snow':
-                if paccum > 0.05:
-                    s += Config.LSnow + '%.0f' % heightm(paccum) + 'mm '
-            else:
-                if paccum > 0.05:
-                    s += Config.LRain + '%.0f' % heightm(paccum) + 'mm '
-            s += '%.0f' % tempm(f['temperature']) + u'°C'
-        else:
-            if ptype == 'snow':
-                if paccum > 0.05:
-                    s += Config.LSnow + '%.0f' % paccum + 'in '
-            else:
-                if paccum > 0.05:
-                    s += Config.LRain + '%.0f' % paccum + 'in '
-            s += '%.0f' % (f['temperature']) + u'°F'
-
-        wx.setStyleSheet("#wx { font-size: " + str(int(19 * xscale)) + "px; }")
-        wx.setText(f['summary'] + "\n" + s)
-
-    for i in range(3, 9):
-        f = wxdata['daily']['data'][i - 3]
-        fl = forecast[i]
-        icon = fl.findChild(QtWidgets.QLabel, "icon")
-        wxiconpixmap = QtGui.QPixmap(Config.icons + "/" + f['icon'] + ".png")
-        icon.setPixmap(wxiconpixmap.scaled(
-            icon.width(),
-            icon.height(),
-            Qt.IgnoreAspectRatio,
-            Qt.SmoothTransformation))
-        wx = fl.findChild(QtWidgets.QLabel, "wx")
-        day = fl.findChild(QtWidgets.QLabel, "day")
-        day.setText("{0:%A}".format(datetime.datetime.fromtimestamp(
-            int(f['time']))))
-        s = ''
-        pop = 0
-        ptype = ''
-        paccum = 0
-        if 'precipProbability' in f:
-            pop = float(f['precipProbability']) * 100.0
-        if 'precipAccumulation' in f:
-            paccum = float(f['precipAccumulation'])
-        if 'precipType' in f:
-            ptype = f['precipType']
-
-        if pop > 0.05 or ptype != '':
-            s += '%.0f' % pop + '% '
-        if Config.metric:
-            if ptype == 'snow':
-                if paccum > 0.05:
-                    s += Config.LSnow + '%.0f' % heightm(paccum) + 'mm '
-            else:
-                if paccum > 0.05:
-                    s += Config.LRain + '%.0f' % heightm(paccum) + 'mm '
-            s += '%.0f' % tempm(f['temperatureHigh']) + '/' + \
-                 '%.0f' % tempm(f['temperatureLow'])
-        else:
-            if ptype == 'snow':
-                if paccum > 0.05:
-                    s += Config.LSnow + '%.1f' % paccum + 'in '
-            else:
-                if paccum > 0.05:
-                    s += Config.LRain + '%.1f' % paccum + 'in '
-            s += '%.0f' % f['temperatureHigh'] + '/' + \
-                 '%.0f' % f['temperatureLow']
-
-        wx.setStyleSheet("#wx { font-size: " + str(int(19 * xscale)) + "px; }")
-        wx.setText(f['summary'] + "\n" + s)
-'''
 cc_code_map = {
     0: "Unknown",
     1000: "Clear, Sunny",
@@ -856,8 +695,6 @@ cc_code_icons = {
     7102: "sleet",
     8000: "thunderstorm"
 }
-
-
 
 def wxfinished_cc():
     global wxreply, wxdata, supress_current
@@ -1878,6 +1715,7 @@ class MyMain(QtWidgets.QWidget):
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/all_leds_off.py")
 
             if event.key() == Qt.Key_Up:  # Key_UP, NEOPIXEL, GPIO 25, кнопка на корпусе
+                os.popen("sudo pkill -f 'PiClock/Leds'")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/NeoAmbi.py")
 
             if event.key() == Qt.Key_U:
