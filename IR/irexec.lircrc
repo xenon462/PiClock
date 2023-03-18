@@ -82,13 +82,14 @@ end
 begin
     prog   = irexec
     button = KEY_R
-    config = sudo python3  /home/pi/PiClock/Leds/rainbow.py
+    config = sudo python3 /home/pi/PiClock/Leds/all_leds_off.py
+    config = sudo python3 /home/pi/PiClock/Leds/rainbow.py
 end
 
 begin
     prog   = irexec
     button = KEY_P
-    config = sudo python3  /home/pi/PiClock/Leds/all_leds_off.py
+    config = sudo python3 /home/pi/PiClock/Leds/all_leds_off.py
 end
 
 begin
