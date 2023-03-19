@@ -7,6 +7,9 @@ GPIO.output(26, True)
 sleep(0.1)
 GPIO.output(26, False)
 GPIO.cleanup()
+import os
+
+os.popen("sudo pkill -f '/home/pi/PiClock/Leds/'") # убить все процессы из папки Leds
 
 import time
 from rpi_ws281x import PixelStrip, Color

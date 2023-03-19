@@ -10,9 +10,11 @@
 # 'journalctl -b0 /usr/bin/irexec'. This service just echoes some keys
 # commonly available.
 #
+
 begin
     prog   = irexec
     button = KEY_1
+    config = echo "KEY_RED"
     config = sudo python3 /home/pi/PiClock/Leds/red.py
     config = sudo python3 /home/pi/PiClock/Leds/orange.py
     config = sudo python3 /home/pi/PiClock/Leds/yellow.py
@@ -28,61 +30,61 @@ end
 begin
     prog   = irexec
     button = KEY_2
-    config = echo "KEY_2"
+    config = sudo python3 /home/pi/PiClock/Leds/red.py
 end
 
 begin
     prog   = irexec
     button = KEY_3
-    config = echo "KEY_3"
+    config = sudo python3 /home/pi/PiClock/Leds/red.py
 end
 
 begin
     prog   = irexec
     button = KEY_4
-    config = echo "KEY_4"
+    config = sudo python3 /home/pi/PiClock/Leds/red.py
 end
 
 begin
     prog   = irexec
     button = KEY_5
-    config = echo "KEY_5"
+    config = sudo python3 /home/pi/PiClock/Leds/red.py
 end
 
 begin
     prog   = irexec
     button = KEY_6
-    config = echo "KEY_6"
+    config = sudo python3 /home/pi/PiClock/Leds/red.py
 end
 
 begin
     prog   = irexec
     button = KEY_7
-    config = echo "KEY_7"
+    config = sudo python3 /home/pi/PiClock/Leds/red.py
 end
 
 begin
     prog   = irexec
     button = KEY_8
-    config = echo "KEY_8"
+    config = sudo python3 /home/pi/PiClock/Leds/red.py
 end
 
 begin
     prog   = irexec
     button = KEY_9
-    config = echo "KEY_9"
+    config = sudo python3 /home/pi/PiClock/Leds/red.py
 end
 
 begin
     prog   = irexec
-    button = KEY_0
+    button = KEY_F2
     config = sudo python3 /home/pi/PiClock/scripts/meteonova.py
 end
 
 begin
     prog   = irexec
     button = KEY_R
-    config = sudo python3 /home/pi/PiClock/Leds/all_leds_off.py
+    config = sudo python3 /home/pi/PiClock/Leds/all_leds_off.py;
     config = sudo python3 /home/pi/PiClock/Leds/rainbow.py
 end
 
