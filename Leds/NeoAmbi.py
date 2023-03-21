@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 import time
 from rpi_ws281x import PixelStrip, Color
 from time import sleep

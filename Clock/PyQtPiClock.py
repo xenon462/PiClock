@@ -1,4 +1,4 @@
-#!/usr/bin/env python3                        # Climacell
+#!/usr/bin/python3                        # Climacell
 # -*- coding: utf-8 -*-
 
 import requests
