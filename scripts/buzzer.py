@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 #on GPIO26 for sound
 from RPi import GPIO
 from time import sleep

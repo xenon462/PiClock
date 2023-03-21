@@ -1,21 +1,19 @@
 #!/usr/bin/python3                        # Climacell
 # -*- coding: utf-8 -*-
 
-import requests
 import datetime
 import json
 import locale
 import math
 import os
-import platform
 import random
 import signal
 import sys
 import time
 from subprocess import Popen
 
-from w1thermsensor import W1ThermSensor, Sensor
-import dateutil.parser #date/time string parser 
+import dateutil.parser  # date/time string parser
+import requests
 import tzlocal
 from PyQt5 import QtGui, QtCore, QtNetwork, QtWidgets
 from PyQt5.QtCore import QUrl
@@ -24,6 +22,7 @@ from PyQt5.QtGui import QPainter, QImage, QFont
 from PyQt5.QtGui import QPixmap, QBrush, QColor
 from PyQt5.QtNetwork import QNetworkReply
 from PyQt5.QtNetwork import QNetworkRequest
+from w1thermsensor import W1ThermSensor, Sensor
 
 sys.dont_write_bytecode = True
 from GoogleMercatorProjection import get_corners, get_point, get_tile_xy, LatLng  # NOQA
