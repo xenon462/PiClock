@@ -8,6 +8,10 @@ sleep(0.1)
 GPIO.output(26, False)
 GPIO.cleanup()
 
+import subprocess
+proc = subprocess.Popen(["pkill", "-f", "/home/pi/PiClock/Leds/rainbow.py"], stdout=subprocess.PIPE)
+proc.wait()
+
 import time
 from rpi_ws281x import PixelStrip, Color
 
