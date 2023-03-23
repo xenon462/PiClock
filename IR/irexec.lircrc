@@ -86,7 +86,7 @@ end
 begin
     prog   = irexec
     button = KEY_UP
-    config = DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%+
+    config = sudo -u pi DISPLAY=:0.0 /home/pi/PiClock/scripts/osd.sh 1%+
 end
 
 begin
@@ -110,5 +110,5 @@ end
 begin
     prog   = irexec
     button = KEY_DOWN
-    config = DISPLAY=:0 /home/pi/PiClock/scripts/osd.sh 1%-
+    config = sudo -u pi DISPLAY=:0.0 /home/pi/PiClock/scripts/osd.sh 1%-
 end
