@@ -85,7 +85,7 @@ end
 
 begin
     prog   = irexec
-    button = KEY_UP
+    button = KEY_VOLUMEUP
     config = sudo -u pi DISPLAY=:0.0 /home/pi/PiClock/scripts/osd.sh 1%+
 end
 
@@ -109,6 +109,6 @@ end
 
 begin
     prog   = irexec
-    button = KEY_DOWN
+    button = KEY_VOLUMEDOWN
     config = sudo -u pi DISPLAY=:0.0 /home/pi/PiClock/scripts/osd.sh 1%-
 end
