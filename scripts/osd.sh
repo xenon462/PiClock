@@ -8,7 +8,7 @@ killall -9 -q xosd &>/dev/null
 volume=$(amixer -c 0 sset PCM,0 \
 $1 | grep "Left:" | awk '{print $4}' | tr -d '[]''%') 
 # Выводим на экран 
-osd_cat -b percentage -P $volume -p bottom -o 100 \
+osd_cat -b percentage -P $volume -p bottom -o 150 \
 -A center -i 60 -s 0 -S white -d 3 \
 -T $volume'%' -f "-adobe-helvetica-bold-*-*-34-240-*-*-*-*" \
 -c white
