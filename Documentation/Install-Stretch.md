@@ -233,11 +233,11 @@ Dance
 
 
 ### Настройка API-ключей для PiClock
-Получить ключи:  
-[mapbox.com](https://www.mapbox.com/)   Для загрузки карты  
-[openweathermap.org](https://openweathermap.org/) Погода  
-[climacell = tomorrow.io](https://www.tomorrow.io/) Другая погода  
-[thingspeak.com](https://thingspeak.com/) для датчика температуры  
+Получить ключи:    
+[mapbox.com](https://www.mapbox.com/)   Для загрузки карты    
+[openweathermap.org](https://openweathermap.org/) Погода    
+[climacell = tomorrow.io](https://www.tomorrow.io/) Другая погода    
+[thingspeak.com](https://thingspeak.com/) для датчика температуры    
 ### Создать файл ApiKeys.py и записать в него ключи
 
 
