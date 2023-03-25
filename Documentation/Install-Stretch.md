@@ -233,7 +233,7 @@ Dance
 
 
 ### Настройка API-ключей для PiClock
-Получить ключи:
+Получить ключи:  
 [mapbox.com](https://www.mapbox.com/)   Для загрузки карты  
 [openweathermap.org](https://openweathermap.org/) Погода  
 [climacell = tomorrow.io](https://www.tomorrow.io/) Другая погода  
