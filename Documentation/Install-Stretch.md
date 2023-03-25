@@ -175,7 +175,7 @@ sudo systemctl start irexec.service
 sudo systemctl enable irexec
 ```
 
-### исправить ошибку системы
+### Исправить ошибку системы
 Пульт выдаёт бесконечное количество команд. Для нормальной работы пульта отредактировать службу, добавить параметр.
 
 `sudo nano /lib/systemd/system/lircd-uinput.service`
@@ -234,10 +234,10 @@ Dance
 
 ### Настройка API-ключей для PiClock
 Получить ключи:
-[mapbox.com](https://www.mapbox.com/)   Для загрузки карты
-[openweathermap.org](https://openweathermap.org/) Погода
-[climacell = tomorrow.io](https://www.tomorrow.io/) Другая погода
-[thingspeak.com](https://thingspeak.com/) для датчика температуры
+[mapbox.com](https://www.mapbox.com/)   Для загрузки карты  
+[openweathermap.org](https://openweathermap.org/) Погода  
+[climacell = tomorrow.io](https://www.tomorrow.io/) Другая погода  
+[thingspeak.com](https://thingspeak.com/) для датчика температуры  
 ### Создать файл ApiKeys.py и записать в него ключи
 
 
