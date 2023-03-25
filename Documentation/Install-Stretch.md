@@ -98,9 +98,9 @@ git clone https://github.com/xenon462/PiClock.git
 ```
 
 для использования кнопок выполнить:  
-`cd PiClock/Button`
-`make gpio-keys`
-`cd ../..`
+`cd PiClock/Button`  
+`make gpio-keys`  
+`cd ../..`  
 
 ### Установить библиотеку rpi_ws281x  
 
