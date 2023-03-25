@@ -5,13 +5,14 @@
 - Создать пустой текстовый файл в корне SD карты с именем: `ssh`
 - Создать текстовый файл `wpa_supplicant.conf`   в корне SD карты и добавить эти строки:
 ```
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
-country=RU
-network={
-ssid="Asus-2.4Ghz"
-psk="1bt4Y284"
-key_mgmt=WPA-PSK}
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev  
+update_config=1  
+country=RU  
+network={  
+ssid="Asus-2.4Ghz"  
+psk="1bt4Y284"  
+key_mgmt=WPA-PSK  
+}
 ```
 ### Загрузить Raspberry pi и изменить настройки: `sudo raspi-config`
 
