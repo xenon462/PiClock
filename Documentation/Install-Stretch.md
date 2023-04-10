@@ -35,6 +35,16 @@ key_mgmt=WPA-PSK
 - **Update**
 - **Finish =>  Yes**
 
+### Отключение скринсейвера
+
+`sudo nano /etc/lightdm/lightdm.conf`   
+Добавить в него строки
+
+```
+[SeatDefaults]
+xserver-command=X -s 0 -dpms
+```
+
 Oбновить информацию обо всех пакетах:
 
 ```    
