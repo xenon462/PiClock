@@ -287,9 +287,9 @@ sudo chmod a+x PiClock/scripts/osd.sh
 sudo apt-get install mpg123 -y
 ```
 
-Дорожное радио Ялта
-`mpg123 -q http://109.200.130.38:8000/dorozh-yalta`
-Dance
+Дорожное радио Ялта  
+`mpg123 -q http://109.200.130.38:8000/dorozh-yalta`  
+Dance  
 `mpg123 -q http://stream.nonstopplay.co.uk/nsp-128k-mp3`
 
 громкость:
