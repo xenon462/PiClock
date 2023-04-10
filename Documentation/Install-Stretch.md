@@ -28,7 +28,6 @@ key_mgmt=WPA-PSK
 - **Change User Password => Enter new UNIX password**
 - **Network Options => Hostname => PiClock**
 - **Boot Options => Desktop / CLI => Desktop Autologin**
-- **Boot Options => Splash Screen => NO**
 - **Localisation Options => Change Locale => ru_RU.UTF-8 UTF-8**
 - **Localisation Options => Change Timezone => Europe => Moscow**
 - **Advanced Options => Expand Filesystem**
@@ -223,7 +222,7 @@ sudo cp PiClock/IR/lirc_options.conf /etc/lirc/lirc_options.conf
 в файле lirc_options.conf дожны быть такие строки:
 
 ```
-sudo nano /etc/lirc/lirc_options.conf`
+sudo nano /etc/lirc/lirc_options.conf
 ```
 
 ```
@@ -241,26 +240,6 @@ sudo systemctl start irexec.service
 
 ```
 sudo systemctl enable irexec
-```
-
-### Исправить ошибку системы
-
-Пульт выдаёт бесконечное количество команд. Для нормальной работы пульта отредактировать службу, добавить параметр.
-
-```
-sudo nano /lib/systemd/system/lircd-uinput.service
-```
-
-изменить эту строку
-
-```
-ExecStart=/usr/sbin/lircd-uinput  
-```
-
-вот так
-
-```
-ExecStart=/usr/sbin/lircd-uinput --add-release-events
 ```
 
 Перезагрузить:
@@ -293,7 +272,7 @@ sudo systemctl reboot
 
 ### Проверить работу программы вывода сообщений на экран
 
-`export DISPLAY=:0.0`
+`export DISPLAY=:0.0`  
 `echo "hello world" | osd_cat -A center -p bottom -f -*-*-bold-*-*-*-36-120-*-*-*-*-*-* -cgreen -s 5`
 
 ### Установить права на выполнение
