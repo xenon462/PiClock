@@ -1,9 +1,15 @@
 # Установка RpiClock
+
 ## для Raspbian Stretch
 
-### Установить **Raspbian Stretch OS with desktop** на SD карту: [Скачать: 2019-04-08-raspbian-stretch.zip](https://downloads.raspberrypi.org/raspbian/images/raspbian-2019-04-09/)
+### Установить **Raspbian Stretch OS with desktop
+
+** на SD
+карту: [Скачать: 2019-04-08-raspbian-stretch.zip](https://downloads.raspberrypi.org/raspbian/images/raspbian-2019-04-09/)
+
 - Создать пустой текстовый файл в корне SD карты с именем: `ssh`
 - Создать текстовый файл `wpa_supplicant.conf`   в корне SD карты и добавить эти строки:
+
 ```
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev  
 update_config=1  
@@ -14,51 +20,71 @@ psk="1bt4Y284"
 key_mgmt=WPA-PSK  
 }
 ```
+
 ### Загрузить Raspberry pi и изменить настройки:
+
 `sudo raspi-config`
 
- -  **Change User Password => Enter new UNIX password**
- -  **Network Options => Hostname => PiClock**	
- -  **Boot Options => Desktop / CLI => Desktop Autologin** 
- -  **Boot Options => Splash Screen => NO** 	
- -  **Localisation Options => Change Locale => ru_RU.UTF-8 UTF-8**
- -  **Localisation Options => Change Timezone => Europe => Moscow**
- -  **Advanced Options => Expand Filesystem** 
- -  **Update**  
- -  **Finish  =>  Yes**
- 
-Oбновить информацию обо всех пакетах: 
+- **Change User Password => Enter new UNIX password**
+- **Network Options => Hostname => PiClock**
+- **Boot Options => Desktop / CLI => Desktop Autologin**
+- **Boot Options => Splash Screen => NO**
+- **Localisation Options => Change Locale => ru_RU.UTF-8 UTF-8**
+- **Localisation Options => Change Timezone => Europe => Moscow**
+- **Advanced Options => Expand Filesystem**
+- **Update**
+- **Finish =>  Yes**
+
+Oбновить информацию обо всех пакетах:
 
 ```    
 sudo apt-get update
 ```
-Для  работы драйвера светодиодов *rpi-ws281x* и звука внести изменения в файл. 
+
+Для работы драйвера светодиодов *rpi-ws281x* и звука внести изменения в файл.
+
 ``` 
  sudo nano /etc/modprobe.d/snd-blacklist.conf
 ```
- добавить строку:  
+
+добавить строку:
+
 ```
 blacklist snd_bcm2835
 ```
 
-открыть файл настроек и внести изменения.  
+открыть файл настроек и внести изменения.
+
 ```
 sudo nano /boot/config.txt
 ```
+
 удалить строку: `dtparam=audio=on`
-добавить эти строки:  
+добавить эти строки:
+
 ```
 dtparam=audio=off
 dtoverlay=gpio-ir,gpio_pin=3
 dtoverlay=w1-gpio,gpiopin=4
 ```
 
+### Убрать окно настройки Welcome to Raspberry Pi
+
+```
+sudo rm /etc/xdg/autostart/piwiz.desktop
+sudo reboot now
+```
+
 ### Настроить звук.
+
 Создать файл
+
 ```
 sudo nano /etc/asound.conf
 ```
-со следующим содержимым:  
+
+со следующим содержимым:
+
 ```
 pcm.sftvol {  
 type softvol  
@@ -74,25 +100,31 @@ slave.pcm "sftvol"
 }  
 ```
 
-перезагрузить  
+перезагрузить
+
 ```
 sudo systemctl reboot
 ```
-### Проверить звук  
+
+### Проверить звук
+
 ```
 speaker-test -D default -c 2 -twav
 ```
+
 Уровень громкости:
 `alsamixer`
 
-### Устанавить qt5 для Python  
+### Устанавить qt5 для Python
+
 ```
 sudo apt-get install python3-pyqt5 -y
 ```
 
-### Установить PiClock  
+### Установить PiClock
 
-не root  
+не root
+
 ```
 git clone https://github.com/xenon462/PiClock.git
 ```
@@ -100,9 +132,9 @@ git clone https://github.com/xenon462/PiClock.git
 для использования кнопок выполнить:  
 `cd PiClock/Button`  
 `make gpio-keys`  
-`cd ../..`  
+`cd ../..`
 
-### Установить библиотеку rpi_ws281x  
+### Установить библиотеку rpi_ws281x
 
 [официальный дистрибутив Python библиотеки ws281x.](https://github.com/rpi-ws281x/rpi-ws281x-python)
 
@@ -110,61 +142,76 @@ git clone https://github.com/xenon462/PiClock.git
 sudo pip3 install rpi_ws281x && sudo reboot
 ```
 
-### Проверить работу светодиодной ленты:  
+### Проверить работу светодиодной ленты:
+
 ```
 cd PiClock/Leds && sudo python3 NeoAmbi.py && cd
 ```
 
-### Установить библиотеки Python  
+### Установить библиотеки Python
 
 `sudo su`
 
 `pip3 install --upgrade pip && pip3 install python-dateutil --upgrade && pip3 install tzlocal --upgrade && reboot`
 
-### Установить программу для отключения указателя мыши,  когда нет активности  
+### Установить программу для отключения указателя мыши, когда нет активности
+
 ```
 sudo apt-get install unclutter
 ```
 
-### Установить драйвер датчика DS18b20 для измерения температуры внутри помещения  
+### Установить драйвер датчика DS18b20 для измерения температуры внутри помещения
 
 [страница проекта w1thermsensor:](https://github.com/timofurrer/w1thermsensor)
+
 ```
 sudo pip3 install w1thermsensor && sudo reboot
 ```
-### Показать HWID подключенных датчиков:  
+
+### Показать HWID подключенных датчиков:
+
 ```
 w1thermsensor ls
 ```
-### Показать температуру датчика №1  
+
+### Показать температуру датчика №1
+
 ```
 w1thermsensor get 1
 ```
-### В файле Config изменить серийный номер (HWID) датчика: sensds18b20 = 'xxxxxxx'  
+
+### В файле Config изменить серийный номер (HWID) датчика: sensds18b20 = 'xxxxxxx'
+
 ```
 nano PiClock/Clock/Config.py
 ```
-### Установить драйвер Lirc для работы ИК пульта  
+
+### Установить драйвер Lirc для работы ИК пульта
 
 ``` 
 sudo apt-get install lirc -y
 ```
 
-### Cкопировать файл конфигурации пульта HX1838 17keys  
+### Cкопировать файл конфигурации пульта HX1838 17keys
+
 ```
 sudo cp PiClock/IR/HX1838.conf /etc/lirc/lircd.conf.d
 ```
 
-### Cкопировать файл irexec.lircrc  
+### Cкопировать файл irexec.lircrc
+
 ```
 sudo cp PiClock/IR/irexec.lircrc /etc/lirc/irexec.lircrc
 ```
-### Cкопировать файл настроек  
+
+### Cкопировать файл настроек
+
 ```
 sudo cp PiClock/IR/lirc_options.conf /etc/lirc/lirc_options.conf
 ```
 
 в файле lirc_options.conf дожны быть такие строки:
+
 ```
 sudo nano /etc/lirc/lirc_options.conf`
 ```
@@ -174,70 +221,86 @@ driver = default
 device = /dev/lirc0
 ```
 
-### Запустить сервис  
+### Запустить сервис
+
 ```
 sudo systemctl start irexec.service
 ```
 
-### Включить автозагрузку сервиса  
+### Включить автозагрузку сервиса
+
 ```
 sudo systemctl enable irexec
 ```
 
-### Исправить ошибку системы  
-Пульт выдаёт бесконечное количество команд. Для нормальной работы пульта отредактировать службу, добавить параметр.  
+### Исправить ошибку системы
+
+Пульт выдаёт бесконечное количество команд. Для нормальной работы пульта отредактировать службу, добавить параметр.
+
 ```
 sudo nano /lib/systemd/system/lircd-uinput.service
 ```
 
-изменить эту строку  
+изменить эту строку
+
 ```
 ExecStart=/usr/sbin/lircd-uinput  
 ```
 
- вот так  
+вот так
+
 ```
 ExecStart=/usr/sbin/lircd-uinput --add-release-events
 ```
-Перезагрузить:  
+
+Перезагрузить:
+
 ```
 sudo systemctl reboot
 ```
-### Проверить пульт  
+
+### Проверить пульт
 
 `irw`
 
-### Установить пакет для показа сообщений на экране  
+### Установить пакет для показа сообщений на экране
+
 ```
 sudo apt-get install xosd-bin -y
 ```
-### Установить шрифты  
+
+### Установить шрифты
+
 ```
 sudo apt-get install t1-xfree86-nonfree ttf-xfree86-nonfree ttf-xfree86-nonfree-syriac xfonts-75dpi xfonts-100dpi -y
 ```
 
-### Перезагрузить  
+### Перезагрузить
+
 ```
 sudo systemctl reboot
 ```
 
-### Проверить работу программы вывода сообщений на экран  
+### Проверить работу программы вывода сообщений на экран
+
 `export DISPLAY=:0.0`
 `echo "hello world" | osd_cat -A center -p bottom -f -*-*-bold-*-*-*-36-120-*-*-*-*-*-* -cgreen -s 5`
 
+### Установить права на выполнение
 
-### Установить права на выполнение  
 ```
 sudo chmod a+x PiClock/scripts/osd.sh
 ```
 
-### Установить аудио плеер mpg123  
+### Установить аудио плеер mpg123
+
 ```
 sudo apt-get install mpg123 -y
 ```
+
 Дорожное радио Ялта
 `mpg123 -q http://109.200.130.38:8000/dorozh-yalta`
-Dance 
+Dance
 `mpg123 -q http://stream.nonstopplay.co.uk/nsp-128k-mp3`
 
 громкость:
@@ -245,39 +308,45 @@ Dance
 
 ### Установить Bluetooth
 
-
 ### Настройка API-ключей для PiClock
+
 Получить ключи:    
 [mapbox.com](https://www.mapbox.com/)   Для загрузки карты    
 [openweathermap.org](https://openweathermap.org/) Погода    
 [climacell = tomorrow.io](https://www.tomorrow.io/) Другая погода    
-[thingspeak.com](https://thingspeak.com/) для датчика температуры    
-### Создать файл ApiKeys и записать в него ключи  
+[thingspeak.com](https://thingspeak.com/) для датчика температуры
+
+### Создать файл ApiKeys и записать в него ключи
 
 `cd PiClock/Clock`
 `cp ApiKeys-example.py ApiKeys.py`
 
-### Cохранить ключи в файл:  
+### Cохранить ключи в файл:
+
 ```
 nano ApiKeys.py
 ```
 
-### Настройка:  
+### Настройка:
+
 ```
 nano Config.py
 ```
 
-### Запустить PiClock  
+### Запустить PiClock
+
 ```
 cd && sh PiClock/startup.sh -n -s
 ```
 
 ### Для запуска программ в автоматическом режиме поместить эти строки в планировщик заданий
+
 ```
 crontab -e
 ```
 
-### добавить строки:  
+### добавить строки:
+
 ```
 @reboot sh /home/pi/PiClock/startup.sh
 # Прогноз голосом в 7часов 20 минут каждый будний день
@@ -289,12 +358,13 @@ crontab -e
 
 ```
 
-### перезагрузить  
+### перезагрузить
+
 ```
 sudo reboot
 ```
 
-### Обновление программы из GitHub  
+### Обновление программы из GitHub
 
 удалить каталог:
 `rm -fr PiClock`
@@ -307,38 +377,40 @@ sudo reboot
 `make gpio-keys`
 `cd ../..`
 
- Cделать файл исполняемым
+Cделать файл исполняемым
 `sudo chmod u+x PiClock/scripts/osd.sh`
 
 Создать файл ApiKeys.py и записать в него ключи
 
-`cd PiClock/Clock` 
+`cd PiClock/Clock`
 `cp ApiKeys-example.py ApiKeys.py`
 
 сохранить ключи в файл:
 
-`nano ApiKeys.py` 
+`nano ApiKeys.py`
 
-скопировать файл конфигурации пульта HX1838 17keys  
+скопировать файл конфигурации пульта HX1838 17keys
 
 `cd PiClock`
 `sudo cp IR/HX1838.conf /etc/lirc/lircd.conf.d/`
 
- 
 ### ПУЛЬТ HX1838
- < > Карта
- ^v Громкость
- 1 Красный  
- 2 Оранжевый
- 3 Желтый
- 4 Зеленый
- 5 Голубой
- 6 Синий
- 7 Фиолетовый
- 8 Белый тусклый
- 9 Белый
- 0 Метеонова 
-     # Радуга
-     * Выключить Leds
- ОК выкл. звук
+
+< > Карта
+^v Громкость
+1 Красный  
+2 Оранжевый
+3 Желтый
+4 Зеленый
+5 Голубой
+6 Синий
+7 Фиолетовый
+8 Белый тусклый
+9 Белый
+0 Метеонова
+
+# Радуга
+
+* Выключить Leds
+  ОК выкл. звук
 
