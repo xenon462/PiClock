@@ -9,38 +9,38 @@ primary_coordinates = 69.008538, 33.089840  # Change to your Lat/Lon
 
 location = LatLng(primary_coordinates[0], primary_coordinates[1])
 primary_location = LatLng(primary_coordinates[0], primary_coordinates[1])
-#noaastream = 'http://www.urberg.net:8000/tim273/edina'
-#noaastream = 'http://www.meteonova.ru/speech/forecast_33990_0.mp3' # Ялта
-noaastream = 'http://www.meteonova.ru/speech/forecast_22113_0.mp3' # Мурманск
+# noaastream = 'http://www.urberg.net:8000/tim273/edina'
+# noaastream = 'http://www.meteonova.ru/speech/forecast_33990_0.mp3' # Ялта
+noaastream = 'http://www.meteonova.ru/speech/forecast_22113_0.mp3'  # Мурманск
 
 background = 'images/dark.png'
 squares1 = 'images/squares1-kevin.png'
 squares2 = 'images/squares2-kevin.png'
-#icons = 'icons-climacell'  # иконки для climacell.io
-#icons = 'icons-lightblue'
+# icons = 'icons-climacell'  # иконки для climacell.io
+# icons = 'icons-lightblue'
 icons = 'icons-weatherapi'
 
-textcolor = '#ffe4e1'   
+textcolor = '#ffe4e1'
 clockface = 'images/myclockface3.png'
 hourhand = 'images/myhour.png'
 minhand = 'images/mymin.png'
 sechand = 'images/my_sechand.png'
 
-textcolorTopLine = '#20FFFF'     #Цвет верхняя строка
+textcolorTopLine = '#20FFFF'  # Цвет верхняя строка
 textcolorDatex2 = '#20FFFF'  # Цвет строка день недели на второй странице
-textcolorDatey2 = 'yellow' # Цвет время на второй странице
-textcolorWeather = '#FFB520' # Строка состояние погоды слева вверху
-textcolorWeather2 = '#FF6800' # Строка состояние погоды на второй странице 
-textcolorTemper = 'white' # Цвет Температура вверху слева
-textcolorTemper2 = 'white' # Цвет Температура на второй странице
+textcolorDatey2 = 'yellow'  # Цвет время на второй странице
+textcolorWeather = '#FFB520'  # Строка состояние погоды слева вверху
+textcolorWeather2 = '#FF6800'  # Строка состояние погоды на второй странице
+textcolorTemper = 'white'  # Цвет Температура вверху слева
+textcolorTemper2 = 'white'  # Цвет Температура на второй странице
 
-textcolorPress = '#3774FF' # Строка Давление слева
-textcolorHumidity = '#FF8520'# '#ff0000' # Цвет строка Влажность
+textcolorPress = '#3774FF'  # Строка Давление слева
+textcolorHumidity = '#FF8520'  # '#ff0000' # Цвет строка Влажность
 
 colorCCfields = '#FF004F'  # цвет строки Видимость, Облачность, УФ индекс
-textcolorTempInDoor = '#407B29' # Цвет Температура В помещении
-textcolorBottom = '#FFA500' # Цвет нижняя строка Восх, Зах, Луна
-textcolorDayWeek = "#day { background-color: transparent; color:#66ff00}"#  Цинково-жёлтый '#ffa500'# Цвет Дней недели справа 1-9
+textcolorTempInDoor = '#407B29'  # Цвет Температура В помещении
+textcolorBottom = '#FFA500'  # Цвет нижняя строка Восх, Зах, Луна
+textcolorDayWeek = "#day {background-color: transparent; color:#66ff00}"  # Цинково-жёлтый '#ffa500'# Цвет Дней недели справа 1-9
 
 fontmult = 1  # коэф. размера шрифта
 
@@ -77,11 +77,11 @@ digitalformat2 = "{0:%H:%M:%S}"  # Format of the digital time on second screen
 
 usemapbox = 1  # Use Mapbox.com for maps, needs api key (mbapi in ApiKeys.py)
 
-#map_base = 'bcurley/cj712peyz0bwr2sqfndbggupb'  # Custom dark Mapbox style for land and water only (bottom layer that goes below weather radar)
+# map_base = 'bcurley/cj712peyz0bwr2sqfndbggupb'  # Custom dark Mapbox style for land and water only (bottom layer that goes below weather radar)
 map_overlay = 'bcurley/cj712r01c0bw62rm9isme3j8c'  # Custom Mapbox style for labels, roads, and borders only (top layer that goes above weather radar)
 
-map_base = 'mapbox/satellite-streets-v11' # Uncomment for standard Mapbox style, and comment/remove the custom style
-#map_overlay = '' # Uncomment and leave blank for standard Mapbox style, and comment/remove the custom style
+map_base = 'mapbox/satellite-streets-v11'  # Uncomment for standard Mapbox style, and comment/remove the custom style
+# map_overlay = '' # Uncomment and leave blank for standard Mapbox style, and comment/remove the custom style
 
 # Sign-in and create custom map styles at https://studio.mapbox.com/
 # Example: If static map URL is
@@ -98,10 +98,10 @@ wind_degrees = 0
 
 # gives all text additional attributes using QT style notation
 # example: fontattr = 'font-weight: bold; '
-#fontattr = ''
+# fontattr = ''
 
-#толщина шрифта font-weight: (100-900);font-style: ( normal, italic, oblique)
-fontattr = 'font-weight: 900; font-style: italic' #
+# толщина шрифта font-weight: (100-900);font-style: ( normal, italic, oblique)
+fontattr = 'font-weight: 900; font-style: italic'  #
 
 # These are to dim the radar images, if needed.
 # see and try Config-Example-Bedside.py
@@ -118,13 +118,13 @@ dimcolor.setAlpha(0)
 # or look up the ICAO code here:
 # https://airportcodes.aero/name
 
-#METAR = ''
+# METAR = ''
 
 # Language Specific wording
 # DarkSky Language code
 # (https://darksky.net/dev/docs under lang=)
 # и для openweahermap.org
-Language = "ru" 
+Language = "ru"
 
 # The Python Locale for date/time (locale.setlocale)
 #  '' for default Pi Setting
@@ -190,7 +190,6 @@ Lcc_code_map = {
     7102: u"Небольшая ледяная крупа",
     8000: u"Гроза"
 }
-
 
 # RADAR
 # By default, primary_location entered will be the

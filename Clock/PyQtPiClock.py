@@ -228,7 +228,7 @@ def tick():
                 ts.height()
             )
 
-    dy = "{0:%H:%M}".format(now)  #                       Время на второй странице
+    dy = "{0:%H:%M}".format(now)  # Время на второй странице
     if Config.digitalformat2.find("%I") > -1:
         if dy[0] == '0':
             dy = dy[1:99]
@@ -246,7 +246,7 @@ def tick():
     if now.day != lastday:
         lastday = now.day
 
-# date
+        # date
         sup = 'th'
         if now.day == 1 or now.day == 21 or now.day == 31:
             sup = 'st'
@@ -255,7 +255,7 @@ def tick():
         if now.day == 3 or now.day == 23:
             sup = 'rd'
         if Config.DateLocale != "":
-            sup = ""        
+            sup = ""
         weekday = "{0:%w}".format(now)
         if (weekday == '0'):
             weekrus = u' Воскресенье '
@@ -298,10 +298,10 @@ def tick():
         if (month == '12'):
             monthrus = u'Декабря'
 
-        ds = u" {1} {0:%d} {2} {0.year}г. ".format(now, weekrus, monthrus) #  ДАТА сверху
+        ds = u" {1} {0:%d} {2} {0.year}г. ".format(now, weekrus, monthrus)  # ДАТА сверху
         datex.setText(ds)
         datex2.setText(ds)
-        ds2 = u" {0:%d} {2} {0.year}г. ".format(now, weekrus, monthrus) #     ДАТА на второй странице
+        ds2 = u" {0:%d} {2} {0.year}г. ".format(now, weekrus, monthrus)  # ДАТА на второй странице
 
         datex.setText(ds)
         datex2.setText(ds2)
@@ -312,32 +312,32 @@ def tick():
         bottomtext += (Config.LSunRise +
                        "{0:%H:%M}".format(sunrise) + ',' +
                        Config.LSet +
-                       "{0:%H:%M}".format(sunset) + ',')  #           Запятая Восх Зах   
+                       "{0:%H:%M}".format(sunset) + ',')  # Запятая Восх Зах
         bottomtext += (Config.LMoonPhase + phase(moon_phase()))
         bottom.setText(bottomtext)
 
 
 def tempfinished():
-#    global tempreply, temp
+    #    global tempreply, temp
     global temp
 
-# sensor ds18b20 
+    # sensor ds18b20
     sensor = W1ThermSensor(Sensor.DS18B20, Config.sensds18b20)
     tempdata = sensor.get_temperature()
-# sensor thingspeak.com
-    url = "https://api.thingspeak.com/channels/" + Config.ChannelID + "/fields/" + Config.Field + ".json?api_key=" + ApiKeys.tsApiKey + "&results=1"
+    # sensor thingspeak.com
+    url = "https://api.thingspeak.com/channels/" + Config.ChannelID + "/fields/" + Config.Field + "/last.json?api_key=" + ApiKeys.tsApiKey
     response = requests.get(url)
-    data_disc = json.loads(response.text) 
-    flt = float(data_disc['feeds'][0]['field4'])
+    data_disc = json.loads(response.text)
+    flt = float(data_disc['field' + Config.Field])
 
     if Config.metric:
-        s = Config.LInsideTemp + str('%.1f' % tempdata) + u'°C   ' + Config.LOutsideTemp +  \
-                str('%.1f' % flt) + u'°C'                   #                       Температура внутри и на улице
+        s = Config.LInsideTemp + str('%.1f' % tempdata) + u'°C   ' + Config.LOutsideTemp + \
+            str('%.1f' % flt) + u'°C'  # Температура внутри и на улице
 
     else:
-        s = Config.LInsideTemp + str('%.1f' % (tempdata * 1.8 + 32)) + u'°F   ' + Config.LOutsideTemp +  \
-                str('%.1f' % (flt * 1.8 + 32)) + u'°F'   
-       
+        s = Config.LInsideTemp + str('%.1f' % (tempdata * 1.8 + 32)) + u'°F   ' + Config.LOutsideTemp + \
+            str('%.1f' % (flt * 1.8 + 32)) + u'°F'
+
     temp.setText(s)
 
 
@@ -346,11 +346,11 @@ def tempm(f):
 
 
 def speedm(f):
-    return f * 0.44704 # m/sec
+    return f * 0.44704  # m/sec
 
 
 def pressi(f):
-    return f  * 0.029530
+    return f * 0.029530
 
 
 def heightm(f):
@@ -359,7 +359,6 @@ def heightm(f):
 
 def barom(f):
     return f * 25.4
-
 
 
 def phase(f):
@@ -407,12 +406,13 @@ def bearing(f):
 def gettemp():
     global tempreply
     host = 'localhost'
-#    if platform.uname()[1] == 'KW81':
-#        host = 'piclock.local'  # this is here just for testing
+    #    if platform.uname()[1] == 'KW81':
+    #        host = 'piclock.local'  # this is here just for testing
     r = QUrl('http://' + host + ':48213/temp')
     r = QNetworkRequest(r)
     tempreply = manager.get(r)
     tempreply.finished.connect(tempfinished)
+
 
 def wxfinished_owm():
     global wxreply, wxdata, supress_current
@@ -446,10 +446,9 @@ def wxfinished_owm():
     wxstr = str(wxreply.readAll(), 'utf-8')
     wxdata = json.loads(wxstr)
     f = wxdata['current']
-#    print(wxdata)    
+    #    print(wxdata)
     icon = f['weather'][0]['icon']
     icon = owmicons[icon]
-
 
     if not supress_current:
         wxiconpixmap = QtGui.QPixmap(Config.icons + "/" + icon + ".png")
@@ -467,18 +466,18 @@ def wxfinished_owm():
         if Config.metric:
             temper.setText('%.1d' % (f['temp']) + u'°C')  # '%.1d' Целое число
             temper2.setText('%.1d' % (f['temp']) + u'°C')
-            press.setText(Config.LPressure + '%.1d' % (f['pressure']*0.750062) + ' мм.рт.ст')
+            press.setText(Config.LPressure + '%.1d' % (f['pressure'] * 0.750062) + ' мм.рт.ст')
             humidity.setText(Config.LHumidity + '%.0f%%' % (f['humidity']) + u', Т.росы: ' + \
-                            '%.1d' % (f['dew_point']) + u'°C')  #                                   Точка Росы
-# Видимость owm
-            visibility = (Config.Lvisibility + '%.1d' % (f['visibility'] / 1000) + u'км, ') 
+                             '%.1d' % (f['dew_point']) + u'°C')  # Точка Росы
+            # Видимость owm
+            visibility = (Config.Lvisibility + '%.1d' % (f['visibility'] / 1000) + u'км, ')
 
-# Облачность owm
-            cloudCover = (Config.LcloudCover + 
-                            '%.1d' % ((f["clouds"])) + u'%, ')                           
-# УФ индекс owm
-            uvIndex = (Config.LuvIndex + 
-                            '%.1d' % ((f["uvi"])) + u'')                            
+            # Облачность owm
+            cloudCover = (Config.LcloudCover +
+                          '%.1d' % ((f["clouds"])) + u'%, ')
+            # УФ индекс owm
+            uvIndex = (Config.LuvIndex +
+                       '%.1d' % ((f["uvi"])) + u'')
 
             ccfields.setText(visibility + cloudCover + uvIndex)
 
@@ -503,17 +502,17 @@ def wxfinished_owm():
             temper2.setText('%.1d' % (f['temp']) + u'°F')
             press.setText(Config.LPressure + '%.1f' % f['pressure'] + 'in')
             humidity.setText(Config.LHumidity + '%.0f%%' % (f['humidity']) + u', Dew Point: ' + \
-                            '%.1d' % (f['dew_point']) + u'°F')  #                                   Точка Росы
+                             '%.1d' % (f['dew_point']) + u'°F')  # Точка Росы
 
-# visibility owm
-            visibility = (Config.Lvisibility + '%.1d' % (f['visibility'] / 1000) + u'км, ') 
+            # visibility owm
+            visibility = (Config.Lvisibility + '%.1d' % (f['visibility'] / 1000) + u'км, ')
 
-# cloudCover owm
-            cloudCover = (Config.LcloudCover + 
-                            '%.1d' % ((f["clouds"])) + u'%, ')                           
-# UV index owm
-            uvIndex = (Config.LuvIndex + 
-                            '%.1d' % ((f["uvi"])) + u'')                            
+            # cloudCover owm
+            cloudCover = (Config.LcloudCover +
+                          '%.1d' % ((f["clouds"])) + u'%, ')
+            # UV index owm
+            uvIndex = (Config.LuvIndex +
+                       '%.1d' % ((f["uvi"])) + u'')
 
             ccfields.setText(visibility + cloudCover + uvIndex)
 
@@ -667,7 +666,6 @@ cc_code_map = {
     8000: "Thunderstorm"
 }
 
-
 cc_code_icons = {
     0: "Unknown",
     1000: "clear-day",
@@ -685,7 +683,7 @@ cc_code_icons = {
     5001: "snow",
     5100: "snow",
     5101: "snow",
-    6000: "sleet",   
+    6000: "sleet",
     6001: "sleet",
     6200: "sleet",
     6201: "sleet",
@@ -694,6 +692,7 @@ cc_code_icons = {
     7102: "sleet",
     8000: "thunderstorm"
 }
+
 
 def wxfinished_cc():
     global wxreply, wxdata, supress_current
@@ -708,8 +707,8 @@ def wxfinished_cc():
     wxdata = json.loads(wxstr)
     f = wxdata
     dt = dateutil.parser.parse(f["data"]["timelines"][0]["startTime"]) \
-        .astimezone(tzlocal.get_localzone())  
-    icon=f["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"]
+        .astimezone(tzlocal.get_localzone())
+    icon = f["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"]
     icon = cc_code_icons[icon]
     if not daytime:
         icon = icon.replace('-day', '-night')
@@ -728,24 +727,28 @@ def wxfinished_cc():
         wxdesc2.setText(cc_code_map[f["data"]["timelines"][0]["intervals"][0]["values"]["weatherCode"]])
 
         if Config.metric:
-            temper.setText('%.1d' % (f["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + u'°C')  # '%.1d' Целое число # Температура Внутри
-            temper2.setText('%.1d' % (f["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + u'°C')  # '%.1d' Целое число
-            press.setText(Config.LPressure + 
-                            '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["pressureSurfaceLevel"])*0.750062) + u' мм.рт.ст')  # Давление
-            humidity.setText(Config.LHumidity + '%.0f%%' % (f["data"]["timelines"][0]["intervals"][0]["values"]["humidity"]) + u', Т.росы: ' + \
-                            '%.1d' % (f["data"]["timelines"][0]["intervals"][0]["values"]["dewPoint"]) + u'°C')
-# Видимость
-            visibility = (Config.Lvisibility + 
-                            '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["visibility"])) + u'км, ')
-# Облачность
-            cloudCover = (Config.LcloudCover + 
-                            '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["cloudCover"])) + u'%, ')                           
-# УФ индекс
-            uvIndex = (Config.LuvIndex + 
-                            '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"])) + u'')                            
-                            
+            temper.setText('%.1d' % (f["data"]["timelines"][0]["intervals"][0]["values"][
+                "temperature"]) + u'°C')  # '%.1d' Целое число # Температура Внутри
+            temper2.setText('%.1d' % (
+                f["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + u'°C')  # '%.1d' Целое число
+            press.setText(Config.LPressure +
+                          '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"][
+                "pressureSurfaceLevel"]) * 0.750062) + u' мм.рт.ст')  # Давление
+            humidity.setText(Config.LHumidity + '%.0f%%' % (
+                f["data"]["timelines"][0]["intervals"][0]["values"]["humidity"]) + u', Т.росы: ' + \
+                             '%.1d' % (f["data"]["timelines"][0]["intervals"][0]["values"]["dewPoint"]) + u'°C')
+            # Видимость
+            visibility = (Config.Lvisibility +
+                          '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["visibility"])) + u'км, ')
+            # Облачность
+            cloudCover = (Config.LcloudCover +
+                          '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["cloudCover"])) + u'%, ')
+            # УФ индекс
+            uvIndex = (Config.LuvIndex +
+                       '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"])) + u'')
+
             ccfields.setText(visibility + cloudCover + uvIndex)
-            
+
             wd = bearing(f["data"]["timelines"][0]["intervals"][0]["values"]["windDirection"])
             if Config.wind_degrees:
                 wd = str(f["data"]["timelines"][0]["intervals"][0]["values"]["windDirection"]) + u'°'
@@ -755,28 +758,31 @@ def wxfinished_cc():
                          Config.Lgusting +
                          '%.1f' % (f["data"]["timelines"][0]["intervals"][0]["values"]["windGust"]) + u'м/с')
             feelslike.setText(Config.LFeelslike +
-                              '%.1f' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["temperatureApparent"])) + u'°C')
-            wdate.setText(u'Данные на:  ' + "{0:%H:%M}".format(dt))  #                                                      Данные на
+                              '%.1f' % (
+                                  (f["data"]["timelines"][0]["intervals"][0]["values"]["temperatureApparent"])) + u'°C')
+            wdate.setText(u'Данные на:  ' + "{0:%H:%M}".format(dt))  # Данные на
         # Config.LPrecip1hr + f['precip_1hr_metric'] + 'mm ' +
         # Config.LToday + f['precip_today_metric'] + 'mm')
         else:
-            temper.setText('%.1d' % (f["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + u'°F')  # '%.1d' Целое число
+            temper.setText('%.1d' % (
+                f["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + u'°F')  # '%.1d' Целое число
             temper2.setText('%.1d' % (f["data"]["timelines"][0]["intervals"][0]["values"]["temperature"]) + u'°F')
             press.setText(Config.LPressure +
                           '%.2f' % (f["data"]["timelines"][0]["intervals"][0]["values"]["pressureSurfaceLevel"]) + 'in')
-            humidity.setText(Config.LHumidity + '%.0f%%' % (f["data"]["timelines"][0]["intervals"][0]["values"]["humidity"]) + u', Dew Point: ' + \
-                            '%.1d' % (f["data"]["timelines"][0]["intervals"][0]["values"]["dewPoint"]) + u'°F')
+            humidity.setText(Config.LHumidity + '%.0f%%' % (
+                f["data"]["timelines"][0]["intervals"][0]["values"]["humidity"]) + u', Dew Point: ' + \
+                             '%.1d' % (f["data"]["timelines"][0]["intervals"][0]["values"]["dewPoint"]) + u'°F')
 
-# Видимость
-            visibility = (Config.Lvisibility + 
-                            '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["visibility"])) + u'км, ')
-# Облачность
-            cloudCover = (Config.LcloudCover + 
-                            '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["cloudCover"])) + u'%, ')                           
-# УФ индекс
-            uvIndex = (Config.LuvIndex + 
-                            '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"])) + u'')                            
-                            
+            # Видимость
+            visibility = (Config.Lvisibility +
+                          '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["visibility"])) + u'км, ')
+            # Облачность
+            cloudCover = (Config.LcloudCover +
+                          '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["cloudCover"])) + u'%, ')
+            # УФ индекс
+            uvIndex = (Config.LuvIndex +
+                       '%.1d' % ((f["data"]["timelines"][0]["intervals"][0]["values"]["uvIndex"])) + u'')
+
             ccfields.setText(visibility + cloudCover + uvIndex)
 
             wd = bearing(f["data"]["timelines"][0]["intervals"][0]["values"]["windDirection"])
@@ -788,7 +794,8 @@ def wxfinished_cc():
                          Config.Lgusting +
                          '%.1f' % (f["data"]["timelines"][0]["intervals"][0]["values"]["windGust"]) + 'mph')
             feelslike.setText(Config.LFeelslike +
-                              '%.1f' % (f["data"]["timelines"][0]["intervals"][0]["values"]["temperatureApparent"]) + u'°F')
+                              '%.1f' % (
+                                  f["data"]["timelines"][0]["intervals"][0]["values"]["temperatureApparent"]) + u'°F')
             wdate.setText(u'Data on:  ' + "{0:%H:%M}".format(dt))
     # Config.LPrecip1hr + f['precip_1hr_in'] + 'in ' +
     # Config.LToday + f['precip_today_in'] + 'in')
@@ -799,14 +806,14 @@ def wxfinished_cc2():
     global daytime
     wxstr2 = str(wxreply2.readAll(), 'utf-8')
     wxdata2 = json.loads(wxstr2)
-#    print(wxdata2)
+    #    print(wxdata2)
 
     for i in range(0, 3):
-        f = wxdata2["data"]["timelines"][0]["intervals"][i * 3 + 2] # 3 Часовой прогноз
+        f = wxdata2["data"]["timelines"][0]["intervals"][i * 3 + 2]  # 3 Часовой прогноз
         fl = forecast[i]
         wicon = f["values"]["weatherCode"]
-        
-        wicon = cc_code_icons[wicon] 
+
+        wicon = cc_code_icons[wicon]
         dt = dateutil.parser.parse(f["startTime"]) \
             .astimezone(tzlocal.get_localzone())
 
@@ -816,7 +823,7 @@ def wxfinished_cc2():
         else:
             fsunrise = sun.sunrise(dt)
             fsunset = sun.sunset(dt)
-#            print('calc daytime', fdaytime, dt, fsunrise, fsunset)
+            #            print('calc daytime', fdaytime, dt, fsunrise, fsunset)
             if fsunrise <= dt.time() <= fsunset:
                 fdaytime = True
             else:
@@ -833,18 +840,18 @@ def wxfinished_cc2():
             Qt.SmoothTransformation))
         wx = fl.findChild(QtWidgets.QLabel, "wx")
         day = fl.findChild(QtWidgets.QLabel, "day")
-        day.setText("{0:%A %H:%M}".format(  #                            день недели и время 1-3 строка в столбце
+        day.setText("{0:%A %H:%M}".format(  # день недели и время 1-3 строка в столбце
             dateutil.parser.parse(f["startTime"]).astimezone(tzlocal.get_localzone())))  # Справа 3 часовой прогноз
         s = ''
         pop = float(f["values"]["precipitationProbability"])
         ptype = f["values"]["precipitationType"]
         if ptype == 0:
             ptype = ''
-        paccum = f["values"]["precipitationIntensity"]        
+        paccum = f["values"]["precipitationIntensity"]
         if pop > 0.0 or ptype != '':
             s += u"" '%.0f' % pop + '% '
         if Config.metric:
-            if ptype == 2 :  
+            if ptype == 2:
                 if paccum > 0.01:
                     s += Config.LSnow + '%.0f' % (paccum) + u'мм/ч '
             else:
@@ -852,7 +859,7 @@ def wxfinished_cc2():
                     s += Config.LRain + '%.0f' % (paccum) + u'мм/ч '
             s += '%.0f' % (f["values"]["temperature"]) + u'°C'
         else:
-            if ptype == 2 :
+            if ptype == 2:
                 if paccum > 0.01:
                     s += Config.LSnow + '%.0f' % paccum + 'in '
             else:
@@ -862,7 +869,8 @@ def wxfinished_cc2():
 
         wx.setStyleSheet("#wx { font-size: " + str(int(19 * xscale * Config.fontmult)) + "px; }")
         wx.setText(cc_code_map[f["values"]["weatherCode"]] + "\n" + s)
-        wx.setAlignment(Qt.AlignHCenter | Qt.AlignTop)  #             Выравнивание столбец 1-3 строка
+        wx.setAlignment(Qt.AlignHCenter | Qt.AlignTop)  # Выравнивание столбец 1-3 строка
+
 
 def wxfinished_cc3():
     global wxreply3, forecast
@@ -889,7 +897,7 @@ def wxfinished_cc3():
             Qt.SmoothTransformation))
         wx = fl.findChild(QtWidgets.QLabel, "wx")
         day = fl.findChild(QtWidgets.QLabel, "day")
-        day.setText("{0:%A}".format(  #                 Дата справа столбец 4-9 строка
+        day.setText("{0:%A}".format(  # Дата справа столбец 4-9 строка
             dateutil.parser.parse(
                 f["startTime"] + "T00:00:00"
             )
@@ -932,18 +940,16 @@ def wxfinished_cc3():
         if '7102' in wc:
             ptype = 'snow'
         if '8000' in wc:
-            ptype = 'rain'    
+            ptype = 'rain'
 
-
-
-        # if (pop > 0.05 and ptype == ''):
+            # if (pop > 0.05 and ptype == ''):
         #     if f['temp'][1]['max']['value'] > 28:
         #         ptype = 'rain'
         #     else:
         #         ptype = 'snow'
         if pop > 0.05 or ptype != '':
             s += u"" + '%.0f' % pop + '% '
-        if Config.metric:            
+        if Config.metric:
             if ptype == 'snow':
                 if paccum > 0.01:
                     s += Config.LSnow + '%.2f' % (paccum) + u'мм/ч '
@@ -951,7 +957,7 @@ def wxfinished_cc3():
                 if paccum > 0.01:
                     s += Config.LRain + '%.2f' % (paccum) + u'мм/ч '
             s += '%.0f' % (f["values"]["temperatureMin"]) + '/' + \
-                    '%.0f' % (f["values"]["temperatureMax"]) + '°C'
+                 '%.0f' % (f["values"]["temperatureMax"]) + '°C'
         else:
             if ptype == 'snow':
                 if paccum > 0.01:
@@ -960,27 +966,28 @@ def wxfinished_cc3():
                 if paccum > 0.01:
                     s += Config.LRain + '%.1f' % paccum + 'in/hr '
             s += '%.0f' % f["values"]["temperatureMin"] + '/' + \
-                    '%.0f' % f["values"]["temperatureMax"]
+                 '%.0f' % f["values"]["temperatureMax"]
         wx.setStyleSheet("#wx { font-size: " + str(int(19 * xscale * Config.fontmult)) + "px; }")
         wx.setText(cc_code_map[f["values"]["weatherCode"]] + "\n" + s)
-        wx.setAlignment(Qt.AlignHCenter | Qt.AlignTop)  #                 Выравнивание столбец 4-9 строка
+        wx.setAlignment(Qt.AlignHCenter | Qt.AlignTop)  # Выравнивание столбец 4-9 строка
+
 
 def getwx():
     global supress_current
     supress_current = False
-#    try:
-#        if Config.METAR != '':
-#            supress_current = True
-#            getwx_metar()
-#    except AttributeError:
-#        pass
-#
-#    try:
-#        ApiKeys.dsapi
-#        getwx_ds()
-#        return
-#    except AttributeError:
-#        pass
+    #    try:
+    #        if Config.METAR != '':
+    #            supress_current = True
+    #            getwx_metar()
+    #    except AttributeError:
+    #        pass
+    #
+    #    try:
+    #        ApiKeys.dsapi
+    #        getwx_ds()
+    #        return
+    #    except AttributeError:
+    #        pass
 
     try:
         ApiKeys.ccapi
@@ -1005,19 +1012,19 @@ def getwx():
 def getwx_owm():
     global wxurl
     global wxreply
-#    print("getting current and forecast: " + time.ctime())
+    #    print("getting current and forecast: " + time.ctime())
     wxurl = 'https://api.openweathermap.org/data/2.5/onecall?appid=' + ApiKeys.owmapi
     wxurl += "&lat=" + str(Config.location.lat) + '&lon=' + str(Config.location.lng)
 
     if Config.metric:
-        
+
         wxurl += '&units=metric'
     else:
         wxurl += '&units=imperial'
 
-    wxurl += '&lang='+ Config.Language.lower()
+    wxurl += '&lang=' + Config.Language.lower()
     wxurl += '&r=' + str(random.random())
-#    print(wxurl)
+    #    print(wxurl)
     r = QUrl(wxurl)
     r = QNetworkRequest(r)
     wxreply = manager.get(r)
@@ -1031,55 +1038,54 @@ def getwx_cc():
     global wxreply
     global wxreply2
     global wxreply3
-#    print("getting current: " + time.ctime())
+    #    print("getting current: " + time.ctime())
     wxurl = 'https://api.tomorrow.io/v4/timelines?timesteps=current&apikey=' + ApiKeys.ccapi
     wxurl += "&location=" + str(Config.location.lat) + ',' + str(Config.location.lng)
 
     if Config.metric:
-        
-        wxurl += '&units=metric'  #                                          Единицы измерения
+
+        wxurl += '&units=metric'  # Единицы измерения
     else:
         wxurl += '&units=imperial'
 
     wxurl += '&fields=temperature,weatherCode,temperatureApparent,humidity,'
     wxurl += 'windSpeed,windDirection,windGust,pressureSurfaceLevel,precipitationType,'
     wxurl += 'dewPoint,visibility,cloudCover,uvIndex'
-#    print(wxurl)
+    #    print(wxurl)
     r = QUrl(wxurl)
     r = QNetworkRequest(r)
     wxreply = manager.get(r)
     wxreply.finished.connect(wxfinished_cc)
-#    print("getting hourly: " + time.ctime())
+    #    print("getting hourly: " + time.ctime())
     wxurl2 = 'https://api.tomorrow.io/v4/timelines?timesteps=1h&apikey=' + ApiKeys.ccapi
     wxurl2 += "&location=" + str(Config.location.lat) + ',' + str(Config.location.lng)
 
     if Config.metric:
-        
-        wxurl2 += '&units=metric'  #                                          Единицы измерения
+
+        wxurl2 += '&units=metric'  # Единицы измерения
     else:
         wxurl2 += '&units=imperial'
 
     wxurl2 += '&fields=temperature,precipitationIntensity,precipitationType,'
     wxurl2 += 'precipitationProbability,weatherCode'
-#    print(wxurl2)
+    #    print(wxurl2)
     r2 = QUrl(wxurl2)
     r2 = QNetworkRequest(r2)
     wxreply2 = manager.get(r2)
     wxreply2.finished.connect(wxfinished_cc2)
-#    print("getting daily: " + time.ctime())
-    wxurl3 = 'https://api.tomorrow.io/v4/timelines?timesteps=1d&apikey=' + ApiKeys.ccapi 
+    #    print("getting daily: " + time.ctime())
+    wxurl3 = 'https://api.tomorrow.io/v4/timelines?timesteps=1d&apikey=' + ApiKeys.ccapi
     wxurl3 += "&location=" + str(Config.location.lat) + ',' + str(Config.location.lng)
 
-
     if Config.metric:
-        
-        wxurl3 += '&units=metric'  #                                          Единицы измерения
+
+        wxurl3 += '&units=metric'  # Единицы измерения
     else:
         wxurl3 += '&units=imperial'
 
     wxurl3 += '&fields=temperature,precipitationIntensity,precipitationType,'
     wxurl3 += 'precipitationProbability,weatherCode,temperatureMax,temperatureMin'
-#    print(wxurl3)
+    #    print(wxurl3)
     r3 = QUrl(wxurl3)
     r3 = QNetworkRequest(r3)
     wxreply3 = manager.get(r3)
@@ -1229,7 +1235,7 @@ class Radar(QtWidgets.QLabel):
         self.point = radar["center"]
         self.radar = radar
         self.baseurl = self.mapurl(radar, rect, False)
-#        print("map base url for " + self.myname + ": " + self.baseurl)
+        #        print("map base url for " + self.myname + ": " + self.baseurl)
 
         mb = 0
         try:
@@ -1240,7 +1246,7 @@ class Radar(QtWidgets.QLabel):
             if 'overlay' in radar:
                 if radar['overlay'] != '':
                     self.overlayurl = self.mapurl(radar, rect, True)
-#                    print("map overlay url for " + self.myname + ": " + self.overlayurl)
+        #                    print("map overlay url for " + self.myname + ": " + self.overlayurl)
 
         QtWidgets.QLabel.__init__(self, parent)
         self.interval = Config.radar_refresh * 60
@@ -1370,7 +1376,7 @@ class Radar(QtWidgets.QLabel):
         self.frameImages = newf
         firstt = t - self.anim * 600
         for tt in range(firstt, t + 1, 600):
-#            print("get... " + str(tt) + " " + self.myname)
+            #            print("get... " + str(tt) + " " + self.myname)
             gotit = False
             for f in self.frameImages:
                 if f["time"] == tt:
@@ -1390,13 +1396,13 @@ class Radar(QtWidgets.QLabel):
                 tileurl = "https://tilecache.rainviewer.com/v2/radar/%d/%s" \
                           % (t, tt)
                 self.tileurls.append(tileurl)
-#        print(self.myname + " " + str(self.getIndex) + " " + self.tileurls[i])
+        #        print(self.myname + " " + str(self.getIndex) + " " + self.tileurls[i])
         self.tilereq = QNetworkRequest(QUrl(self.tileurls[i]))
         self.tilereply = manager.get(self.tilereq)
         self.tilereply.finished.connect(self.get_tilesreply)
 
     def get_tilesreply(self):
-#        print("get_tilesreply " + str(self.getIndex))
+        #        print("get_tilesreply " + str(self.getIndex))
         if self.tilereply.error() != QNetworkReply.NoError:
             return
         self.tileQimages.append(QImage())
@@ -1433,11 +1439,11 @@ class Radar(QtWidgets.QLabel):
         timestamp = "{0:%H:%M} rainviewer.com".format(
             datetime.datetime.fromtimestamp(self.getTime))
         painter2.setPen(QColor(63, 63, 63, 255))
-        painter2.setFont(QFont("Arial", 12))  #             Шрифт rainviewer.com на карте вверху
+        painter2.setFont(QFont("Arial", 12))  # Шрифт rainviewer.com на карте вверху
         painter2.setRenderHint(QPainter.TextAntialiasing)
         painter2.drawText(3 - 1, 12 - 1, timestamp)
         painter2.drawText(3 + 2, 12 + 1, timestamp)
-        painter2.setPen(QColor(192, 192, 192, 255))  #      Цвет rainviewer.com на карте вверху
+        painter2.setPen(QColor(192, 192, 192, 255))  # Цвет rainviewer.com на карте вверху
         painter2.drawText(3, 12, timestamp)
         painter2.drawText(3 + 1, 12, timestamp)
         painter2.end()
@@ -1471,14 +1477,14 @@ class Radar(QtWidgets.QLabel):
             if radar['overlay'] != '':
                 hide_attribution = '&attribution=false&logo=false'
         return 'https://api.mapbox.com/styles/v1/' + \
-               basemap + \
-               '/static/' + \
-               str(radar['center'].lng) + ',' + \
-               str(radar['center'].lat) + ',' + \
-               str(radar['zoom']-1) + ',0,0/' + \
-               str(rect.width()) + 'x' + str(rect.height()) + \
-               '?access_token=' + ApiKeys.mbapi + \
-               hide_attribution
+            basemap + \
+            '/static/' + \
+            str(radar['center'].lng) + ',' + \
+            str(radar['center'].lat) + ',' + \
+            str(radar['zoom'] - 1) + ',0,0/' + \
+            str(rect.width()) + 'x' + str(rect.height()) + \
+            '?access_token=' + ApiKeys.mbapi + \
+            hide_attribution
 
     @staticmethod
     def mapboxoverlayurl(radar, rect):
@@ -1489,13 +1495,13 @@ class Radar(QtWidgets.QLabel):
         if 'overlay' in radar:
             overlay = radar['overlay']
         return 'https://api.mapbox.com/styles/v1/' + \
-               overlay + \
-               '/static/' + \
-               str(radar['center'].lng) + ',' + \
-               str(radar['center'].lat) + ',' + \
-               str(radar['zoom']-1) + ',0,0/' + \
-               str(rect.width()) + 'x' + str(rect.height()) + \
-               '?access_token=' + ApiKeys.mbapi
+            overlay + \
+            '/static/' + \
+            str(radar['center'].lng) + ',' + \
+            str(radar['center'].lat) + ',' + \
+            str(radar['zoom'] - 1) + ',0,0/' + \
+            str(rect.width()) + 'x' + str(rect.height()) + \
+            '?access_token=' + ApiKeys.mbapi
 
     @staticmethod
     def googlemapurl(radar, rect):
@@ -1515,7 +1521,7 @@ class Radar(QtWidgets.QLabel):
         urlp.append('maptype=hybrid')
 
         return 'http://maps.googleapis.com/maps/api/staticmap?' + \
-               '&'.join(urlp)
+            '&'.join(urlp)
 
     def basefinished(self):
         if self.basereply.error() != QNetworkReply.NoError:
@@ -1565,14 +1571,14 @@ class Radar(QtWidgets.QLabel):
                     for x in range(0, mk2.width()):
                         for y in range(0, mk2.height()):
                             (r, g, b, a) = QColor.fromRgba(
-                                           mk2.pixel(x, y)).getRgbF()
+                                mk2.pixel(x, y)).getRgbF()
                             r = r * cr
                             g = g * cg
                             b = b * cb
                             mk2.setPixel(x, y, QColor.fromRgbF(r, g, b, a)
                                          .rgba())
                 mk2 = mk2.scaledToHeight(mkh, 1)
-                painter.drawImage(int(pt.x-mkh / 2), int(pt.y-mkh / 2), mk2)
+                painter.drawImage(int(pt.x - mkh / 2), int(pt.y - mkh / 2), mk2)
 
         painter.end()
 
@@ -1585,9 +1591,9 @@ class Radar(QtWidgets.QLabel):
         self.overlaypixmap.loadFromData(self.overlayreply.readAll())
         if self.overlaypixmap.size() != self.rect.size():
             self.overlaypixmap = self.overlaypixmap.scaled(
-                                            self.rect.size(),
-                                            Qt.KeepAspectRatio,
-                                            Qt.SmoothTransformation)
+                self.rect.size(),
+                Qt.KeepAspectRatio,
+                Qt.SmoothTransformation)
         self.overlay.setPixmap(self.overlaypixmap)
 
     def getbase(self):
@@ -1622,11 +1628,11 @@ class Radar(QtWidgets.QLabel):
         self.lastget = time.time() - self.interval + random.uniform(3, 10)
 
     def wxstart(self):
-#        print("wxstart for " + self.myname)
+        #        print("wxstart for " + self.myname)
         self.timer.start(200)
 
     def wxstop(self):
-#        print("wxstop for " + self.myname)
+        #        print("wxstop for " + self.myname)
         self.timer.stop()
 
     def stop(self):
@@ -1710,7 +1716,6 @@ class MyMain(QtWidgets.QWidget):
                 os.popen("sudo python3 /home/pi/PiClock/Leds/all_leds_off.py")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/NeoAmbi.py")
 
-
             if event.key() == Qt.Key_F6:  # Previous Image
                 objimage1.prev_next(-1)
             if event.key() == Qt.Key_F7:  # Next Image
@@ -1734,7 +1739,7 @@ if len(sys.argv) > 1:
     configname = sys.argv[1]
 
 if not os.path.isfile(configname + ".py"):
-#    print("Config file not found %s" % configname + ".py")
+    #    print("Config file not found %s" % configname + ".py")
     exit(1)
 
 Config = __import__(configname)
@@ -2007,31 +2012,31 @@ radar2rect = QtCore.QRect(int(3 * xscale), int(622 * yscale), int(300 * xscale),
 objradar2 = Radar(foreGround, Config.radar2, radar2rect, "radar2")
 
 radar3rect = QtCore.QRect(int(13 * xscale), \
-    int(10 * yscale), int(700 * xscale), int(740 * yscale))  
-objradar3 = Radar(frame2, Config.radar3, radar3rect, "radar3")  #           Левая карта на 2 стр
+                          int(10 * yscale), int(700 * xscale), int(740 * yscale))
+objradar3 = Radar(frame2, Config.radar3, radar3rect, "radar3")  # Левая карта на 2 стр
 
 radar4rect = QtCore.QRect(int(726 * xscale), \
-    int(10 * yscale), int(700 * xscale), int(740 * yscale))  
-objradar4 = Radar(frame2, Config.radar4, radar4rect, "radar4")  #           Правая карта на 2 стр
+                          int(10 * yscale), int(700 * xscale), int(740 * yscale))
+objradar4 = Radar(frame2, Config.radar4, radar4rect, "radar4")  # Правая карта на 2 стр
 
 #                     Дата Верхняя строка
 datex = QtWidgets.QLabel(foreGround)
 datex.setObjectName("datex")
-datex.setStyleSheet("#datex { font-family:sans-serif; color: " +   
-                    Config.textcolorTopLine +  #                             Цвет верхняя строка      
+datex.setStyleSheet("#datex { font-family:sans-serif; color: " +
+                    Config.textcolorTopLine +  # Цвет верхняя строка
                     "; background-color: transparent; font-size: " +
                     str(int(50 * xscale * Config.fontmult)) +
                     "px; " +
-                    Config.fontattr +  #                                     Шрифт
+                    Config.fontattr +  # Шрифт
                     "}")
-datex.setAlignment(Qt.AlignHCenter | Qt.AlignTop)  #                        Выравнивание
+datex.setAlignment(Qt.AlignHCenter | Qt.AlignTop)  # Выравнивание
 datex.setGeometry(-50, 0, width, int(100 * yscale))
 
 #                     Дата на второй странице
 datex2 = QtWidgets.QLabel(frame2)
 datex2.setObjectName("datex2")
 datex2.setStyleSheet("#datex2 { font-family:sans-serif; color: " +
-                     Config.textcolorDatex2  +  #                      Цвет День недели на второй странице
+                     Config.textcolorDatex2 +  # Цвет День недели на второй странице
                      "; background-color: transparent; font-size: " +
                      str(int(50 * xscale * Config.fontmult)) + "px; " +
                      Config.fontattr +
@@ -2041,11 +2046,11 @@ datex2.setGeometry(int(600 * xscale), int(760 * yscale), int(960 * xscale), 100)
 datey2 = QtWidgets.QLabel(frame2)
 datey2.setObjectName("datey2")
 datey2.setStyleSheet("#datey2 { font-family:sans-serif; color: " +
-                     Config.textcolorDatey2 +  #                       Цвет Время на 2 стр 
+                     Config.textcolorDatey2 +  # Цвет Время на 2 стр
                      "; background-color: transparent; font-size: " +
                      str(int(50 * xscale * Config.fontmult)) +
                      "px; " +
-                     Config.fontattr +  
+                     Config.fontattr +
                      "}")
 datey2.setAlignment(Qt.AlignHCenter | Qt.AlignTop)
 datey2.setGeometry(int(980 * xscale), int(840 * yscale), int(640 * xscale), 100)  # Время на 2 стр
@@ -2055,7 +2060,7 @@ attribution = QtWidgets.QLabel(foreGround)
 attribution.setObjectName("attribution")
 attribution.setStyleSheet("#attribution { " +
                           " background-color: transparent; color: " +
-                          Config.textcolor + 
+                          Config.textcolor +
                           "; font-size: " +
                           str(int(12 * xscale)) +
                           "px; " +
@@ -2063,7 +2068,7 @@ attribution.setStyleSheet("#attribution { " +
                           "}")
 attribution.setAlignment(Qt.AlignTop)
 attribution.setGeometry(int(6 * xscale), \
-    int(3 * yscale), int(150 * xscale), 100) 
+                        int(3 * yscale), int(150 * xscale), 100)
 
 #                       Иконка вверху слева
 ypos = -25
@@ -2071,14 +2076,14 @@ wxicon = QtWidgets.QLabel(foreGround)
 wxicon.setObjectName("wxicon")
 wxicon.setStyleSheet("#wxicon { background-color: transparent; }")
 wxicon.setGeometry(int(75 * xscale), \
-    int(0 * yscale), int(130 * xscale), int(130 * yscale))  
+                   int(0 * yscale), int(130 * xscale), int(130 * yscale))
 
 #                       Имя сайта погоды на 2 стр внизу слева
 attribution2 = QtWidgets.QLabel(frame2)
 attribution2.setObjectName("attribution2")
 attribution2.setStyleSheet("#attribution2 { " +
                            "background-color: transparent; color: " +
-                           Config.textcolor +  
+                           Config.textcolor +
                            "; font-size: " +
                            str(int(12 * xscale * Config.fontmult)) +
                            "px; " +
@@ -2086,48 +2091,48 @@ attribution2.setStyleSheet("#attribution2 { " +
                            "}")
 attribution2.setAlignment(Qt.AlignTop)
 attribution2.setGeometry(int(6 * xscale), \
-    int(880 * yscale), int(150 * xscale), 100)  
+                         int(880 * yscale), int(150 * xscale), 100)
 
 #                         Иконка на 2 странице
 wxicon2 = QtWidgets.QLabel(frame2)
 wxicon2.setObjectName("wxicon2")
 wxicon2.setStyleSheet("#wxicon2 { background-color: transparent; }")
-wxicon2.setGeometry(int(0 * xscale),  \
-    int(750 * yscale), int(150 * xscale), int(150 * yscale))
+wxicon2.setGeometry(int(0 * xscale), \
+                    int(750 * yscale), int(150 * xscale), int(150 * yscale))
 
 #                         Текст состояние погоды 
 ypos += 130
 wxdesc = QtWidgets.QLabel(foreGround)
 wxdesc.setObjectName("wxdesc")
 wxdesc.setStyleSheet("#wxdesc { background-color: transparent; color: " +
-                     Config.textcolorWeather + 
+                     Config.textcolorWeather +
                      "; font-size: " +
                      str(int(30 * xscale)) +
                      "px; " +
                      Config.fontattr +
                      "}")
-wxdesc.setAlignment(Qt.AlignLeft | Qt.AlignTop)  
-wxdesc.setGeometry(int(3 * xscale), int(ypos * yscale), int(600 * xscale), 800)  
+wxdesc.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+wxdesc.setGeometry(int(3 * xscale), int(ypos * yscale), int(600 * xscale), 800)
 
 #                         Текст состояние погоды на 2 странице
 wxdesc2 = QtWidgets.QLabel(frame2)
 wxdesc2.setObjectName("wxdesc2")
 wxdesc2.setStyleSheet("#wxdesc2 { background-color: transparent; color: " +
-                      Config.textcolorWeather2 +  
+                      Config.textcolorWeather2 +
                       "; font-size: " +
                       str(int(50 * xscale * Config.fontmult)) +
                       "px; " +
                       Config.fontattr +
                       "}")
 wxdesc2.setAlignment(Qt.AlignLeft | Qt.AlignTop)
-wxdesc2.setGeometry(int(150 * xscale), int(845 * yscale), int(900 * xscale), 100) 
+wxdesc2.setGeometry(int(150 * xscale), int(845 * yscale), int(900 * xscale), 100)
 
 #                             Температура слева вверху
 ypos += 25
 temper = QtWidgets.QLabel(foreGround)
 temper.setObjectName("temper")
-temper.setStyleSheet("#temper { background-color: transparent; color: " + 
-                     Config.textcolorTemper +   
+temper.setStyleSheet("#temper { background-color: transparent; color: " +
+                     Config.textcolorTemper +
                      "; font-size: " +
                      str(int(70 * xscale * Config.fontmult)) +
                      "px; " +
@@ -2139,36 +2144,36 @@ temper.setGeometry(int(3 * xscale), int(ypos * yscale), int(300 * xscale), int(1
 #                             Температура на 2 странице
 temper2 = QtWidgets.QLabel(frame2)
 temper2.setObjectName("temper2")
-temper2.setStyleSheet("#temper2 { background-color: transparent; color: " +  
-                      Config.textcolorTemper2 +  
+temper2.setStyleSheet("#temper2 { background-color: transparent; color: " +
+                      Config.textcolorTemper2 +
                       "; font-size: " +
                       str(int(70 * xscale * Config.fontmult)) +
                       "px; " +
-                      Config.fontattr +  
+                      Config.fontattr +
                       "}")
 temper2.setAlignment(Qt.AlignHCenter | Qt.AlignTop)
-temper2.setGeometry(int(125 * xscale), int(780 * yscale), int(300 * xscale), 100) 
+temper2.setGeometry(int(125 * xscale), int(780 * yscale), int(300 * xscale), 100)
 
 #                             Строка слева Давление:
 ypos += 80
 press = QtWidgets.QLabel(foreGround)
 press.setObjectName("press")
 press.setStyleSheet("#press { background-color: transparent; color: " +
-                    Config.textcolorPress +  
+                    Config.textcolorPress +
                     "; font-size: " +
-                    str(int(26 * xscale * Config.fontmult)) +  
+                    str(int(26 * xscale * Config.fontmult)) +
                     "px; " +
                     Config.fontattr +
                     "}")
-press.setAlignment(Qt.AlignLeft | Qt.AlignTop) 
-press.setGeometry(int(10 * xscale), int(ypos * yscale), int(400 * xscale), 100)  
+press.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+press.setGeometry(int(10 * xscale), int(ypos * yscale), int(400 * xscale), 100)
 
 #                             Строка слева Влажность:
 ypos += 30
 humidity = QtWidgets.QLabel(foreGround)
 humidity.setObjectName("humidity")
-humidity.setStyleSheet("#humidity { background-color: transparent; color: " +  
-                       Config.textcolorHumidity +  #                             Цвет
+humidity.setStyleSheet("#humidity { background-color: transparent; color: " +
+                       Config.textcolorHumidity +  # Цвет
                        "; font-size: " +
                        str(int(25 * xscale * Config.fontmult)) +
                        "px; " +
@@ -2184,21 +2189,21 @@ wind.setObjectName("wind")
 wind.setStyleSheet("#wind { background-color: transparent; color: " +  # Ветер
                    Config.textcolor +
                    "; font-size: " +
-                   str(int(21 * xscale * Config.fontmult)) +  #        Шрифт
+                   str(int(21 * xscale * Config.fontmult)) +  # Шрифт
                    "px; " +
                    Config.fontattr +
                    "}")
-wind.setAlignment(Qt.AlignLeft | Qt.AlignTop)      
-wind.setGeometry(int(10 * xscale), int(ypos * yscale), int(500 * xscale), 100)  
+wind.setAlignment(Qt.AlignLeft | Qt.AlignTop)
+wind.setGeometry(int(10 * xscale), int(ypos * yscale), int(500 * xscale), 100)
 
 #                              Строка слева По Ощущению:
 ypos += 20
 feelslike = QtWidgets.QLabel(foreGround)
 feelslike.setObjectName("feelslike")
-feelslike.setStyleSheet("#feelslike { background-color: transparent; color: " +  
+feelslike.setStyleSheet("#feelslike { background-color: transparent; color: " +
                         Config.textcolor +
                         "; font-size: " +
-                        str(int(21 * xscale * Config.fontmult)) +  #         Шрифт
+                        str(int(21 * xscale * Config.fontmult)) +  # Шрифт
                         "px; " +
                         Config.fontattr +
                         "}")
@@ -2209,7 +2214,7 @@ feelslike.setGeometry(int(3 * xscale), int(ypos * yscale), int(300 * xscale), 10
 ypos += 20
 wdate = QtWidgets.QLabel(foreGround)
 wdate.setObjectName("wdate")
-wdate.setStyleSheet("#wdate { background-color: transparent; color: " +  
+wdate.setStyleSheet("#wdate { background-color: transparent; color: " +
                     Config.textcolor +
                     "; font-size: " +
                     str(int(15 * xscale * Config.fontmult)) +
@@ -2222,10 +2227,10 @@ wdate.setGeometry(int(3 * xscale), int(ypos * yscale), int(300 * xscale), 100)
 #                               Нижняя строка. Восход Заход, фазы луны
 bottom = QtWidgets.QLabel(foreGround)
 bottom.setObjectName("bottom")
-bottom.setStyleSheet("#bottom { font-family:sans-serif; color: " +  
-                     Config.textcolorBottom +  #                        Цвет
+bottom.setStyleSheet("#bottom { font-family:sans-serif; color: " +
+                     Config.textcolorBottom +  # Цвет
                      "; background-color: transparent; font-size: " +
-                     str(int(30 * xscale * Config.fontmult)) +  #       Шрифт
+                     str(int(30 * xscale * Config.fontmult)) +  # Шрифт
                      "px; " +
                      Config.fontattr +
                      "}")
@@ -2245,19 +2250,17 @@ temp.setStyleSheet("#temp { font-family:sans-serif; color: " +
 temp.setAlignment(Qt.AlignHCenter | Qt.AlignTop)
 temp.setGeometry(0, int(height - 100 * yscale), width, int(50 * yscale))
 
-
-
 #                              строка Видимость, Облачность, УФ индекс
 ypos += 450
 ccfields = QtWidgets.QLabel(foreGround)
 ccfields.setObjectName("ccfields")
 ccfields.setStyleSheet("#ccfields { background-color: transparent; color: " +
-                    Config.colorCCfields + 
-                    "; font-size: " +
-                    str(int(29 * xscale * Config.fontmult)) +
-                    "px; " +
-                    Config.fontattr +
-                    "}")
+                       Config.colorCCfields +
+                       "; font-size: " +
+                       str(int(29 * xscale * Config.fontmult)) +
+                       "px; " +
+                       Config.fontattr +
+                       "}")
 ccfields.setAlignment(Qt.AlignHCenter | Qt.AlignTop)
 ccfields.setGeometry(0, int(height - 150 * yscale), width, int(50 * yscale))
 ccfields.raise_()
@@ -2277,25 +2280,25 @@ for i in range(0, 9):
     lab.setGeometry(int(1137 * xscale), int(i * 100 * yscale), int(300 * xscale), int(100 * yscale))
     lab.stackUnder(datex)
 
-#                               Иконка справа в столбце
+    #                               Иконка справа в столбце
     icon = QtWidgets.QLabel(lab)
     icon.setStyleSheet("#icon { background-color: transparent; }")
-    icon.setGeometry(10, 10, int(65 * xscale), int(65 * yscale))  
+    icon.setGeometry(10, 10, int(65 * xscale), int(65 * yscale))
     icon.setObjectName("icon")
 
-#                               Текст в Столбике
+    #                               Текст в Столбике
     wx = QtWidgets.QLabel(lab)
     wx.setStyleSheet("#wx { background-color: transparent; }")
     wx.setGeometry(int(100 * xscale), int(5 * yscale), int(200 * xscale), int(120 * yscale))
-    wx.setAlignment(Qt.AlignLeft | Qt.AlignTop)  
+    wx.setAlignment(Qt.AlignLeft | Qt.AlignTop)
     wx.setWordWrap(True)
     wx.setObjectName("wx")
 
-#                               Дата в столбике
-    day = QtWidgets.QLabel(lab)  
-    day.setStyleSheet(Config.textcolorDayWeek) 
+    #                               Дата в столбике
+    day = QtWidgets.QLabel(lab)
+    day.setStyleSheet(Config.textcolorDayWeek)
     day.setGeometry(int(10 * xscale), int(75 * yscale), int(250 * xscale), int(25 * yscale))
-    day.setAlignment(Qt.AlignLeft | Qt.AlignBottom) 
+    day.setAlignment(Qt.AlignLeft | Qt.AlignBottom)
     day.setObjectName("day")
 
     forecast.append(lab)
