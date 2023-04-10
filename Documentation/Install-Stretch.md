@@ -367,23 +367,23 @@ sudo reboot
 
 ### Обновление программы из GitHub
 
-удалить каталог:
-`rm -fr PiClock`
+удалить каталог:  
+`sudo rm -fr PiClock`
 
-не root
+не root  
 `git clone https://github.com/xenon462/PiClock.git`
 
-для кнопок выполнить
+для кнопок выполнить  
 `cd PiClock/Button`  
-`make gpio-keys`
+`make gpio-keys`  
 `cd ../..`
 
-Cделать файл исполняемым
+Cделать файл исполняемым  
 `sudo chmod u+x PiClock/scripts/osd.sh`
 
 Создать файл ApiKeys.py и записать в него ключи
 
-`cd PiClock/Clock`
+`cd PiClock/Clock`  
 `cp ApiKeys-example.py ApiKeys.py`
 
 сохранить ключи в файл:
@@ -392,11 +392,12 @@ Cделать файл исполняемым
 
 скопировать файл конфигурации пульта HX1838 17keys
 
-`cd PiClock`
+`cd PiClock`  
 `sudo cp IR/HX1838.conf /etc/lirc/lircd.conf.d/`
 
 ### ПУЛЬТ HX1838
 
+```
 < > Карта
 ^v Громкость
 1 Красный  
@@ -409,9 +410,7 @@ Cделать файл исполняемым
 8 Белый тусклый
 9 Белый
 0 Метеонова
-
 # Радуга
-
 * Выключить Leds
-  ОК выкл. звук
-
+ОК выкл. звук
+```
