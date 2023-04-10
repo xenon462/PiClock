@@ -242,6 +242,18 @@ sudo systemctl start irexec.service
 sudo systemctl enable irexec
 ```
 
+### Исправить ошибку системы
+
+Пульт выдаёт бесконечное количество команд. Для нормальной работы пульта отредактировать службу, добавить параметр.
+
+`sudo nano /lib/systemd/system/lircd-uinput.service`
+
+изменить эту строку
+`ExecStart=/usr/sbin/lircd-uinput`
+
+вот так
+`ExecStart=/usr/sbin/lircd-uinput --add-release-events`
+
 Перезагрузить:
 
 ```
@@ -307,7 +319,7 @@ Dance
 
 ### Создать файл ApiKeys и записать в него ключи
 
-`cd PiClock/Clock`
+`cd PiClock/Clock`  
 `cp ApiKeys-example.py ApiKeys.py`
 
 ### Cохранить ключи в файл:
