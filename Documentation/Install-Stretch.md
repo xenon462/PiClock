@@ -2,7 +2,7 @@
 
 ## для Raspbian Stretch
 
-### Установить **Raspbian Stretch OS with desktop
+### Установить ***Raspbian Stretch OS with desktop***
 
 ** на SD
 карту: [Скачать: 2019-04-08-raspbian-stretch.zip](https://downloads.raspberrypi.org/raspbian/images/raspbian-2019-04-09/)
@@ -79,13 +79,6 @@ dtoverlay=gpio-ir,gpio_pin=3
 dtoverlay=w1-gpio,gpiopin=4
 ```
 
-### Убрать окно настройки Welcome to Raspberry Pi
-
-```
-sudo rm /etc/xdg/autostart/piwiz.desktop
-sudo reboot now
-```
-
 Создать файл
 
 ```
@@ -107,6 +100,12 @@ pcm.!default {
 type plug  
 slave.pcm "sftvol"  
 }  
+```
+
+### Убрать окно настройки Welcome to Raspberry Pi
+
+```
+sudo rm /etc/xdg/autostart/piwiz.desktop
 ```
 
 перезагрузить
