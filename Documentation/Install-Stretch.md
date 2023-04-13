@@ -50,6 +50,8 @@ Oбновить информацию обо всех пакетах:
 sudo apt-get update
 ```
 
+### Настроить звук.
+
 Для работы драйвера светодиодов *rpi-ws281x* и звука внести изменения в файл.
 
 ``` 
@@ -83,8 +85,6 @@ dtoverlay=w1-gpio,gpiopin=4
 sudo rm /etc/xdg/autostart/piwiz.desktop
 sudo reboot now
 ```
-
-### Настроить звук.
 
 Создать файл
 
@@ -394,6 +394,74 @@ Cделать файл исполняемым
 
 `cd PiClock`  
 `sudo cp IR/HX1838.conf /etc/lirc/lircd.conf.d/`
+
+### Настроить Raspberry pi как Bluetooth колонку
+
+Установить:
+
+```
+sudo apt install pulseaudio-module-bluetooth
+```
+
+добавить pi пользователя в группу Bluetooth
+
+```
+sudo usermod -a -G bluetooth pi
+```
+
+Перезагрузить
+
+```
+sudo reboot
+```
+
+запустить PulseAudio
+
+```
+systemctl --user start pulseaudio
+```
+
+запустить интерфейс bluetoothctl
+
+```
+bluetoothctl
+```
+
+Включить Bluetooth на смартфоне  
+Запустить сканирование
+
+```
+scan on
+```
+
+Скопировать MAC адрес найденного смартфона    
+Остановить сканирование
+
+```
+scan off
+```
+
+Соединить и доверить
+
+```
+pair 04:B4:29:FE:EB:52
+```
+
+```
+trust 04:B4:29:FE:EB:52
+```
+
+подключить смартфон
+
+```
+connect 04:B4:29:FE:EB:52
+```
+
+Выход
+
+```
+exit
+```
 
 ### ПУЛЬТ HX1838
 

@@ -600,7 +600,7 @@ def wxfinished_owm():
         wx = fl.findChild(QtWidgets.QLabel, "wx")
         day = fl.findChild(QtWidgets.QLabel, "day")
         day.setText("{0:%A}".format(datetime.datetime.fromtimestamp(
-            int(f['dt']))))
+            int(f['dt']))))  # Время 4-9 строка в столбце
         s = ''
         pop = 0
         ptype = ''
