@@ -283,8 +283,13 @@ sudo systemctl reboot
 
 ### Проверить работу программы вывода сообщений на экран
 
-`export DISPLAY=:0.0`  
-`echo "hello world" | osd_cat -A center -p bottom -f -*-*-bold-*-*-*-36-120-*-*-*-*-*-* -cgreen -s 5`
+```
+export DISPLAY=:0.0  
+```
+
+```
+echo "hello world" | osd_cat -A center -p bottom -f -*-*-bold-*-*-*-36-120-*-*-*-*-*-* -cgreen -s 5
+```
 
 ### Установить права на выполнение
 
@@ -298,15 +303,17 @@ sudo chmod a+x PiClock/scripts/osd.sh
 sudo apt-get install mpg123 -y
 ```
 
-Дорожное радио Ялта  
-`mpg123 -q http://109.200.130.38:8000/dorozh-yalta`  
-Dance  
-`mpg123 -q http://stream.nonstopplay.co.uk/nsp-128k-mp3`
+Dance
+
+```
+mpg123 -q http://stream.nonstopplay.co.uk/nsp-128k-mp3
+```
 
 громкость:
-`alsamixer`
 
-### Установить Bluetooth
+```
+alsamixer
+```
 
 ### Настройка API-ключей для PiClock
 
@@ -318,8 +325,13 @@ Dance
 
 ### Создать файл ApiKeys и записать в него ключи
 
-`cd PiClock/Clock`  
-`cp ApiKeys-example.py ApiKeys.py`
+```
+cd PiClock/Clock  
+```
+
+```
+cp ApiKeys-example.py ApiKeys.py
+```
 
 ### Cохранить ключи в файл:
 
@@ -357,42 +369,6 @@ crontab -e
 20 6 * * 1-5 sudo python3  /home/pi/PiClock/Leds/dawn.py; sudo python3  /home/pi/PiClock/Leds/all_leds_off.py
 
 ```
-
-### перезагрузить
-
-```
-sudo reboot
-```
-
-### Обновление программы из GitHub
-
-удалить каталог:  
-`sudo rm -fr PiClock`
-
-не root  
-`git clone https://github.com/xenon462/PiClock.git`
-
-для кнопок выполнить  
-`cd PiClock/Button`  
-`make gpio-keys`  
-`cd ../..`
-
-Cделать файл исполняемым  
-`sudo chmod u+x PiClock/scripts/osd.sh`
-
-Создать файл ApiKeys.py и записать в него ключи
-
-`cd PiClock/Clock`  
-`cp ApiKeys-example.py ApiKeys.py`
-
-сохранить ключи в файл:
-
-`nano ApiKeys.py`
-
-скопировать файл конфигурации пульта HX1838 17keys
-
-`cd PiClock`  
-`sudo cp IR/HX1838.conf /etc/lirc/lircd.conf.d/`
 
 ### Настроить Raspberry pi как Bluetooth колонку
 
@@ -460,6 +436,72 @@ connect 04:B4:29:FE:EB:52
 
 ```
 exit
+```
+
+### перезагрузить
+
+```
+sudo reboot
+```
+
+### Обновление программы из GitHub
+
+удалить каталог:
+
+```
+sudo rm -fr PiClock
+```
+
+не root
+
+```
+git clone https://github.com/xenon462/PiClock.git
+```
+
+для кнопок выполнить
+
+```
+cd PiClock/Button  
+```
+
+```
+make gpio-keys  
+```
+
+```
+cd ../..
+```
+
+Cделать файл исполняемым
+
+```
+sudo chmod u+x PiClock/scripts/osd.sh
+```
+
+Создать файл ApiKeys.py и записать в него ключи
+
+```
+cd PiClock/Clock  
+```
+
+```
+cp ApiKeys-example.py ApiKeys.py
+```
+
+сохранить ключи в файл:
+
+```
+nano ApiKeys.py
+```
+
+скопировать файл конфигурации пульта HX1838 17keys
+
+```
+cd PiClock  
+```
+
+```
+sudo cp IR/HX1838.conf /etc/lirc/lircd.conf.d/
 ```
 
 ### ПУЛЬТ HX1838
