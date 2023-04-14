@@ -548,7 +548,7 @@ def wxfinished_owm():
             Qt.SmoothTransformation))
         wx = fl.findChild(QtWidgets.QLabel, "wx")
         day = fl.findChild(QtWidgets.QLabel, "day")
-        day.setText("{0:%A %H:%M%p}".format(datetime.datetime.fromtimestamp(  # Время 1-3 строка в столбце
+        day.setText("{0:%A %H:%M%p}".format(datetime.datetime.fromtimestamp(
             int(f['dt']))))
         s = ''
         pop = 0
@@ -600,7 +600,7 @@ def wxfinished_owm():
         wx = fl.findChild(QtWidgets.QLabel, "wx")
         day = fl.findChild(QtWidgets.QLabel, "day")
         day.setText("{0:%A}".format(datetime.datetime.fromtimestamp(
-            int(f['dt']))))  # Время 4-9 строка в столбце
+            int(f['dt']))))
         s = ''
         pop = 0
         ptype = ''
@@ -897,7 +897,7 @@ def wxfinished_cc3():
             Qt.SmoothTransformation))
         wx = fl.findChild(QtWidgets.QLabel, "wx")
         day = fl.findChild(QtWidgets.QLabel, "day")
-        day.setText("{0:%A}".format(  # Дата справа столбец 4-9 строка
+        day.setText("{0:%A %d %b}".format(  # Дата справа столбец 4-9 строка
             dateutil.parser.parse(
                 f["startTime"] + "T00:00:00"
             )
