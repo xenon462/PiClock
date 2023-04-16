@@ -1417,6 +1417,7 @@ class Radar(QtWidgets.QLabel):
     def combine_tiles(self):
         ii = QImage(self.tilesWidth * 256, self.tilesHeight * 256,
                     QImage.Format_ARGB32)
+        ii.fill(Qt.transparent)
         painter = QPainter()
         painter.begin(ii)
         painter.setPen(QColor(255, 255, 255, 255))
