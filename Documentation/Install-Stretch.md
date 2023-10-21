@@ -314,7 +314,7 @@ export DISPLAY=:0.0
 echo "hello world" | osd_cat -A center -p bottom -f -*-*-bold-*-*-*-36-120-*-*-*-*-*-* -cgreen -s 5
 ```
 
-### Установить права на выполнение
+### Установить права на выполнение скрипта osd.sh
 
 ```
 sudo chmod a+x PiClock/scripts/osd.sh
