@@ -181,9 +181,13 @@ cd PiClock/Leds && sudo python3 NeoAmbi.py && cd
 
 ### Установить библиотеки Python
 
-`sudo su`
+```
+sudo su
+```
 
-`pip3 install --upgrade pip && pip3 install python-dateutil --upgrade && pip3 install tzlocal --upgrade && reboot`
+```
+pip3 install --upgrade pip && pip3 install python-dateutil --upgrade && pip3 install tzlocal --upgrade && reboot
+```
 
 ### Установить программу для отключения указателя мыши, когда нет активности
 
