@@ -58,6 +58,7 @@ sudo nano /etc/apt/sources.list
 deb http://raspbian.raspberrypi.org/raspbian/ stretch main contrib non-free rpi
 на
 deb http://legacy.raspbian.org/raspbian/ stretch main contrib non-free rpi
+
 Oбновить информацию обо всех пакетах:
 
 ```    
