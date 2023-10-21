@@ -44,6 +44,20 @@ key_mgmt=WPA-PSK
 xserver-command=X -s 0 -dpms
 ```
 
+Stretch не поддерживается уже много лет.  
+Однако репозиторий все еще существует,
+он переехал на http://legacy.raspbian.org/raspbian/dists/stretch/.
+Он будет оставаться там очень долгое время, но не будет получать никаких обновлений.
+Поэтому измените запись в source.list с
+
+```
+sudo nano /etc/apt/sources.list
+```
+
+изменить
+deb http://raspbian.raspberrypi.org/raspbian/ stretch main contrib non-free rpi
+на
+deb http://legacy.raspbian.org/raspbian/ stretch main contrib non-free rpi
 Oбновить информацию обо всех пакетах:
 
 ```    
