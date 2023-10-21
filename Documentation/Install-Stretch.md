@@ -326,7 +326,7 @@ sudo chmod a+x PiClock/scripts/osd.sh
 sudo apt-get install mpg123 -y
 ```
 
-Dance
+Radio Dance
 
 ```
 mpg123 -q http://stream.nonstopplay.co.uk/nsp-128k-mp3
