@@ -349,7 +349,7 @@ alsamixer
 ### Создать файл ApiKeys и записать в него ключи
 
 ```
-cd PiClock/Clock  
+cd PiClock/Clock
 ```
 
 ```
