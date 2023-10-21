@@ -101,7 +101,8 @@ dtoverlay=gpio-ir,gpio_pin=3
 dtoverlay=w1-gpio,gpiopin=4
 ```
 
-Создать файл
+Сохранить и выйти.
+Создать файл.
 
 ```
 sudo nano /etc/asound.conf
