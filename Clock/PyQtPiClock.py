@@ -55,6 +55,10 @@ class SunTimes:
 
     @staticmethod
     def __timefromdecimalday(day):
+        if (day < 0.0):
+            xdt = datetime.datetime.now()
+            return datetime.time(hour=xdt.hour, minute=xdt.minute, second=xdt.second)
+
         hours = 24.0 * day
         h = int(hours)
         minutes = (hours - h) * 60
