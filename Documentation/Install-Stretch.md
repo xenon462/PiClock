@@ -1,6 +1,6 @@
 # Установка RpiClock
 
-## для Raspbian Stretch
+## Для Raspbian Stretch
 
 ### Установить ***Raspbian Stretch OS with desktop***
 
@@ -25,14 +25,14 @@ key_mgmt=WPA-PSK
 
 `sudo raspi-config`
 
-- **Change User Password => Enter new UNIX password**
-- **Network Options => Hostname => PiClock**
-- **Boot Options => Desktop / CLI => Desktop Autologin**
+- **Change User Password ⇒ Enter new UNIX password**
+- **Network Options ⇒ Hostname ⇒ PiClock**
+- **Boot Options ⇒ Desktop / CLI ⇒ Desktop Autologin**
 - **Localisation Options => Change Locale => ru_RU.UTF-8 UTF-8**
-- **Localisation Options => Change Timezone => Europe => Moscow**
-- **Advanced Options => Expand Filesystem**
+- **Localisation Options ⇒ Change Timezone ⇒ Europe => Moscow**
+- **Advanced Options ⇒ Expand Filesystem**
 - **Update**
-- **Finish =>  Yes**
+- **Finish ⇒ Yes**
 
 ### Отключение заставки (ScreenSaver)
 
@@ -146,7 +146,7 @@ speaker-test -D default -c 2 -twav
 Уровень громкости:
 `alsamixer`
 
-### Устанавить qt5 для Python
+### Установить qt5 для Python
 
 ```
 sudo apt-get install python3-pyqt5 -y
@@ -241,7 +241,7 @@ sudo cp PiClock/IR/irexec.lircrc /etc/lirc/irexec.lircrc
 sudo cp PiClock/IR/lirc_options.conf /etc/lirc/lirc_options.conf
 ```
 
-в файле lirc_options.conf дожны быть такие строки:
+в файле lirc_options.conf должны быть такие строки:
 
 ```
 sudo nano /etc/lirc/lirc_options.conf
@@ -340,10 +340,10 @@ alsamixer
 
 ### Настройка API-ключей для PiClock
 
-Получить ключи:    
-[mapbox.com](https://www.mapbox.com/)   Для загрузки карты    
-[openweathermap.org](https://openweathermap.org/) Погода    
-[climacell = tomorrow.io](https://www.tomorrow.io/) Другая погода    
+Получить ключи:  
+[mapbox.com](https://www.mapbox.com/)   Для загрузки карты  
+[openweathermap.org](https://openweathermap.org/) Погода  
+[climacell = tomorrow.io](https://www.tomorrow.io/) Другая погода  
 [thingspeak.com](https://thingspeak.com/) для датчика температуры
 
 ### Создать файл ApiKeys и записать в него ключи
@@ -419,27 +419,27 @@ sudo reboot
 systemctl --user start pulseaudio
 ```
 
-запустить интерфейс bluetoothctl
+запустить интерфейс bluetoothctl.
 
 ```
 bluetoothctl
 ```
 
-Включить Bluetooth на смартфоне  
-Запустить сканирование
+Включить Bluetooth на смартфоне.  
+Запустить сканирование Bluetooth устройств.
 
 ```
 scan on
 ```
 
-Скопировать MAC адрес найденного смартфона,    
-Остановить сканирование
+Скопировать MAC адрес найденного смартфона.  
+Остановить сканирование.
 
 ```
 scan off
 ```
 
-Соединить и доверить
+Соединить и доверить.
 
 ```
 pair 04:B4:29:FE:EB:52
@@ -495,13 +495,13 @@ make gpio-keys
 cd ../..
 ```
 
-Cделать файл исполняемым
+Cделать файл исполняемым.
 
 ```
 sudo chmod u+x PiClock/scripts/osd.sh
 ```
 
-Создать файл ApiKeys.py и записать в него ключи
+Создать файл ApiKeys.py и записать в него ключи.
 
 ```
 cd PiClock/Clock  
