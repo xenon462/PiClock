@@ -163,7 +163,7 @@ def tick():
     global sun, daytime, sunrise, sunset
     global bottom
 
-    if Config.DateLocale != "":
+    if Config.DateLocale != '':
         try:
             locale.setlocale(locale.LC_TIME, Config.DateLocale)
         except AttributeError:
@@ -172,7 +172,7 @@ def tick():
     now = datetime.datetime.now()
     if Config.digital:
         timestr = Config.digitalformat.format(now)
-        if Config.digitalformat.find("%I") > -1:
+        if Config.digitalformat.find('%I') > -1:
             if timestr[0] == '0':
                 timestr = timestr[1:99]
         if lasttimestr != timestr:
@@ -234,7 +234,7 @@ def tick():
             )
 
     dy = "{0:%H:%M}".format(now)  # Время на второй странице
-    if Config.digitalformat2.find("%I") > -1:
+    if Config.digitalformat2.find('%I') > -1:
         if dy[0] == '0':
             dy = dy[1:99]
     if dy != pdy:
@@ -259,7 +259,7 @@ def tick():
             sup = 'nd'
         if now.day == 3 or now.day == 23:
             sup = 'rd'
-        if Config.DateLocale != "":
+        if Config.DateLocale != '':
             sup = ""
         weekday = "{0:%w}".format(now)
         if (weekday == '0'):
