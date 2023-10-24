@@ -37,7 +37,7 @@ key_mgmt=WPA-PSK
 ### Отключение заставки (ScreenSaver)
 
 `sudo nano /etc/lightdm/lightdm.conf`   
-Добавить в него строки
+Добавить эти строки.
 
 ```
 [SeatDefaults]
