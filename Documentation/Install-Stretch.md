@@ -46,9 +46,9 @@ xserver-command=X -s 0 -dpms
 
 Stretch не поддерживается уже много лет.  
 Однако репозиторий все еще существует,
-он переехал на http://legacy.raspbian.org/raspbian/dists/stretch/.
-Он будет оставаться там очень долгое время, но не будет получать никаких обновлений.
-Поэтому измените запись в source.list с
+он переехал на http://legacy.raspbian.org/raspbian/dists/stretch/  
+Он будет оставаться там очень долгое время, но не будет получать никаких обновлений.  
+Поэтому измените запись в source.list
 
 ```
 sudo nano /etc/apt/sources.list
@@ -137,7 +137,7 @@ sudo rm /etc/xdg/autostart/piwiz.desktop
 sudo systemctl reboot
 ```
 
-### Проверить звук
+### Проверить звук.
 
 ```
 speaker-test -D default -c 2 -twav
