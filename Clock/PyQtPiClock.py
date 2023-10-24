@@ -260,7 +260,7 @@ def tick():
         if now.day == 3 or now.day == 23:
             sup = 'rd'
         if Config.DateLocale != '':
-            sup = ""
+            sup = ''
         weekday = "{0:%w}".format(now)
         if (weekday == '0'):
             weekrus = u' Воскресенье '

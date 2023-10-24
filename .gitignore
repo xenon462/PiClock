@@ -64,3 +64,6 @@ docs/_build/
 target/
 
 Thumbs.db
+/Clock/SerBrynden.py
+/Documentation/Notes.txt
+/Documentation/TimezoneFinder.py
