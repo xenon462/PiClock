@@ -28,8 +28,8 @@ key_mgmt=WPA-PSK
 - **Change User Password ⇒ Enter new UNIX password**
 - **Network Options ⇒ Hostname ⇒ PiClock**
 - **Boot Options ⇒ Desktop / CLI ⇒ Desktop Autologin**
-- **Localisation Options => Change Locale => ru_RU.UTF-8 UTF-8**
-- **Localisation Options ⇒ Change Timezone ⇒ Europe => Moscow**
+- **Localisation Options ⇒ Change Locale ⇒ ru_RU.UTF-8 UTF-8**
+- **Localisation Options ⇒ Change Timezone ⇒ Europe ⇒ Moscow**
 - **Advanced Options ⇒ Expand Filesystem**
 - **Update**
 - **Finish ⇒ Yes**
