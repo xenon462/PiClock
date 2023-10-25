@@ -189,6 +189,10 @@ pip3 install --upgrade pip && pip3 install python-dateutil --upgrade && pip3 ins
 python3 -m pip install timezonefinder --upgrade
 ```
 
+```
+python3 -m pip install pytz --upgrade
+```
+
 ### Установить программу для отключения указателя мыши, когда нет активности
 
 ```
