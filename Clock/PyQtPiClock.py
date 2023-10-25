@@ -1,6 +1,5 @@
-#!/usr/bin/python3                        # Climacell
+#!/usr/bin/python3                        # Tomorrow.io
 # -*- coding: utf-8 -*-
-
 import datetime
 import json
 import locale
