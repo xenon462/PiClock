@@ -185,6 +185,10 @@ cd PiClock/Leds && sudo python3 NeoAmbi.py && cd
 pip3 install --upgrade pip && pip3 install python-dateutil --upgrade && pip3 install tzlocal --upgrade && reboot
 ```
 
+```
+python3 -m pip install timezonefinder --upgrade
+```
+
 ### Установить программу для отключения указателя мыши, когда нет активности
 
 ```
