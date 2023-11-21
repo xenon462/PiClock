@@ -1,14 +1,13 @@
-# change this to your API keys
+# Change this to your API keys
 
-# Map API keys -- only needs 1 of the following
-# Google Maps API key (if usemapbox is not set in Config)
-googleapi = 'YOUR GOOGLE MAPS API KEY'
-# Mapbox API key (access_token) [if usemapbox is set in Config]
+# Map API keys -- only need 1 of the following
+# If you want to use Google Maps, uncomment and add API key
+# googleapi = 'YOUR GOOGLE MAPS API KEY'
+# If you want to use Mapbox, uncomment and add API key (access token)
 mbapi = 'YOUR MAPBOX ACCESS TOKEN'
-# If you want to use Openweathermap.org, uncomment and add appid
-# also comment/remove ccapi if you're using Openweathermap
-# owmapi = 'YOUR OPENWEATHERMAP APPID'
-# If you want to use Climacell.co, uncomment and add appid
-# owmapi = 'owmap'  #OWM
-ccapi = 'Climacell v4'  # Climacell v4
-tsApiKey = 'thingspeak Read API Key'  # thingspeak Read API Key
+
+# Weather API key -- only need 1 of the following
+# If you want to use OpenWeatherMap.org, uncomment and add API key
+owmapi = 'YOUR OPENWEATHERMAP API KEY'
+# If you want to use Tomorrow.io, uncomment and add API key
+# tmapi = 'YOUR TOMORROW API KEY'
