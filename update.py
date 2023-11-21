@@ -1,74 +1,108 @@
-import sys
 import os
 import re
 
-print("Updating Python Modules")
-print("Updating python-dateutil")
-os.system("sudo pip3 install python-dateutil --upgrade")
-print("Updating tzlocal")
-os.system("sudo pip3 install tzlocal --upgrade")
-print("Updating python-metar")
-os.system("sudo pip3 install python-metar --upgrade")
+print('\nUpdating Python Package Manager')
+cmd = 'python3 -m pip install --upgrade pip'
+print(cmd)
+os.system(cmd)
+print('\nUpdating Python Modules')
+print('Updating python-dateutil')
+cmd = 'python3 -m pip install python-dateutil --upgrade'
+print(cmd)
+os.system(cmd)
+print('\nUpdating python-metar')
+cmd = 'python3 -m pip install python-metar --upgrade'
+print(cmd)
+os.system(cmd)
+print('\nUpdating pytz')
+cmd = 'python3 -m pip install pytz --upgrade'
+print(cmd)
+os.system(cmd)
+print('\nUpdating timezonefinder')
+cmd = 'python3 -m pip install timezonefinder --upgrade'
+print(cmd)
+os.system(cmd)
+print('\nUpdating tzlocal')
+cmd = 'python3 -m pip install tzlocal --upgrade'
+print(cmd)
+os.system(cmd)
 
 buttonFileName = 'Button/gpio-keys'
-print("Checking " + buttonFileName)
+print('\nChecking ' + buttonFileName)
 if os.path.isfile(buttonFileName):
-    try:
-        print("Setting proper permissions on " + buttonFileName)
-        os.chmod(buttonFileName, 0o744)
-    except AttributeError:
-        pass
+    print('Setting proper permissions on ' + buttonFileName)
+    os.chmod(buttonFileName, 0o744)
 
 apikeysFileName = 'Clock/ApiKeys.py'
 wuapi_re = re.compile('\\s*wuapi\\s*=')
 dsapi_re = re.compile('\\s*dsapi\\s*=')
 ccapi_re = re.compile('\\s*ccapi\\s*=')
+tmapi_re = re.compile('\\s*tmapi\\s*=')
 owmapi_re = re.compile('\\s*owmapi\\s*=')
 
-print("Checking " + apikeysFileName)
+print('\nChecking ' + apikeysFileName)
 if os.path.isfile(apikeysFileName):
     altered = False
-    foundcc = False
+    foundtm = False
     foundowm = False
     newfile = ''
-    apikeys = open(apikeysFileName, "r")
+    apikeys = open(apikeysFileName, 'r')
     for aline in apikeys:
-        if ccapi_re.match(aline):
-            foundcc = True
+        if tmapi_re.match(aline):
+            foundtm = True
         if owmapi_re.match(aline):
             foundowm = True
         if wuapi_re.match(aline):
-            print("Removing wuapi key from " + apikeysFileName)
+            print('Removing wuapi key from ' + apikeysFileName)
             altered = True
         if dsapi_re.match(aline):
-            print("Removing dsapi key from " + apikeysFileName)
+            print('Removing dsapi key from ' + apikeysFileName)
+            altered = True
+        if ccapi_re.match(aline):
+            print('Removing ccapi key from ' + apikeysFileName)
             altered = True
         else:
             newfile += aline
     apikeys.close()
 
-    if not foundcc and not foundowm:
-        print("This version of PiClock requires a ClimaCell api key.")
-        print("https://www.climacell.co/weather-api/")
-        print("Enter your Climacell api key.")
-        print("key: "),
-        k = sys.stdin.readline()
-        k = k.strip()
-        if len(k) > 1:
-            newfile += "ccapi = '" + k + "'"
-            altered = True
+    if not foundtm and not foundowm:
+        print('\nThis version of PiClock requires a new weather API key.')
+        while 1:
+            print('Please select your weather provider:')
+            print('  <1> OpenWeatherMap.org (https://openweathermap.org/price)')
+            print('  <2> Tomorrow.io (https://www.tomorrow.io/weather-api/)')
+            print('Selection (1 or 2)')
+            choice = int(input('? '))
+            if 1 <= choice <= 2:
+                break
+        if choice == 1:
+            print('Enter your OpenWeatherMap.org API key.')
+            print('key: '),
+            k = input('key: ')
+            k = k.strip()
+            if len(k) > 1:
+                newfile += 'owmapi = \'' + k + '\''
+                altered = True
+        else:
+            print('Enter your Tomorrow.io API key.')
+            k = input('key: ')
+            k = k.strip()
+            if len(k) > 1:
+                newfile += 'tmapi = \'' + k + '\''
+                altered = True
 
     if altered:
-        print("Writing Updated " + apikeysFileName)
-        apikeys = open(apikeysFileName, "w")
+        print('\nWriting updated ' + apikeysFileName)
+        apikeys = open(apikeysFileName, 'w')
         apikeys.write(newfile)
         apikeys.close()
     else:
-        print("No changes made to " + apikeysFileName)
+        print('No changes made to ' + apikeysFileName)
 
     try:
-        from rpi_ws281x import *    # NOQA
-    except AttributeError:
-        print("NeoAmbi.py now uses rpi-ws281x/rpi-ws281x-python")
-        print("Please install it as follows:")
-        print("sudo pip3 install rpi_ws281x")
+        from rpi_ws281x import *  # NOQA
+    except ModuleNotFoundError:
+        print('\nERROR: rpi_ws281x not found')
+        print('NeoAmbi.py now uses rpi-ws281x/rpi-ws281x-python')
+        print('Please install it as follows:')
+        print('python3 -m pip install rpi_ws281x')
