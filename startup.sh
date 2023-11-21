@@ -79,7 +79,7 @@ then
 	if [ $? -eq 1 ]
 	then
 		echo "Starting NeoPixel Ambilight Service..."
-		sudo python3 NeoAmbi.py &
+#		sudo python3 NeoAmbi.py &
 	fi
 fi
 cd ..
