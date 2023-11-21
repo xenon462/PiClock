@@ -112,11 +112,13 @@ speaker-test -D default -c 2 -twav
 не root
 
 ```
-git clone https://github.com/SerBrynden/PiClock.git
+git clone https://github.com/xenon462/PiClock.git
 ```
 
 #### для использования кнопок выполнить:  
-`cd PiClock/Button && make gpio-keys && cd ../..`
+```
+cd PiClock/Button && make gpio-keys && cd ../..
+```
 
 ### 5. Установить библиотеку rpi_ws281x
 
@@ -143,12 +145,10 @@ python3 -m pip install timezonefinder --upgrade
 python3 -m pip install tzlocal --upgrade
 
 ```
-или выполнить bash скрипт для установки всех библиотек  
+или создать bash скрипт `sudo nano libPy.sh`   
+и установить библиотеки командой  
 
 `sudo sh libPy.sh`
-
-
-создать файл скрипта `sudo nano libPy.sh`  
 
 ```
 #! /bin/bash
@@ -247,18 +247,6 @@ sudo systemctl start irexec.service
 ```
 sudo systemctl enable irexec
 ```
-
-#### Исправить ошибку системы
-
-Пульт выдаёт бесконечное количество команд. Для нормальной работы пульта отредактировать службу, добавить параметр.
-
-`sudo nano /lib/systemd/system/lircd-uinput.service`
-
-изменить эту строку
-`ExecStart=/usr/sbin/lircd-uinput`
-
-вот так
-`ExecStart=/usr/sbin/lircd-uinput --add-release-events`
 
 Перезагрузить:
 
