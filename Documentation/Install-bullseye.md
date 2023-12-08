@@ -1,6 +1,6 @@
 # Установка RpiClock  
 
-### Для Raspberry Pi OS with desktop. Debian version: 11 (bullseye)  
+### Для Raspberry Pi OS (Legacy, 64-bit) with desktop. Debian version: 11 (bullseye)  
 
 ### 1. Установить ОС: [2023-05-03-bullseye](https://downloads.raspberrypi.com/raspios_oldstable_armhf/images/raspios_oldstable_armhf-2023-10-10/2023-05-03-raspios-bullseye-armhf.img.xz) с помощью [Raspberry Pi Imager](https://downloads.raspberrypi.org/imager/imager_latest.exe) на SD карту  
 
@@ -23,8 +23,11 @@
 - **Localisation Options ⇒ Locale ⇒ ru_RU.UTF-8 UTF-8**
 - **Advanced Options ⇒ Expand Filesystem**
 
-#### Или создать файл для изменения настроек конфигурации Raspberry pi `sudo nano configure.sh` <br> и выполнить командой `sudo sh configure.sh`
-
+#### Или создать файл для изменения настроек конфигурации Raspberry pi 
+```
+sudo nano configure.sh
+```   
+со следующим содержимым
 ```
 #! /bin/bash
 sudo raspi-config nonint do_change_locale ru_RU.UTF-8 UTF-8;
@@ -38,18 +41,24 @@ echo "\033[33m--- 4. pyqt5 установлен ";
 sudo sh -c "echo '[SeatDefaults]\nxserver-command=X -s 0 -dpms' >> /etc/lightdm/lightdm.conf";
 echo "\033[33m--- 5. Отключение заставки выполнено";
 echo "\033[33m--- 6. Настройка конфигурации Raspberry завершена";
-echo "\033[91m--- Для перезагрузки нажмите Enter"
+echo "\033[91m--- 7. Для перезагрузки нажмите Enter"
 read -p "" y
-echo "\033[93m--- 7. Перезагрузка...";
+echo "\033[93m--- Перезагрузка...";
 sleep 2;
 sudo systemctl reboot;
 exit 0
 ```
 
+и выполнить командой  
+
+```
+sudo sh configure.sh
+```
+
 ### 3. Настроить звук.
 
 Для работы звука и драйвера светодиодов *rpi-ws281x*   
-добавить строку `blacklist snd_bcm2835` в файл `/etc/modprobe.d/snd-blacklist.conf`  
+добавить строку ***blacklist snd_bcm2835*** в файл ***/etc/modprobe.d/snd-blacklist.conf***  
 командой:
 ``` 
 sudo sh  -c "echo 'blacklist snd_bcm2835' >> /etc/modprobe.d/snd-blacklist.conf"
@@ -145,8 +154,10 @@ python3 -m pip install timezonefinder --upgrade
 python3 -m pip install tzlocal --upgrade
 
 ```
-или создать bash скрипт `sudo nano libPy.sh`   
-и установить библиотеки командой  
+или создать bash скрипт 
+```
+sudo nano libPy.sh
+```   
 
 `sudo sh libPy.sh`
 
@@ -169,21 +180,25 @@ exit 0
 
 ```
 
+и установить библиотеки командой  
+
+```
+sudo sh libPy.sh
+```
+
 ### 7. Установить программу для отключения указателя мыши, когда нет активности
 
 ```
 sudo apt-get install unclutter -y
 ```
 
-### 8. Установить драйвер датчика DS18b20 для измерения температуры внутри помещения
-
-[страница проекта w1thermsensor:](https://github.com/timofurrer/w1thermsensor)
+### 8. Установить [*драйвер датчика DS18b20*](https://github.com/timofurrer/w1thermsensor) для измерения температуры внутри помещения
 
 ```
 sudo pip3 install w1thermsensor && sudo reboot
 ```
 
-#### Показать HWID подключенных датчиков:
+#### Показать HWID (Hardware ID) подключенных датчиков:
 
 ```
 w1thermsensor ls
