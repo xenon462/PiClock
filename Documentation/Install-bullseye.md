@@ -251,16 +251,26 @@ driver = default
 device = /dev/lirc0
 ```
 
-#### Запустить сервис
-
+#### Включить автозагрузку сервиса _irexec_ от имени пользователя _pi_
+* Создать директорию _autostart_
 ```
-sudo systemctl start irexec.service
+mkdir /home/pi/.config/autostart
 ```
-
-#### Включить автозагрузку сервиса
-
+* Скопировать файл _irexec.desktop_ в директорию _autostart_
 ```
-sudo systemctl enable irexec
+cp /usr/share/lirc/contrib/irexec.desktop /home/pi/.config/autostart
+```
+* Изменить разрешение на выполнение для всех пользователей
+```
+chmod +x irexec.desktop /home/pi/.config/autostart/irexec.desktop
+```
+* Открыть файл
+```
+nano /home/pi/.config/autostart/irexec.desktop
+```
+* Исправить строку _Exec=run-irexec_ на 
+```
+Exec=/usr/bin/irexec /etc/lirc/irexec.lircrc_ 
 ```
 
 Перезагрузить:
