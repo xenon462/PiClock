@@ -1,10 +1,8 @@
 #! /bin/bash
 #Убить процесс
-killall -9 -q osd_cat &>/dev/null
-killall -9 -q xosd &>/dev/null
+killall -9 -q osd_cat &>/dev/null xosd &>/dev/null
 # Увеличиваем уровень звука  на 1% и присваиваем 
 #значение переменной volume
-
 volume=$(amixer sset 'Master',0 \
 $1 | grep "Left:" | awk '{print $5}' | tr -d '[]''%')
 # Выводим на экран 

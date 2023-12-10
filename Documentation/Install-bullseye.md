@@ -157,10 +157,8 @@ python3 -m pip install tzlocal --upgrade
 или создать bash скрипт 
 ```
 sudo nano libPy.sh
-```   
-
-`sudo sh libPy.sh`
-
+```
+со следующим содержимым
 ```
 #! /bin/bash
 python3 -m pip install --upgrade pip;
@@ -247,8 +245,9 @@ sudo nano /etc/lirc/lirc_options.conf
 ```
 
 ```
-driver = default
-device = /dev/lirc0
+nodaemon = False
+driver   = default
+device   = /dev/lirc0
 ```
 
 #### Включить автозагрузку сервиса _irexec_ от имени пользователя _pi_
@@ -258,22 +257,30 @@ mkdir /home/pi/.config/autostart
 ```
 * Скопировать файл _irexec.desktop_ в директорию _autostart_
 ```
-cp /usr/share/lirc/contrib/irexec.desktop /home/pi/.config/autostart
+sudo cp /usr/share/lirc/contrib/irexec.desktop /home/pi/.config/autostart
 ```
-* Изменить разрешение на выполнение для всех пользователей
+
+* Сменить владельца
 ```
-chmod +x irexec.desktop /home/pi/.config/autostart/irexec.desktop
+sudo chown pi /home/pi/.config/autostart/irexec.desktop
 ```
+
+* Добавить разрешение на выполнение для пользователей
+```
+chmod +x /home/pi/.config/autostart/irexec.desktop
+```
+
 * Открыть файл
 ```
 nano /home/pi/.config/autostart/irexec.desktop
 ```
-* Исправить строку _Exec=run-irexec_ на 
+* Удалить верхнюю строку ***; Drop in ~/.config/autostart to create a session irexec service***
+* Изменить строку ***Exec=run-irexec*** на: 
 ```
-Exec=/usr/bin/irexec /etc/lirc/irexec.lircrc_ 
+Exec=/usr/bin/irexec /etc/lirc/irexec.lircrc
 ```
 
-Перезагрузить:
+* Перезагрузить:
 
 ```
 sudo systemctl reboot
@@ -292,13 +299,7 @@ sudo apt-get install xosd-bin -y
 #### Установить шрифты
 
 ```
-sudo apt-get install xfonts-100dpi -y
-```
-
-#### Перезагрузить
-
-```
-sudo systemctl reboot
+sudo apt-get install xfonts-100dpi -y && sudo systemctl reboot
 ```
 
 #### Проверить работу программы вывода сообщений на экран
