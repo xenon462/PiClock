@@ -89,18 +89,12 @@ sudo nano /etc/asound.conf
 со следующим содержимым:
 
 ```
-pcm.sftvol {  
-type softvol  
-slave.pcm "plughw:0"  
-control {  
-name "PCM"  
-card 0  
-}  
-}  
-pcm.!default {  
-type plug  
-slave.pcm "sftvol"  
-}  
+pcm.!default {
+  type hw card 0
+}
+ctl.!default {
+  type hw card 0
+}
 ```
 
 #### Перезагрузить.
@@ -232,20 +226,15 @@ sudo cp PiClock/IR/HX1838.conf /etc/lirc/lircd.conf.d
 sudo cp PiClock/IR/irexec.lircrc /etc/lirc/irexec.lircrc
 ```
 
-#### Cкопировать файл настроек
-
-```
-sudo cp PiClock/IR/lirc_options.conf /etc/lirc/lirc_options.conf
-```
-
-##### в файле lirc_options.conf должны быть такие строки:
+#### Открыть файл настроек ***lirc_options.conf***  
 
 ```
 sudo nano /etc/lirc/lirc_options.conf
 ```
 
+##### изменить строки вот так:
+
 ```
-nodaemon = False
 driver   = default
 device   = /dev/lirc0
 ```
@@ -263,11 +252,6 @@ sudo cp /usr/share/lirc/contrib/irexec.desktop /home/pi/.config/autostart
 * Сменить владельца
 ```
 sudo chown pi /home/pi/.config/autostart/irexec.desktop
-```
-
-* Добавить разрешение на выполнение для пользователей
-```
-chmod +x /home/pi/.config/autostart/irexec.desktop
 ```
 
 * Открыть файл

@@ -9,106 +9,122 @@
 # check the output generated use something like
 # 'journalctl -b0 /usr/bin/irexec'. This service just echoes some keys
 # commonly available.
-#
 
 begin
-    prog   = irexec
-    button = KEY_1
-    config = python /home/pi/PiClock/Leds/red.py
+prog   = irexec
+remote = HX1838
+button = KEY_1
+config = sudo python /home/pi/PiClock/Leds/red.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_2
-    config = sudo python /home/pi/PiClock/Leds/orange.py
+prog   = irexec
+remote = HX1838
+button = KEY_2
+config = sudo python /home/pi/PiClock/Leds/orange.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_3
-    config = sudo python /home/pi/PiClock/Leds/yellow.py
+prog   = irexec
+remote = HX1838
+button = KEY_3
+config = sudo python /home/pi/PiClock/Leds/yellow.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_4
-    config = sudo python /home/pi/PiClock/Leds/green.py
+prog   = irexec
+remote = HX1838
+button = KEY_4
+config = sudo python /home/pi/PiClock/Leds/green.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_5
-    config = sudo python /home/pi/PiClock/Leds/skyblue.py
+prog   = irexec
+remote = HX1838
+button = KEY_5
+config = sudo python /home/pi/PiClock/Leds/skyblue.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_6
-    config = sudo python /home/pi/PiClock/Leds/blue.py
+prog   = irexec
+remote = HX1838
+button = KEY_6
+config = sudo python /home/pi/PiClock/Leds/blue.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_7
-    config = sudo python /home/pi/PiClock/Leds/purple.py
+prog   = irexec
+remote = HX1838
+button = KEY_7
+config = sudo python /home/pi/PiClock/Leds/purple.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_8
-    config = sudo python /home/pi/PiClock/Leds/dim_light.py
+prog   = irexec
+remote = HX1838
+button = KEY_8
+config = sudo python /home/pi/PiClock/Leds/dim_light.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_9
-    config = sudo python /home/pi/PiClock/Leds/light.py
+prog   = irexec
+remote = HX1838
+button = KEY_9
+config = sudo python /home/pi/PiClock/Leds/light.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_0
-    config = sudo python /home/pi/PiClock/scripts/meteonova.py
+prog   = irexec
+remote = HX1838
+button = KEY_0
+config = sudo python /home/pi/PiClock/scripts/meteonova.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_REWIND
-    config = sudo python /home/pi/PiClock/Leds/rainbow.py
+prog   = irexec
+remote = HX1838
+button = KEY_REWIND
+config = sudo python /home/pi/PiClock/Leds/rainbow.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_PREVIOUS
-    config = sudo python /home/pi/PiClock/Leds/all_leds_off.py
+prog   = irexec
+remote = HX1838
+button = KEY_PREVIOUS
+config = sudo python /home/pi/PiClock/Leds/all_leds_off.py
 end
 
 begin
-    prog   = irexec
-    button = KEY_VOLUMEUP
-    config = sh /home/pi/PiClock/scripts/osd.sh 5%+
+prog   = irexec
+remote = HX1838
+button = KEY_VOLUMEUP
+config = /usr/bin/bash /home/pi/PiClock/scripts/osd.sh 5%+
 end
 
 begin
-    prog   = irexec
-    button = KEY_LEFT
-    config = echo "KEY_LEFT"
+prog   = irexec
+remote = HX1838
+button = KEY_LEFT
+config = echo "KEY_LEFT"
 end
 
 begin
-    prog   = irexec
-    button = KEY_OK
-    config = killall -9 -q mpg123
+prog   = irexec
+remote = HX1838
+button = KEY_OK
+config = killall -9 -q mpg123
 end
 
 begin
-    prog   = irexec
-    button = KEY_RIGHT
-    config = echo "KEY_RIGHT"
+prog   = irexec
+remote = HX1838
+button = KEY_RIGHT
+config = echo "KEY_RIGHT"
 end
 
 begin
-    prog   = irexec
-    button = KEY_VOLUMEDOWN
-    config = sh /home/pi/PiClock/scripts/osd.sh 5%+
+prog   = irexec
+remote = HX1838
+button = KEY_VOLUMEDOWN
+config = sh /home/pi/PiClock/scripts/osd.sh 5%-
 end
