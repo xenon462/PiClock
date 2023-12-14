@@ -134,7 +134,7 @@ sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel && sudo reboot
 #### Проверить работу светодиодной ленты:
 
 ```
-cd PiClock/Leds && sudo python3 NeoAmbi.py && cd
+sudo python PiClock/Leds/NeoAmbi.py
 ```
 
 ### 6. Установить библиотеки Python
@@ -271,6 +271,14 @@ sudo systemctl start lircd.service
 ```
 sudo systemctl enable lircd.service
 ```
+* Запустить сервис
+```
+sudo systemctl start lircd-uinput.service
+```
+```
+sudo systemctl enable lircd-uinput.service
+```
+
 * Перезагрузить:
 
 ```
@@ -374,11 +382,11 @@ crontab -e
 ```
 @reboot sh /home/pi/PiClock/startup.sh
 # Прогноз голосом в 7часов 20 минут каждый будний день
-15 7 * * 1-5 amixer cset numid=1 -- 180 >/dev/null 2>&1 && python3 PiClock/scripts/meteonova.py
+15 7 * * 1-5 amixer sset 'Master',0 70% >/dev/null 2>&1 && python PiClock/scripts/meteonova.py
 # Сигнал зуммер каждый час с 8 до 17 часов в будние дни.
 0 8-17 * * 1-5 python PiClock/scripts/buzzer.py
 # Будильник 'Рассвет' в 6 часов 20 минут в будние дни
-20 6 * * 1-5 sudo python3  /home/pi/PiClock/Leds/dawn.py; sudo python3  /home/pi/PiClock/Leds/all_leds_off.py
+20 6 * * 1-5 sudo python  /home/pi/PiClock/Leds/dawn.py; sudo python3  /home/pi/PiClock/Leds/all_leds_off.py
 
 ```
 
