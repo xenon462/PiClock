@@ -263,7 +263,14 @@ nano /home/pi/.config/autostart/irexec.desktop
 ```
 Exec=/usr/bin/irexec /etc/lirc/irexec.lircrc
 ```
-
+* Запустить  ***lircd.service***  
+```
+sudo systemctl start lircd.service
+```
+* Добавить автозагрузку при старте  
+```
+sudo systemctl enable lircd.service
+```
 * Перезагрузить:
 
 ```

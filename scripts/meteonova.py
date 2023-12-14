@@ -12,8 +12,8 @@ GPIO.cleanup()
 import os, sys
 sys.path.append('/home/pi/PiClock/Clock')
 from Config import noaastream
-os.popen("sudo mpg123 -q " + noaastream)
-os.popen("killall -9 -q mpg123")
+os.popen("mpg123 -q " + noaastream)
+#os.popen("killall -9 -q mpg123 &>/dev/null")
 sys.exit()
 
 # sudo systemctl stop bt_speaker && \

@@ -37,7 +37,6 @@ def colorWipe(strip, color, wait_ms=50):
 strip = PixelStrip(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 # Intialize the library (must be called once before other functions).
 strip.begin()
-
 while True:
     colorWipe(strip, Color(0, 0, 255))  # Blue
     quit()

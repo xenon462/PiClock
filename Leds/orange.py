@@ -40,4 +40,3 @@ strip.begin()
 while True:
     colorWipe(strip, Color(255, 88, 0))  # orange
     quit()
-

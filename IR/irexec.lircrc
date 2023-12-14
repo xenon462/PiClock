@@ -77,7 +77,7 @@ begin
 prog   = irexec
 remote = HX1838
 button = KEY_0
-config = sudo python /home/pi/PiClock/scripts/meteonova.py
+config = python /home/pi/PiClock/scripts/meteonova.py
 end
 
 begin
@@ -112,7 +112,7 @@ begin
 prog   = irexec
 remote = HX1838
 button = KEY_OK
-config = killall -9 -q mpg123
+config = sudo killall -9 -q mpg123
 end
 
 begin
@@ -126,5 +126,5 @@ begin
 prog   = irexec
 remote = HX1838
 button = KEY_VOLUMEDOWN
-config = sh /home/pi/PiClock/scripts/osd.sh 5%-
+config = /usr/bin/bash /home/pi/PiClock/scripts/osd.sh 5%-
 end

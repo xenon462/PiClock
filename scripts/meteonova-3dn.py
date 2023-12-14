@@ -9,5 +9,5 @@ GPIO.output(26, False)
 GPIO.cleanup()
 
 import os
-os.popen("sudo mpg123 -q http://www.meteonova.ru/speech/forecast_22113_1.mp3")
+os.popen("mpg123 -q http://www.meteonova.ru/speech/forecast_22113_1.mp3")
 
