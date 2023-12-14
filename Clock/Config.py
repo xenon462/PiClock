@@ -141,9 +141,9 @@ Lgusting = u" порывы: "
 LFeelslike = u"по Ощущению: "
 LPrecip1hr = u" Осадки 1hr:"
 LToday = u"Сегодня: "
-LSunRise = u"Восход:"
-LSet = u" Заход:"
-LMoonPhase = u"Фаза Луны: "
+LSunRise = u"Солнце:"
+LSet = u" "
+LMoonPhase = u"Луна: "
 LInsideTemp = u"В помещении: "
 LOutsideTemp = u"На улице: "
 
@@ -152,14 +152,14 @@ LSnow = u"Снег: "
 LFreezingRain = u"Л.Дождь: "
 LSleet = u"М.Cнег: "
 
-Lmoon1 = u'Новолуние'
-Lmoon2 = u'Молодая луна'
+Lmoon1 = u'Новая'
+Lmoon2 = u'Молодая'
 Lmoon3 = u'Первая четверть'
-Lmoon4 = u'Прибывающая луна'
-Lmoon5 = u'Полнолуние'
-Lmoon6 = u'Убывающая луна'
+Lmoon4 = u'Прибывающая'
+Lmoon5 = u'Полная'
+Lmoon6 = u'Убывающая'
 Lmoon7 = u'Последняя четверть'
-Lmoon8 = u'Старая луна'
+Lmoon8 = u'Старая'
 
 Lvisibility = u'Видимость: '
 LcloudCover = u'Облачность: '
