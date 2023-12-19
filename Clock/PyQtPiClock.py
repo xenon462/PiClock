@@ -2127,7 +2127,6 @@ class MyMain(QtWidgets.QWidget):
                 nextframe(1)
 
             if event.key() == Qt.Key_Up:  # Key_UP, NEOPIXEL, GPIO 25, кнопка на корпусе
-                os.popen("sudo python3 /home/pi/PiClock/Leds/all_leds_off.py")
                 os.popen("sudo /usr/bin/python3  /home/pi/PiClock/Leds/NeoAmbi.py")
 
             if event.key() == Qt.Key_F6:  # Previous Image

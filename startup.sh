@@ -65,9 +65,9 @@ then
 	unclutter >/dev/null 2>&1 &
 fi
 
-echo "Setting sound to max (assuming Monitor Tv controls volume)...."
-# push sound level to maximum
-amixer cset numid=1 -- 150 >/dev/null 2>&1
+echo "Setting sound to 50% (assuming Monitor Tv controls volume)...."
+# push sound level to 50%
+amixer sset 'Master',0 50% >/dev/null 2>&1
 
 # NeoPixel AmbiLights
 echo "Checking for NeoPixels Ambilight..."

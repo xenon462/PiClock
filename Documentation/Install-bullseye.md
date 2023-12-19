@@ -263,6 +263,23 @@ nano /home/pi/.config/autostart/irexec.desktop
 ```
 Exec=/usr/bin/irexec /etc/lirc/irexec.lircrc
 ```
+
+#### Исправить ошибку системы
+
+Пульт выдаёт бесконечное количество команд. Для нормальной работы пульта отредактировать службу, добавить параметр.
+
+```
+sudo nano /lib/systemd/system/lircd-uinput.service
+```
+
+изменить эту строку
+`ExecStart=/usr/sbin/lircd-uinput`
+
+вот так:
+```
+ExecStart=/usr/sbin/lircd-uinput --add-release-events
+```
+
 * Запустить  ***lircd.service***  
 ```
 sudo systemctl start lircd.service
@@ -346,23 +363,13 @@ alsamixer
 #### Создать файл ApiKeys и записать в него ключи
 
 ```
-cd PiClock/Clock
-```
-
-```
-cp ApiKeys-example.py ApiKeys.py
-```
-
-#### Cохранить ключи в файл:
-
-```
-nano ApiKeys.py
+cp PiClock/Clock/ApiKeys-example.py ApiKeys.py && nano PiClock/Clock/ApiKeys.py
 ```
 
 ### 13. Настройка PiClock:
 
 ```
-nano Config.py
+nano PiClock/Clock/Config.py
 ```
 
 ### 14. Запустить PiClock
