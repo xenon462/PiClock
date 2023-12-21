@@ -98,7 +98,7 @@ begin
 prog   = irexec
 remote = HX1838
 button = KEY_VOLUMEUP
-config = /usr/bin/bash /home/pi/PiClock/scripts/osd.sh 5%+
+config = sudo -u '#1000' XDG_RUNTIME_DIR=/run/user/1000 /usr/bin/bash /home/pi/PiClock/scripts/vol.sh
 end
 
 begin
@@ -112,5 +112,5 @@ begin
 prog   = irexec
 remote = HX1838
 button = KEY_VOLUMEDOWN
-config = /usr/bin/bash /home/pi/PiClock/scripts/osd.sh 5%-
+config = sudo -u '#1000' XDG_RUNTIME_DIR=/run/user/1000 /usr/bin/bash /home/pi/PiClock/scripts/vol.sh
 end

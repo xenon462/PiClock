@@ -12,7 +12,7 @@ cd $HOME/PiClock
 #
 if [ "$DISPLAY" = "" ]
 then
-	export DISPLAY=:0
+	export DISPLAY=:0.0
 fi
 
 # wait for Xwindows and the desktop to start up

@@ -35,6 +35,7 @@ echo "\033[33m--- 1. Изменён язык системы на ru_RU.UTF-8";
 sudo raspi-config nonint do_expand_rootfs;
 echo "\033[33m--- 2. Выполнено  расширение системы на весь размер SD карты ";
 sudo apt-get update;
+sudo apt-get upgrade -y;
 echo "\033[33m--- 3. Обновление выполнено";
 sudo apt-get install python3-pyqt5 -y;
 echo "\033[33m--- 4. pyqt5 установлен ";
@@ -239,31 +240,6 @@ driver   = default
 device   = /dev/lirc0
 ```
 
-#### Включить автозагрузку сервиса _irexec_ от имени пользователя _pi_
-* Создать директорию _autostart_
-```
-mkdir /home/pi/.config/autostart
-```
-* Скопировать файл _irexec.desktop_ в директорию _autostart_
-```
-sudo cp /usr/share/lirc/contrib/irexec.desktop /home/pi/.config/autostart
-```
-
-* Сменить владельца
-```
-sudo chown pi /home/pi/.config/autostart/irexec.desktop
-```
-
-* Открыть файл
-```
-nano /home/pi/.config/autostart/irexec.desktop
-```
-* Удалить верхнюю строку ***; Drop in ~/.config/autostart to create a session irexec service***
-* Изменить строку ***Exec=run-irexec*** на: 
-```
-Exec=/usr/bin/irexec /etc/lirc/irexec.lircrc
-```
-
 #### Исправить ошибку системы
 
 Пульт выдаёт бесконечное количество команд. Для нормальной работы пульта отредактировать службу, добавить параметр.
@@ -288,12 +264,21 @@ sudo systemctl start lircd.service
 ```
 sudo systemctl enable lircd.service
 ```
-* Запустить сервис
+
+* Запустить сервис ***lircd-uinput***
 ```
 sudo systemctl start lircd-uinput.service
 ```
 ```
 sudo systemctl enable lircd-uinput.service
+```
+
+* Запустить сервис ***irexec***
+```
+sudo systemctl enable irexec.lircrc
+```
+```
+sudo systemctl start irexec.lircrc
 ```
 
 * Перезагрузить:
@@ -302,37 +287,22 @@ sudo systemctl enable lircd-uinput.service
 sudo systemctl reboot
 ```
 
+### 10. Установить пакет для показа сообщений на экране ***aosd-cat***
+```
+sudo apt-get install aosd-cat
+```
+#### Cделать файл исполняемым
+```
+chmod ugo+x PiClock/scripts/vol.sh
+```
+#### Запустить для проверки
+```
+sh /home/pi/PiClock/scripts/vol.sh
+```
+
 #### Проверить пульт
 
 `irw`
-
-### 10. Установить пакет для показа сообщений на экране
-
-```
-sudo apt-get install xosd-bin -y
-```
-
-#### Установить шрифты
-
-```
-sudo apt-get install xfonts-100dpi -y && sudo systemctl reboot
-```
-
-#### Проверить работу программы вывода сообщений на экран
-
-```
-export DISPLAY=:0.0
-```
-
-```
-echo "hello world" | osd_cat -A center -p bottom -f -*-*-bold-*-*-*-36-120-*-*-*-*-*-* -cgreen -s 5
-```
-
-#### Установить права на выполнение скрипта osd.sh
-
-```
-sudo chmod a+x PiClock/scripts/osd.sh
-```
 
 ### 11. Установить аудио плеер mpg123
 
@@ -363,7 +333,7 @@ alsamixer
 #### Создать файл ApiKeys и записать в него ключи
 
 ```
-cp PiClock/Clock/ApiKeys-example.py ApiKeys.py && nano PiClock/Clock/ApiKeys.py
+cp PiClock/Clock/ApiKeys-example.py PiClock/Clock/ApiKeys.py && nano PiClock/Clock/ApiKeys.py
 ```
 
 ### 13. Настройка PiClock:
