@@ -72,7 +72,7 @@ dtoverlay=disable-bt
 
 #### Сохранить и выйти.  
 
-### 4. Установить PiClock
+### 3. Установить PiClock
 
 не root
 
@@ -80,7 +80,7 @@ dtoverlay=disable-bt
 git clone https://github.com/xenon462/PiClock.git
 ```
 
-### 6. Установить библиотеки Python
+### 4. Установить библиотеки Python
 
 ```
 python3 -m pip install --upgrade pip
@@ -121,13 +121,13 @@ exit 0
 sh libPy.sh
 ```
 
-### 7. Установить программу для отключения указателя мыши, когда нет активности
+### 5. Установить программу для отключения указателя мыши, когда нет активности
 
 ```
 sudo apt-get install unclutter -y
 ```
 
-### 8. Установить [*драйвер датчика DS18b20*](https://github.com/timofurrer/w1thermsensor) для измерения температуры внутри помещения
+### 6. Установить [*драйвер датчика DS18b20*](https://github.com/timofurrer/w1thermsensor) для измерения температуры внутри помещения
 
 ```
 python3 -m pip install w1thermsensor
@@ -155,7 +155,7 @@ w1thermsensor get 1
 nano PiClock/Clock/Config.py
 ```
 
-### 12. Настройка API-ключей для PiClock
+### 7. Настройка API-ключей для PiClock
 
 #### Получить ключи:  
 [mapbox.com](https://www.mapbox.com/)   Для загрузки карты  
@@ -169,26 +169,29 @@ nano PiClock/Clock/Config.py
 cp PiClock/Clock/ApiKeys-example.py PiClock/Clock/ApiKeys.py && nano PiClock/Clock/ApiKeys.py
 ```
 
-### 13. Настройка PiClock:
+### 8. Настройка PiClock:
 
 ```
 nano PiClock/Clock/Config.py
 ```
 
-### 14. Запустить PiClock
+### 9. Запустить PiClock
 
 ```
-cd && sh PiClock/startup.sh -n -s
+sh PiClock/startup.sh -n -s
 ```
 
-#### Для запуска программы в автоматическом режиме открыть планировщик заданий
+#### Для запуска программ в автоматическом режиме открыть планировщик заданий
 
 ```
 crontab -e
 ```
 
-#### добавить строку:
+#### Добавить строки:
 
 ```
 @reboot sh /home/pi/PiClock/startup.sh
+0 22 * * * python /home/pi/PiClock/scripts/display-off.py
+20 6 * * 1-5 python /home/pi/PiClock/scripts/display-on.py
+20 7 * * 6-7 python /home/pi/PiClock/scripts/display-on.py
 ```
