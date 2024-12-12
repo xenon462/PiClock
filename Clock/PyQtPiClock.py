@@ -453,8 +453,7 @@ def wxfinished_owm_onecall():
         if Config.metric:
             temper.setText('%.1f' % (tempf2tempc(f['temp'])) + u'°C')
             temper2.setText('%.1f' % (tempf2tempc(f['temp'])) + u'°C')
-            #press.setText(Config.LPressure + '%.1f' % f['pressure'] + 'mbar') #             КАЖДЫЙ ЧАС
-            press.setText(Config.LPressure + '%.2f' % mbar2inhg(f['pressure']) + 'inHg')
+            press.setText(Config.LPressure + '%.1f' % f['pressure'] + 'mbar') #             КАЖДЫЙ ЧАС
             w = (Config.LWind + wd + ' ' + '%.1f' % (mph2kph(f['wind_speed'])) + 'km/h')
             if 'wind_gust' in f:
                 w += (Config.Lgusting + '%.1f' % (mph2kph(f['wind_gust'])) + 'km/h')
