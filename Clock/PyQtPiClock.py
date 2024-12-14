@@ -2465,12 +2465,12 @@ attribution.setStyleSheet('#attribution { ' +
                           ' background-color: transparent; color: ' +
                           Config.textcolor +
                           '; font-size: ' +
-                          str(int(12 * xscale)) +
+                          str(int(13 * xscale)) +
                           'px; ' +
                           Config.fontattr +
                           '}')
 attribution.setAlignment(Qt.AlignTop)
-attribution.setGeometry(int(6 * xscale), int(3 * yscale), int(130 * xscale), 100)
+attribution.setGeometry(int(6 * xscale), int(3 * yscale), int(150 * xscale), 100)
 
 #                       Иконка вверху слева
 wxicon2 = QtWidgets.QLabel(frame2)
