@@ -317,6 +317,9 @@ def tempf2tempc(f):
 def mph2kph(f):
     return f * 1.609  # speed MPH to km/h
 
+def mph2msec
+    return f * 0.44704 # миля в час в м сек
+
 def mbar2inhg(f):
     return f / 33.864  # pressure millibars to inHg
 
@@ -624,8 +627,8 @@ def wxfinished_owm_current():
     if Config.metric:
         temper.setText('%.1d' % (tempf2tempc(f['main']['temp'])) + u'°C') # '%.1d' Целое число, Температура слева вверху
         temper2.setText('%.1d' % (tempf2tempc(f['main']['temp'])) + u'°C') # '%.1d' Целое число,Температура на второй странице
-        press.setText(Config.LPressure + '%.1f' % (f['main']['pressure']/1.333) + 'мм рт ст') # ТЕКУЩЕЕ ЗНАЧЕНИЕ
-        w = (Config.LWind + wd + ' ' + '%.1f' % (mph2kph(f['wind']['speed'])) + 'km/h')
+        press.setText(Config.LPressure + '%.1f' % (f['main']['pressure']/1.333) + 'мм.рт.ст') # ТЕКУЩЕЕ ЗНАЧЕНИЕ
+        w = (Config.LWind + wd + ' ' + '%.1f' % (mph2msec(f['wind']['speed'])) + 'km/h')
         if 'gust' in f['wind']:
             w += (Config.Lgusting + '%.1f' % (mph2kph(f['wind']['gust'])) + 'km/h')
         feelslike.setText(Config.LFeelslike + '%.1f' % (tempf2tempc(f['main']['feels_like'])) + u'°C')
