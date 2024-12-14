@@ -624,7 +624,7 @@ def wxfinished_owm_current():
     if Config.metric:
         temper.setText('%.1f' % (tempf2tempc(f['main']['temp'])) + u'°C')
         temper2.setText('%.1f' % (tempf2tempc(f['main']['temp'])) + u'°C')
-        press.setText(Config.LPressure + '%.1f' % f['main']['pressure'] + 'mbarr') # ТЕКУЩЕЕ ЗНАЧЕНИЕ
+        press.setText(Config.LPressure + '%.1f' % (f['main']['pressure']/1.333) + 'мм рт ст') # ТЕКУЩЕЕ ЗНАЧЕНИЕ
         w = (Config.LWind + wd + ' ' + '%.1f' % (mph2kph(f['wind']['speed'])) + 'km/h')
         if 'gust' in f['wind']:
             w += (Config.Lgusting + '%.1f' % (mph2kph(f['wind']['gust'])) + 'km/h')
