@@ -630,7 +630,7 @@ def wxfinished_owm_current():
         press.setText(Config.LPressure + '%.1f' % (f['main']['pressure']/1.333) + 'мм.рт.ст') # ТЕКУЩЕЕ ЗНАЧЕНИЕ
         w = (Config.LWind + wd + ' ' + '%.1f' % (mph2msec(f['wind']['speed'])) + 'km/h')
         if 'gust' in f['wind']:
-            w += (Config.Lgusting + '%.1f' % (mph2kph(f['wind']['gust'])) + 'km/h')
+            w += (Config.Lgusting + '%.1f' % (mph2kph(f['wind']['gust'])) + 'м/сек')
         feelslike.setText(Config.LFeelslike + '%.1f' % (tempf2tempc(f['main']['feels_like'])) + u'°C')
     else:
         temper.setText('%.1f' % (f['main']['temp']) + u'°F')
