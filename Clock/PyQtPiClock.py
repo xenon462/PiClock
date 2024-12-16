@@ -682,7 +682,7 @@ def wxfinished_owm_forecast():
             Qt.SmoothTransformation))
         wx = fl.findChild(QtWidgets.QLabel, "wx")
         day = fl.findChild(QtWidgets.QLabel, "day")
-        day.setText("{0:%A %d %b}".format(dt)) # OWM   ДАТА
+        day.setText("{0:%a %-H:%M}".format(dt)) # (0:%A %d %b) OWM Дата справа столбец 1-3 строка. (%-H:%M) час без нуля
         f2 = f['main']
         s = ''
         pop = 0
