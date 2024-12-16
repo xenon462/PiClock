@@ -628,7 +628,7 @@ def wxfinished_owm_current():
         temper.setText('%.1d' % (tempf2tempc(f['main']['temp'])) + u'°C') # '%.1d' Целое число, Температура слева вверху
         temper2.setText('%.1d' % (tempf2tempc(f['main']['temp'])) + u'°C') # '%.1d' Целое число,Температура на второй странице
         press.setText(Config.LPressure + '%.1d' % (f['main']['pressure']/1.333) + 'мм.рт.ст') # ТЕКУЩЕЕ ЗНАЧЕНИЕ
-        w = (Config.LWind + wd + ' ' + '%.1f' % (mph2msec(f['wind']['speed'])) + 'м/сек')
+        w = (Config.LWind + wd + ' ' + '%.1d' % (mph2msec(f['wind']['speed'])) + 'м/сек') # %.1d целое число
         if 'gust' in f['wind']:
             w += (Config.Lgusting + '%.1d' % (mph2msec(f['wind']['gust'])) + 'м/сек')
         feelslike.setText(Config.LFeelslike + '%.1d' % (tempf2tempc(f['main']['feels_like'])) + u'°C')

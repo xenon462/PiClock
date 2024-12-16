@@ -135,7 +135,7 @@ DateLocale = 'ru_RU.UTF-8'
 
 # Language specific wording
 LPressure = u"Давление: "
-LHumidity = u"Влажн: "
+LHumidity = u"Влажность: "
 LWind = u"Ветер: "
 Lgusting = u" порывы: "
 LFeelslike = u"по Ощущению: "
