@@ -14,22 +14,22 @@ import traceback
 from subprocess import Popen
 
 import dateutil.parser
-import requests
-import pytz
-import tzlocal
-from PyQt5 import QtGui, QtCore, QtNetwork, QtWidgets
-from PyQt5.QtCore import QUrl
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QPainter, QImage, QFont
-from PyQt5.QtGui import QPixmap, QBrush, QColor
-from PyQt5.QtNetwork import QNetworkReply
-from PyQt5.QtNetwork import QNetworkRequest
-from timezonefinder import TimezoneFinder
-from w1thermsensor import W1ThermSensor, Sensor
+import requests # type: ignore
+import pytz # type: ignore
+import tzlocal # type: ignore
+from PyQt5 import QtGui, QtCore, QtNetwork, QtWidgets # type: ignore
+from PyQt5.QtCore import QUrl # type: ignore
+from PyQt5.QtCore import Qt # type: ignore
+from PyQt5.QtGui import QPainter, QImage, QFont # type: ignore
+from PyQt5.QtGui import QPixmap, QBrush, QColor # type: ignore
+from PyQt5.QtNetwork import QNetworkReply # type: ignore
+from PyQt5.QtNetwork import QNetworkRequest # type: ignore
+from timezonefinder import TimezoneFinder # type: ignore
+from w1thermsensor import W1ThermSensor, Sensor # type: ignore
 
 sys.dont_write_bytecode = True
 from GoogleMercatorProjection import get_corners, get_point, get_tile_xy, LatLng  # NOQA
-import ApiKeys  # NOQA
+import ApiKeys  # type: ignore # NOQA
 
 
 class SunTimes:
@@ -318,7 +318,7 @@ def mph2kph(f):
     return f * 1.609  # speed MPH to km/h
 
 def mph2msec(f):
-    return f * 0.44704 # миля в час в м сек
+    return f * 0.44704 # миля/час в м/сек
 
 def mbar2inhg(f):
     return f / 33.864  # pressure millibars to inHg
@@ -489,7 +489,7 @@ def wxfinished_owm_onecall():
             Qt.SmoothTransformation))
         wx = fl.findChild(QtWidgets.QLabel, 'wx')
         day = fl.findChild(QtWidgets.QLabel, 'day')
-        day.setText('{0:%A %H:%M}'.format(dt))  #  День недели OWM и время 1-3 строка в столбце (%-H:%M)часы без нулей
+        day.setText('{0:%a %H:%M}'.format(dt))  #  День недели OWM и время 1-3 строка в столбце (%-H:%M)часы без нулей
         s = ''
         pop = 0
         ptype = ''
@@ -2271,7 +2271,7 @@ hasMetar = False
 try:
     if Config.METAR != '':
         hasMetar = True
-        from metar import Metar
+        from metar import Metar # type: ignore
 except AttributeError:
     pass
 
