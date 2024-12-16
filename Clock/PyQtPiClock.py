@@ -643,7 +643,6 @@ def wxfinished_owm_current():
 
     wind.setText(w)
     humidity.setText(Config.LHumidity + '%.0f%%' % (f['main']['humidity']))
-#    wdate.setText(                  '{0:%H:%M %Z}'.format(dt))
     wdate.setText(u'Данные на:  ' + '{0:%H:%M %Z}'.format(dt)) #               Данные на:
 
 def wxfinished_owm_forecast():
