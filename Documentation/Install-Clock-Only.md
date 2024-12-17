@@ -191,7 +191,7 @@ crontab -e
 
 ```
 @reboot sh /home/pi/PiClock/startup.sh
-0 22 * * * python /home/pi/PiClock/scripts/display-off.py
-20 6 * * 1-5 python /home/pi/PiClock/scripts/display-on.py
-20 7 * * 6-7 python /home/pi/PiClock/scripts/display-on.py
+0 22 * * * export DISPLAY=:0 && python /home/pi/PiClock/scripts/display-off.py
+20 6 * * 1-5 export DISPLAY=:0 && python /home/pi/PiClock/scripts/display-on.py
+20 7 * * 6-7 export DISPLAY=:0 && python /home/pi/PiClock/scripts/display-on.py
 ```
